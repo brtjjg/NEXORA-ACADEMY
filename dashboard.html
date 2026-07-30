@@ -6,6 +6,9 @@
     <title>Nexora Academy - Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
     <style>
+        /* ============================================
+           ROOT & RESET
+           ============================================ */
         * {
             margin: 0;
             padding: 0;
@@ -71,12 +74,10 @@
             color: var(--white);
             cursor: pointer;
         }
-
         .navbar .logo i {
             color: var(--secondary);
             font-size: 1.8rem;
         }
-
         .navbar .logo span {
             color: var(--secondary);
         }
@@ -87,7 +88,6 @@
             gap: 2rem;
             list-style: none;
         }
-
         .nav-links a {
             color: rgba(255, 255, 255, 0.7);
             font-weight: 500;
@@ -95,7 +95,6 @@
             transition: var(--transition);
             cursor: pointer;
         }
-
         .nav-links a:hover {
             color: var(--white);
         }
@@ -142,36 +141,51 @@
             background: var(--primary);
             color: var(--white);
         }
-
         .btn-primary:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(108, 60, 225, 0.35);
         }
 
         .btn-secondary {
             background: var(--secondary);
             color: var(--dark);
         }
-
         .btn-secondary:hover {
             background: #00b894;
             transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: var(--white);
+        }
+        .btn-success:hover {
+            background: #27ae60;
         }
 
         .btn-danger {
             background: var(--danger);
             color: var(--white);
         }
-
         .btn-danger:hover {
             background: #c0392b;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
         }
 
         .btn-sm {
             padding: 6px 16px;
             font-size: 0.8rem;
         }
-
         .btn-block {
             width: 100%;
             justify-content: center;
@@ -183,7 +197,6 @@
             gap: 5px;
             cursor: pointer;
         }
-
         .hamburger span {
             width: 28px;
             height: 3px;
@@ -205,9 +218,9 @@
         .welcome-banner {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             border-radius: var(--radius);
-            padding: 2.5rem 3rem;
+            padding: 2rem 2.5rem;
             color: var(--white);
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             position: relative;
             overflow: hidden;
         }
@@ -215,16 +228,17 @@
         .welcome-banner::after {
             content: '🎓';
             position: absolute;
-            right: 3rem;
+            right: 2.5rem;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 6rem;
-            opacity: 0.15;
+            font-size: 5rem;
+            opacity: 0.1;
         }
 
         .welcome-banner h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.3rem;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
         }
 
         .welcome-banner h1 span {
@@ -233,47 +247,25 @@
 
         .welcome-banner p {
             color: rgba(255, 255, 255, 0.8);
-            font-size: 1.05rem;
+            font-size: 1rem;
         }
 
-        .welcome-banner .stats-row {
-            display: flex;
-            gap: 3rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .welcome-banner .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .welcome-banner .stat-item .number {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .welcome-banner .stat-item .label {
-            font-size: 0.85rem;
-            opacity: 0.8;
-        }
-
-        /* Stats Grid */
+        /* Stats Grid - 5 columns */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(5, 1fr);
             gap: 1.5rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
         .stat-card {
             background: var(--white);
-            padding: 1.5rem;
+            padding: 1.5rem 1rem;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             text-align: center;
             transition: var(--transition);
+            cursor: pointer;
         }
 
         .stat-card:hover {
@@ -281,182 +273,286 @@
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
         }
 
-        .stat-card .icon {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
         .stat-card .number {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 700;
-            color: var(--dark);
+            color: var(--primary);
         }
 
         .stat-card .label {
             color: var(--gray);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            margin-top: 0.2rem;
         }
 
-        /* Course Grid */
-        .section-header {
+        .stat-card .sub-label {
+            color: var(--gray);
+            font-size: 0.7rem;
+            opacity: 0.7;
+        }
+
+        /* Main Content Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .card h3 i {
+            color: var(--primary);
+            margin-right: 0.5rem;
+        }
+
+        /* Continue Learning Card */
+        .continue-learning {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 12px;
+            margin-bottom: 1rem;
         }
 
-        .section-header h2 {
-            font-size: 1.6rem;
-        }
-
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .course-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            padding: 1.8rem;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            cursor: pointer;
-            border: 1px solid rgba(0, 0, 0, 0.04);
-        }
-
-        .course-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-            border-color: var(--primary);
-        }
-
-        .course-card .icon {
-            font-size: 2.4rem;
-            color: var(--primary);
-            margin-bottom: 0.8rem;
-        }
-
-        .course-card h3 {
+        .continue-learning .course-info h4 {
             font-size: 1.1rem;
-            margin-bottom: 0.3rem;
+            color: var(--dark);
         }
 
-        .course-card .meta {
-            display: flex;
-            justify-content: space-between;
+        .continue-learning .course-info .fee {
             color: var(--gray);
             font-size: 0.85rem;
-            margin: 0.5rem 0 1rem;
         }
 
-        .course-card .price {
+        .continue-learning .course-info .paid {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .continue-learning .course-progress {
+            text-align: right;
+        }
+
+        .continue-learning .course-progress .progress-text {
             font-weight: 700;
             color: var(--primary);
+            font-size: 1.2rem;
         }
 
-        .course-card .progress-text {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            margin: 0.5rem 0;
-        }
-
-        .course-card .progress-bar {
-            width: 100%;
+        .continue-learning .course-progress .progress-bar {
+            width: 100px;
             height: 6px;
             background: var(--light-gray);
             border-radius: 10px;
             overflow: hidden;
+            margin-top: 0.3rem;
         }
 
-        .course-card .progress-bar .fill {
+        .continue-learning .course-progress .progress-bar .fill {
             height: 100%;
-            border-radius: 10px;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 10px;
             transition: width 1s ease;
         }
 
-        .course-card .badge {
-            display: inline-block;
-            padding: 2px 12px;
-            border-radius: 50px;
-            font-size: 0.7rem;
+        .continue-learning .btn {
+            margin-left: 1rem;
+        }
+
+        /* Payment Status */
+        .payment-status .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--light-gray);
+            font-size: 0.95rem;
+        }
+
+        .payment-status .row:last-child {
+            border-bottom: none;
+        }
+
+        .payment-status .row .amount {
             font-weight: 600;
         }
 
-        .badge-enrolled {
-            background: #d4edda;
-            color: #155724;
+        .payment-status .row .balance {
+            color: var(--danger);
+            font-weight: 700;
         }
 
-        .badge-completed {
-            background: #cce5ff;
-            color: #004085;
+        /* Next Milestone */
+        .milestone {
+            background: linear-gradient(135deg, #f0f4ff, #e8edff);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: center;
         }
 
-        /* Activity & Tasks */
-        .activity-grid {
+        .milestone h4 {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .milestone p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Course Progress Overview */
+        .progress-details {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+            gap: 0.5rem 2rem;
+            margin-top: 0.5rem;
         }
 
-        .activity-card {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-
-        .activity-card h3 {
-            margin-bottom: 1rem;
-        }
-
-        .activity-list {
-            list-style: none;
-        }
-
-        .activity-list li {
+        .progress-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.6rem 0;
+            padding: 0.3rem 0;
             border-bottom: 1px solid var(--light-gray);
             font-size: 0.9rem;
         }
 
-        .activity-list li:last-child {
+        .progress-item .label {
+            color: var(--gray);
+        }
+
+        .progress-item .value {
+            font-weight: 600;
+        }
+
+        .progress-item .value.good {
+            color: var(--success);
+        }
+
+        .progress-item .value.warning {
+            color: var(--warning);
+        }
+
+        .progress-item .value.danger {
+            color: var(--danger);
+        }
+
+        .progress-item .value .small {
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: var(--gray);
+        }
+
+        /* Announcements */
+        .announcement-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .announcement-item:last-child {
             border-bottom: none;
         }
 
-        .activity-list .time {
+        .announcement-item .title {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .announcement-item .time {
             color: var(--gray);
             font-size: 0.8rem;
         }
 
-        /* Achievements */
-        .achievements {
+        /* Quick Actions */
+        .quick-actions {
             display: flex;
-            flex-wrap: wrap;
             gap: 0.8rem;
-            margin: 1rem 0;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
         }
 
-        .achievement-badge {
+        .quick-actions .action-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 0.8rem;
             background: var(--light-gray);
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--dark);
         }
 
-        .achievement-badge i {
-            color: var(--warning);
+        .quick-actions .action-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .quick-actions .action-btn i {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        /* Premium Upgrade */
+        .premium-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .premium-box h4 {
+            color: #92400e;
+            font-size: 1.1rem;
+        }
+
+        .premium-box p {
+            color: #78350f;
+            font-size: 0.85rem;
+            margin: 0.3rem 0 0.8rem;
+        }
+
+        .premium-box .btn {
+            background: #92400e;
+            color: white;
+        }
+
+        .premium-box .btn:hover {
+            background: #78350f;
+        }
+
+        /* Bottom Actions */
+        .bottom-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .bottom-actions .btn {
+            flex: 1;
+            justify-content: center;
         }
 
         /* Toast */
@@ -513,7 +609,18 @@
             margin-top: 2rem;
         }
 
-        /* Responsive */
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 992px) {
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-links,
             .nav-auth .user-info .name {
@@ -522,6 +629,9 @@
             .hamburger {
                 display: flex;
             }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
             .welcome-banner {
                 padding: 1.5rem;
             }
@@ -529,15 +639,20 @@
                 display: none;
             }
             .welcome-banner h1 {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
             }
-            .welcome-banner .stats-row {
-                gap: 1.5rem;
+            .continue-learning {
+                flex-direction: column;
+                text-align: center;
             }
-            .activity-grid {
-                grid-template-columns: 1fr;
+            .continue-learning .course-progress {
+                margin-top: 0.5rem;
             }
-            .courses-grid {
+            .continue-learning .btn {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+            .progress-details {
                 grid-template-columns: 1fr;
             }
             .nav-open .nav-links {
@@ -561,20 +676,48 @@
         }
 
         @media (max-width: 480px) {
+            .navbar {
+                padding: 0 1rem;
+            }
             .dashboard {
                 padding: 80px 1rem 40px;
             }
-            .welcome-banner .stats-row {
-                flex-direction: column;
-                gap: 0.8rem;
-            }
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
+                gap: 0.8rem;
+            }
+            .stat-card {
+                padding: 1rem 0.5rem;
+            }
+            .stat-card .number {
+                font-size: 1.5rem;
+            }
+            .quick-actions {
+                flex-direction: column;
+            }
+            .quick-actions .action-btn {
+                min-width: auto;
+            }
+            .bottom-actions {
+                flex-direction: column;
             }
         }
 
         .hidden {
             display: none !important;
+        }
+
+        /* No courses message */
+        .no-courses {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+        }
+
+        .no-courses i {
+            font-size: 3rem;
+            color: var(--primary-light);
+            margin-bottom: 1rem;
         }
     </style>
 </head>
@@ -591,12 +734,12 @@
 
         <ul class="nav-links" id="navLinks">
             <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="#" onclick="showAllCourses()">Courses</a></li>
-            <li><a href="#" onclick="showAchievements()">Achievements</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="certificates.html">Certificates</a></li>
         </ul>
 
         <div class="nav-auth">
-            <div class="user-info" id="userInfo">
+            <div class="user-info">
                 <div class="avatar" id="userAvatar">D</div>
                 <span class="name" id="userName">Student</span>
             </div>
@@ -622,92 +765,126 @@
 
         <!-- Welcome Banner -->
         <div class="welcome-banner" id="welcomeBanner">
-            <h1>👋 Welcome back, <span id="welcomeName">Student</span>!</h1>
+            <h1>Welcome back, <span id="welcomeName">Student</span></h1>
             <p id="welcomeMessage">Keep learning, keep growing. You're one step closer to achieving your goals!</p>
-            <div class="stats-row">
-                <div class="stat-item">
-                    <span class="number" id="statEnrolled">0</span>
-                    <span class="label">Enrolled Courses</span>
-                </div>
-                <div class="stat-item">
-                    <span class="number" id="statProgress">0%</span>
-                    <span class="label">Overall Progress</span>
-                </div>
-                <div class="stat-item">
-                    <span class="number" id="statCertificates">0</span>
-                    <span class="label">Certificates</span>
-                </div>
-                <div class="stat-item">
-                    <span class="number" id="statHours">0h</span>
-                    <span class="label">Learning Hours</span>
-                </div>
-            </div>
         </div>
 
-        <!-- Stats -->
+        <!-- Stats Grid -->
         <div class="stats-grid" id="statsGrid">
             <div class="stat-card">
-                <div class="icon"><i class="fas fa-book-open"></i></div>
-                <div class="number" id="statsCourses">0</div>
-                <div class="label">Available Courses</div>
+                <div class="number" id="statEnrolled">0</div>
+                <div class="label">Enrolled Courses</div>
+                <div class="sub-label">View all courses →</div>
             </div>
             <div class="stat-card">
-                <div class="icon"><i class="fas fa-check-circle"></i></div>
-                <div class="number" id="statsCompleted">0</div>
-                <div class="label">Lessons Completed</div>
+                <div class="number" id="statProgress">0%</div>
+                <div class="label">Overall Progress</div>
+                <div class="sub-label">Keep it up!</div>
             </div>
             <div class="stat-card">
-                <div class="icon"><i class="fas fa-trophy"></i></div>
-                <div class="number" id="statsAchievements">0</div>
+                <div class="number" id="statCertificates">0</div>
+                <div class="label">Certificates Earned</div>
+                <div class="sub-label">Complete your courses</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="statHours">0h</div>
+                <div class="label">Learning Hours</div>
+                <div class="sub-label">Time spent learning</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="statAchievements">0</div>
                 <div class="label">Achievements</div>
-            </div>
-            <div class="stat-card">
-                <div class="icon"><i class="fas fa-fire"></i></div>
-                <div class="number" id="statsStreak">0</div>
-                <div class="label">Day Streak</div>
+                <div class="sub-label">View all achievements</div>
             </div>
         </div>
 
-        <!-- My Courses -->
-        <div class="section-header">
-            <h2>📚 My Courses</h2>
-            <button class="btn btn-primary btn-sm" onclick="showAllCourses()">
-                <i class="fas fa-plus"></i> Browse All
-            </button>
-        </div>
-        <div class="courses-grid" id="myCourses">
-            <!-- Dynamic content -->
-        </div>
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Left Column -->
+            <div>
+                <!-- Continue Learning -->
+                <div class="card" id="continueLearningCard">
+                    <h3><i class="fas fa-play-circle"></i> Continue Learning</h3>
+                    <div id="continueLearningContent">
+                        <!-- Dynamic content -->
+                    </div>
 
-        <!-- All Courses -->
-        <div class="section-header" style="margin-top:2rem;">
-            <h2>🌟 Popular Courses</h2>
-        </div>
-        <div class="courses-grid" id="allCourses">
-            <!-- Dynamic content -->
-        </div>
+                    <!-- Payment Status -->
+                    <div class="payment-status" id="paymentStatus" style="margin-top:1.5rem;">
+                        <h3><i class="fas fa-credit-card"></i> Payment Status</h3>
+                        <div id="paymentContent">
+                            <!-- Dynamic content -->
+                        </div>
+                    </div>
 
-        <!-- Activity & Tasks -->
-        <div class="activity-grid">
-            <div class="activity-card">
-                <h3>📋 Upcoming Tasks</h3>
-                <ul class="activity-list" id="taskList">
-                    <li style="color:var(--gray);">No pending tasks. Great job! 🎉</li>
-                </ul>
+                    <!-- Next Milestone -->
+                    <div class="milestone" id="milestone">
+                        <h4 id="milestoneTitle">You're doing great!</h4>
+                        <p id="milestoneText">Start your first course to begin your learning journey.</p>
+                    </div>
+                </div>
+
+                <!-- Course Progress Overview -->
+                <div class="card" style="margin-top:1.5rem;" id="progressCard">
+                    <h3><i class="fas fa-chart-line"></i> Course Details</h3>
+                    <div id="courseProgressContent">
+                        <!-- Dynamic content -->
+                    </div>
+                </div>
             </div>
-            <div class="activity-card">
-                <h3>🕐 Recent Activity</h3>
-                <ul class="activity-list" id="activityList">
-                    <li style="color:var(--gray);">No recent activity.</li>
-                </ul>
-            </div>
-        </div>
 
-        <!-- Achievements -->
-        <div class="activity-card" style="margin-top:1.5rem;padding:1.5rem;background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);">
-            <h3>🏆 Your Achievements</h3>
-            <div class="achievements" id="achievementsList">
-                <span style="color:var(--gray);">Complete courses to earn achievements!</span>
+            <!-- Right Column -->
+            <div>
+                <!-- Announcements -->
+                <div class="card">
+                    <h3><i class="fas fa-bullhorn"></i> Announcements</h3>
+                    <div id="announcements">
+                        <div class="announcement-item">
+                            <div class="title">Welcome to Nexora Academy!</div>
+                            <div class="time">Start your learning journey today</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card" style="margin-top:1.5rem;">
+                    <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                    <div class="quick-actions">
+                        <button class="action-btn" onclick="window.location.href='courses.html'">
+                            <i class="fas fa-book"></i>
+                            Browse Courses
+                        </button>
+                        <button class="action-btn" onclick="window.location.href='assignments.html'">
+                            <i class="fas fa-tasks"></i>
+                            My Assignments
+                        </button>
+                        <button class="action-btn" onclick="window.location.href='projects.html'">
+                            <i class="fas fa-project-diagram"></i>
+                            My Projects
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Go Premium -->
+                <div class="card" style="margin-top:1.5rem;">
+                    <div class="premium-box">
+                        <h4>🌟 Go Premium</h4>
+                        <p>Unlock all premium courses, mentorship, and more benefits.</p>
+                        <button class="btn btn-sm" onclick="showToast('Premium features coming soon!', 'warning')">
+                            Upgrade Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Bottom Actions -->
+                <div class="bottom-actions">
+                    <button class="btn btn-primary btn-sm" onclick="window.location.href='live-classes.html'">
+                        <i class="fas fa-video"></i> Join Live Class
+                    </button>
+                    <button class="btn btn-outline btn-sm" onclick="showToast('Reminder set! ⏰', 'success')">
+                        <i class="fas fa-bell"></i> Set Reminder
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -724,117 +901,37 @@
     ========================================== -->
     <script>
         // ============================================
-        // COURSE DATA
+        // AUTH HELPERS
         // ============================================
-        const COURSES = [{
-            id: 1,
-            title: 'Computer Packages',
-            icon: 'fa-laptop',
-            category: 'web',
-            price: 20,
-            rating: 4.8,
-            reviews: 120,
-            level: 'Beginner',
-            description: 'Master essential computer skills from basics to advanced.',
-            file: 'computer-packages.html',
-            totalLessons: 40
-        }, {
-            id: 2,
-            title: 'Web Design Bootcamp',
-            icon: 'fa-code',
-            category: 'web',
-            price: 20,
-            rating: 4.9,
-            reviews: 314,
-            level: 'Beginner',
-            description: 'Learn HTML, CSS, JavaScript and build stunning websites.',
-            file: 'web-design.html',
-            totalLessons: 35
-        }, {
-            id: 3,
-            title: 'Python Programming',
-            icon: 'fa-python',
-            category: 'data',
-            price: 20,
-            rating: 4.7,
-            reviews: 314,
-            level: 'Beginner',
-            description: 'Python from zero to hero. Learn programming fundamentals.',
-            file: 'python.html',
-            totalLessons: 30
-        }, {
-            id: 4,
-            title: 'Graphic Design Masterclass',
-            icon: 'fa-paint-brush',
-            category: 'design',
-            price: 20,
-            rating: 4.7,
-            reviews: 314,
-            level: 'Beginner',
-            description: 'Become a professional graphic designer.',
-            file: 'graphic-design.html',
-            totalLessons: 28
-        }, {
-            id: 5,
-            title: 'Digital Marketing Full Course',
-            icon: 'fa-bullhorn',
-            category: 'design',
-            price: 20,
-            rating: 4.7,
-            reviews: 314,
-            level: 'Beginner',
-            description: 'Complete digital marketing strategy and implementation.',
-            file: 'digital-marketing.html',
-            totalLessons: 32
-        }, {
-            id: 6,
-            title: 'AI & Machine Learning Basics',
-            icon: 'fa-robot',
-            category: 'data',
-            price: 20,
-            rating: 4.7,
-            reviews: 314,
-            level: 'Beginner',
-            description: 'Introduction to artificial intelligence and machine learning.',
-            file: 'ai-ml.html',
-            totalLessons: 25
-        }, {
-            id: 7,
-            title: 'Data Analysis Professional',
-            icon: 'fa-chart-bar',
-            category: 'data',
-            price: 20,
-            rating: 4.8,
-            reviews: 200,
-            level: 'Intermediate',
-            description: 'Professional data analysis with Excel and Python.',
-            file: 'data-analysis.html',
-            totalLessons: 30
-        }, {
-            id: 8,
-            title: 'Cybersecurity Fundamentals',
-            icon: 'fa-shield-alt',
-            category: 'web',
-            price: 20,
-            rating: 4.9,
-            reviews: 180,
-            level: 'Intermediate',
-            description: 'Essential cybersecurity skills and best practices.',
-            file: 'cybersecurity.html',
-            totalLessons: 28
-        }, {
-            id: 9,
-            title: 'Mobile App Development',
-            icon: 'fa-mobile-alt',
-            category: 'web',
-            price: 20,
-            rating: 4.8,
-            reviews: 150,
-            level: 'Intermediate',
-            description: 'Build mobile apps for iOS and Android.',
-            file: 'mobile-app.html',
-            totalLessons: 32
-        }];
+        function getCurrentUser() {
+            const user = localStorage.getItem('nexora_current_user');
+            return user ? JSON.parse(user) : null;
+        }
+
+        function getUsers() {
+            const users = localStorage.getItem('nexora_users');
+            return users ? JSON.parse(users) : [];
+        }
+
+        function saveUsers(users) {
+            localStorage.setItem('nexora_users', JSON.stringify(users));
+        }
+
+        function setCurrentUser(user) {
+            localStorage.setItem('nexora_current_user', JSON.stringify(user));
+        }
+
+        function logout() {
+            localStorage.removeItem('nexora_current_user');
+            showToast('Logged out successfully.');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 800);
+        }
+
+        function toggleNav() {
+            document.body.classList.toggle('nav-open');
+        }
 
         // ============================================
         // TOAST
@@ -854,44 +951,66 @@
         }
 
         // ============================================
-        // AUTH
+        // COURSE DATA
         // ============================================
-        function getCurrentUser() {
-            const user = localStorage.getItem('nexora_current_user');
-            return user ? JSON.parse(user) : null;
-        }
-
-        function setCurrentUser(user) {
-            localStorage.setItem('nexora_current_user', JSON.stringify(user));
-        }
-
-        function clearCurrentUser() {
-            localStorage.removeItem('nexora_current_user');
-        }
-
-        function getUsers() {
-            const users = localStorage.getItem('nexora_users');
-            return users ? JSON.parse(users) : [];
-        }
-
-        function saveUsers(users) {
-            localStorage.setItem('nexora_users', JSON.stringify(users));
-        }
-
-        function logout() {
-            clearCurrentUser();
-            showToast('Logged out successfully.');
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 800);
-        }
-
-        function toggleNav() {
-            document.body.classList.toggle('nav-open');
-        }
+        const COURSES = [{
+            id: 1,
+            title: 'Computer Packages',
+            icon: 'fa-laptop',
+            price: 20,
+            totalLessons: 40,
+            totalAssignments: 5,
+            totalProjects: 2,
+            totalQuizzes: 15
+        }, {
+            id: 2,
+            title: 'Web Design Bootcamp',
+            icon: 'fa-code',
+            price: 20,
+            totalLessons: 35,
+            totalAssignments: 4,
+            totalProjects: 2,
+            totalQuizzes: 12
+        }, {
+            id: 3,
+            title: 'Python Programming',
+            icon: 'fa-python',
+            price: 20,
+            totalLessons: 30,
+            totalAssignments: 4,
+            totalProjects: 2,
+            totalQuizzes: 10
+        }, {
+            id: 4,
+            title: 'Graphic Design Masterclass',
+            icon: 'fa-paint-brush',
+            price: 20,
+            totalLessons: 28,
+            totalAssignments: 4,
+            totalProjects: 2,
+            totalQuizzes: 10
+        }, {
+            id: 5,
+            title: 'Digital Marketing',
+            icon: 'fa-bullhorn',
+            price: 20,
+            totalLessons: 32,
+            totalAssignments: 4,
+            totalProjects: 2,
+            totalQuizzes: 12
+        }, {
+            id: 6,
+            title: 'AI & Machine Learning',
+            icon: 'fa-robot',
+            price: 20,
+            totalLessons: 25,
+            totalAssignments: 3,
+            totalProjects: 2,
+            totalQuizzes: 8
+        }];
 
         // ============================================
-        // DASHBOARD
+        // RENDER DASHBOARD
         // ============================================
         function renderDashboard() {
             const user = getCurrentUser();
@@ -901,324 +1020,300 @@
                 return;
             }
 
-            // Welcome Banner
+            // --- Welcome Banner ---
             document.getElementById('welcomeName').textContent = user.name;
 
             const hour = new Date().getHours();
-            let greeting = 'Keep learning, keep growing!';
+            let greeting = 'Keep learning, keep growing. You\'re one step closer to achieving your goals!';
             if (hour < 12) greeting = 'Good morning! Start your day with learning. ☀️';
             else if (hour < 17) greeting = 'Good afternoon! Keep up the great work. 🌤️';
             else greeting = 'Good evening! Perfect time for some learning. 🌙';
 
             document.getElementById('welcomeMessage').textContent = greeting;
 
-            // Avatar
+            // --- User Info ---
             document.getElementById('userAvatar').textContent = user.name.charAt(0).toUpperCase();
             document.getElementById('userName').textContent = user.name;
 
-            // Stats
-            const enrolled = user.enrolledCourses || [];
-            const completedLessons = user.completedLessons || {};
-            const totalCompleted = Object.values(completedLessons).reduce((sum, arr) => sum + arr.length, 0);
-            const achievements = user.achievements || [];
-            const learningHours = user.learningHours || 0;
+            // --- Get User Data ---
+            const users = getUsers();
+            const userData = users.find(u => u.id === user.id);
 
-            document.getElementById('statEnrolled').textContent = enrolled.length;
+            // Initialize empty data if not exists
+            if (!userData.completedLessons) userData.completedLessons = {};
+            if (!userData.payments) userData.payments = [];
+            if (!userData.achievements) userData.achievements = [];
+            if (!userData.learningHours) userData.learningHours = 0;
+            if (!userData.enrolledCourses) userData.enrolledCourses = [];
+
+            const enrolled = userData.enrolledCourses || [];
+            const completedLessons = userData.completedLessons || {};
+            const payments = userData.payments || [];
+            const achievements = userData.achievements || [];
+            const learningHours = userData.learningHours || 0;
+
+            // --- Calculate Stats ---
+            const enrolledCount = enrolled.length;
+            let totalProgress = 0;
+            let totalCompleted = 0;
+            let totalLessons = 0;
+            let totalAssignments = 0;
+            let totalProjects = 0;
+            let totalQuizzes = 0;
+            let completedAssignments = 0;
+            let completedProjects = 0;
+            let completedQuizzes = 0;
+            let attendance = 0;
+
+            enrolled.forEach(courseId => {
+                const course = COURSES.find(c => c.id === courseId);
+                if (course) {
+                    const completed = completedLessons[courseId] || [];
+                    const progress = course.totalLessons > 0 ? (completed.length / course.totalLessons) * 100 : 0;
+                    totalProgress += progress;
+                    totalCompleted += completed.length;
+                    totalLessons += course.totalLessons;
+                    totalAssignments += course.totalAssignments || 0;
+                    totalProjects += course.totalProjects || 0;
+                    totalQuizzes += course.totalQuizzes || 0;
+
+                    // Simulate some progress for assignments, projects, quizzes
+                    completedAssignments += Math.min(course.totalAssignments || 0, Math.round(completed.length / 8));
+                    completedProjects += Math.min(course.totalProjects || 0, Math.round(completed.length / 20));
+                    completedQuizzes += Math.min(course.totalQuizzes || 0, Math.round(completed.length / 4));
+                }
+            });
+
+            // Calculate attendance (simulated based on progress)
+            attendance = enrolledCount > 0 ? Math.min(100, Math.round(totalProgress / enrolledCount) + 10) : 0;
+
+            const avgProgress = enrolledCount > 0 ? Math.round(totalProgress / enrolledCount) : 0;
+            const totalPaid = payments.reduce((sum, p) => sum + p.amount, 0);
+
+            // --- Update Stats ---
+            document.getElementById('statEnrolled').textContent = enrolledCount;
+            document.getElementById('statProgress').textContent = avgProgress + '%';
             document.getElementById('statCertificates').textContent = achievements.filter(a => a.includes('Certificate'))
                 .length || 0;
             document.getElementById('statHours').textContent = learningHours + 'h';
+            document.getElementById('statAchievements').textContent = achievements.length;
 
-            // Calculate overall progress
-            let totalProgress = 0;
-            let totalLessons = 0;
-            COURSES.forEach(c => {
-                const completed = completedLessons[c.id] || [];
-                const progress = (completed.length / c.totalLessons) * 100;
-                totalProgress += progress;
-                totalLessons += c.totalLessons;
-            });
-            const avgProgress = COURSES.length > 0 ? Math.round(totalProgress / COURSES.length) : 0;
-            document.getElementById('statProgress').textContent = avgProgress + '%';
-            document.getElementById('statsCourses').textContent = COURSES.length;
-            document.getElementById('statsCompleted').textContent = totalCompleted;
-            document.getElementById('statsAchievements').textContent = achievements.length;
-
-            // Streak (simulated)
-            document.getElementById('statsStreak').textContent = Math.min(30, Math.floor(totalCompleted / 3));
-
-            // My Courses
-            renderMyCourses(user);
-
-            // All Courses
-            renderAllCourses(user);
-
-            // Tasks
-            renderTasks(user);
-
-            // Activity
-            renderActivity(user);
-
-            // Achievements
-            renderAchievements(user);
-        }
-
-        function renderMyCourses(user) {
-            const container = document.getElementById('myCourses');
-            const enrolled = user.enrolledCourses || [];
-
-            if (enrolled.length === 0) {
-                container.innerHTML = `
-                            <div style="grid-column:1/-1;text-align:center;padding:2rem;background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);">
-                                <p style="color:var(--gray);">You haven't enrolled in any courses yet.</p>
-                                <button class="btn btn-primary" onclick="showAllCourses()">Browse Courses</button>
+            // --- Continue Learning ---
+            const continueContainer = document.getElementById('continueLearningContent');
+            if (enrolledCount === 0) {
+                continueContainer.innerHTML = `
+                            <div class="no-courses">
+                                <i class="fas fa-book-open"></i>
+                                <p>You haven't enrolled in any courses yet.</p>
+                                <button class="btn btn-primary btn-sm" onclick="window.location.href='courses.html'">
+                                    Browse Courses
+                                </button>
                             </div>
                         `;
-                return;
+            } else {
+                // Get the first enrolled course
+                const firstCourseId = enrolled[0];
+                const course = COURSES.find(c => c.id === firstCourseId);
+                const completed = completedLessons[firstCourseId] || [];
+                const progress = course ? Math.round((completed.length / course.totalLessons) * 100) : 0;
+                const paidAmount = payments.filter(p => p.courseId === firstCourseId).reduce((sum, p) => sum + p.amount, 0);
+                const paidPercent = course ? Math.round((paidAmount / course.price) * 100) : 0;
+
+                if (course) {
+                    continueContainer.innerHTML = `
+                                <div class="continue-learning">
+                                    <div class="course-info">
+                                        <h4><i class="fas ${course.icon}"></i> ${course.title}</h4>
+                                        <div class="fee">Course Fee: $${course.price.toFixed(2)}</div>
+                                        <div class="paid">You have paid ${paidPercent}% of the course fee</div>
+                                    </div>
+                                    <div class="course-progress">
+                                        <div class="progress-text">${progress}%</div>
+                                        <div class="progress-bar">
+                                            <div class="fill" style="width:${progress}%;"></div>
+                                        </div>
+                                        <button class="btn btn-primary btn-sm" onclick="window.location.href='course-${course.id}.html'">
+                                            Continue Learning
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                }
             }
 
-            container.innerHTML = COURSES.filter(c => enrolled.includes(c.id)).map(c => {
-                const completed = user.completedLessons?.[c.id] || [];
-                const progress = Math.round((completed.length / c.totalLessons) * 100);
-                const isComplete = progress === 100;
+            // --- Payment Status ---
+            const paymentContainer = document.getElementById('paymentContent');
+            if (enrolledCount === 0) {
+                paymentContainer.innerHTML = `
+                            <div style="text-align:center;padding:0.5rem;color:var(--gray);">
+                                No courses enrolled
+                            </div>
+                        `;
+            } else {
+                const firstCourseId = enrolled[0];
+                const course = COURSES.find(c => c.id === firstCourseId);
+                const paidAmount = payments.filter(p => p.courseId === firstCourseId).reduce((sum, p) => sum + p.amount, 0);
+                const balance = course ? Math.max(0, course.price - paidAmount) : 0;
 
-                return `
-                            <div class="course-card" onclick="openCourse(${c.id})">
-                                <div class="icon"><i class="fas ${c.icon}"></i></div>
-                                <h3>${c.title}</h3>
-                                <div class="meta">
-                                    <span>⭐ ${c.rating} (${c.reviews})</span>
-                                    <span>${c.level}</span>
+                paymentContainer.innerHTML = `
+                            <div class="row">
+                                <span>Total Course Fee</span>
+                                <span class="amount">$${course ? course.price.toFixed(2) : '0.00'}</span>
+                            </div>
+                            <div class="row">
+                                <span>Total Paid</span>
+                                <span class="amount">$${paidAmount.toFixed(2)} (${course ? Math.round((paidAmount/course.price)*100) : 0}%)</span>
+                            </div>
+                            <div class="row">
+                                <span>Balance</span>
+                                <span class="balance">$${balance.toFixed(2)}</span>
+                            </div>
+                            ${balance > 0 ? `
+                                <button class="btn btn-success btn-sm btn-block" style="margin-top:0.8rem;" 
+                                        onclick="makePayment(${firstCourseId})">
+                                    <i class="fas fa-credit-card"></i> Make Payment
+                                </button>
+                            ` : `
+                                <div style="text-align:center;color:var(--success);font-weight:600;margin-top:0.5rem;">
+                                    ✅ Fully Paid!
                                 </div>
-                                <div class="progress-text">
-                                    <span>Progress</span>
-                                    <span>${progress}%</span>
+                            `}
+                        `;
+            }
+
+            // --- Milestone ---
+            const milestoneTitle = document.getElementById('milestoneTitle');
+            const milestoneText = document.getElementById('milestoneText');
+
+            if (enrolledCount === 0) {
+                milestoneTitle.textContent = 'Start Your Journey!';
+                milestoneText.textContent = 'Enroll in your first course to begin learning.';
+            } else if (avgProgress === 100) {
+                milestoneTitle.textContent = '🎉 Course Complete!';
+                milestoneText.textContent = 'You\'ve finished all your courses. Generate your certificates!';
+            } else if (avgProgress >= 50) {
+                milestoneTitle.textContent = 'You\'re doing great!';
+                milestoneText.textContent = `Complete the remaining ${totalLessons - totalCompleted} lessons to finish your courses.`;
+            } else {
+                milestoneTitle.textContent = 'Keep Going!';
+                milestoneText.textContent = `You've completed ${totalCompleted}/${totalLessons} lessons. Keep up the momentum!`;
+            }
+
+            // --- Course Progress Overview ---
+            const progressContainer = document.getElementById('courseProgressContent');
+            if (enrolledCount === 0) {
+                progressContainer.innerHTML = `
+                            <div style="text-align:center;padding:1rem;color:var(--gray);">
+                                Enroll in a course to see your progress
+                            </div>
+                        `;
+            } else {
+                const firstCourseId = enrolled[0];
+                const course = COURSES.find(c => c.id === firstCourseId);
+                const completed = completedLessons[firstCourseId] || [];
+                const lessonsDone = completed.length;
+                const totalLess = course ? course.totalLessons : 0;
+                const assignDone = Math.min(course ? course.totalAssignments : 0, Math.round(lessonsDone / 8));
+                const totalAssign = course ? course.totalAssignments : 0;
+                const projDone = Math.min(course ? course.totalProjects : 0, Math.round(lessonsDone / 20));
+                const totalProj = course ? course.totalProjects : 0;
+                const quizDone = Math.min(course ? course.totalQuizzes : 0, Math.round(lessonsDone / 4));
+                const totalQuiz = course ? course.totalQuizzes : 0;
+
+                // Calculate "Good" score (80% of total)
+                const goodScore = Math.round((lessonsDone / totalLess) * 100);
+
+                progressContainer.innerHTML = `
+                            <div class="progress-details">
+                                <div class="progress-item">
+                                    <span class="label">Lessons</span>
+                                    <span class="value">${lessonsDone}/${totalLess}</span>
                                 </div>
-                                <div class="progress-bar">
-                                    <div class="fill" style="width:${progress}%;"></div>
+                                <div class="progress-item">
+                                    <span class="label">Assignments</span>
+                                    <span class="value">${assignDone}/${totalAssign}</span>
                                 </div>
-                                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.8rem;">
-                                    <span class="price">$${c.price}</span>
-                                    <span class="badge ${isComplete ? 'badge-completed' : 'badge-enrolled'}">
-                                        ${isComplete ? '✅ Completed' : '📖 In Progress'}
+                                <div class="progress-item">
+                                    <span class="label">Projects</span>
+                                    <span class="value">${projDone}/${totalProj}</span>
+                                </div>
+                                <div class="progress-item">
+                                    <span class="label">Quizzes</span>
+                                    <span class="value">${quizDone}/${totalQuiz}</span>
+                                </div>
+                                <div class="progress-item">
+                                    <span class="label">Attendance</span>
+                                    <span class="value ${attendance >= 80 ? 'good' : attendance >= 60 ? 'warning' : 'danger'}">
+                                        ${attendance}%
+                                    </span>
+                                </div>
+                                <div class="progress-item">
+                                    <span class="label">Good</span>
+                                    <span class="value ${goodScore >= 80 ? 'good' : 'warning'}">
+                                        ${goodScore}%
                                     </span>
                                 </div>
                             </div>
                         `;
-            }).join('');
-        }
-
-        function renderAllCourses(user) {
-            const container = document.getElementById('allCourses');
-            const enrolled = user.enrolledCourses || [];
-
-            const available = COURSES.filter(c => !enrolled.includes(c.id));
-
-            if (available.length === 0) {
-                container.innerHTML = `
-                            <div style="grid-column:1/-1;text-align:center;padding:1rem;color:var(--gray);">
-                                You're enrolled in all available courses! 🎉
-                            </div>
-                        `;
-                return;
             }
 
-            container.innerHTML = available.slice(0, 4).map(c => {
-                return `
-                            <div class="course-card" onclick="enrollCourse(${c.id})">
-                                <div class="icon"><i class="fas ${c.icon}"></i></div>
-                                <h3>${c.title}</h3>
-                                <div class="meta">
-                                    <span>⭐ ${c.rating} (${c.reviews})</span>
-                                    <span>${c.level}</span>
-                                </div>
-                                <p style="font-size:0.85rem;color:var(--gray);margin:0.5rem 0;">${c.description}</p>
-                                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.8rem;">
-                                    <span class="price">$${c.price}</span>
-                                    <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();enrollCourse(${c.id})">
-                                        <i class="fas fa-plus"></i> Enroll
-                                    </button>
-                                </div>
-                            </div>
-                        `;
-            }).join('');
-        }
-
-        function renderTasks(user) {
-            const container = document.getElementById('taskList');
-            const tasks = [];
-
-            // Find incomplete courses
-            const enrolled = user.enrolledCourses || [];
-            const completed = user.completedLessons || {};
-
-            enrolled.forEach(cid => {
-                const course = COURSES.find(c => c.id === cid);
-                if (!course) return;
-                const done = completed[cid] || [];
-                const remaining = course.totalLessons - done.length;
-                if (remaining > 0) {
-                    tasks.push({
-                        title: `${course.title} - ${remaining} lessons remaining`,
-                        due: 'In progress'
-                    });
-                }
-            });
-
-            // Check for certificate eligibility
-            enrolled.forEach(cid => {
-                const course = COURSES.find(c => c.id === cid);
-                if (!course) return;
-                const done = completed[cid] || [];
-                if (done.length === course.totalLessons) {
-                    const certs = user.achievements || [];
-                    if (!certs.includes(`Certificate - ${course.title}`)) {
-                        tasks.push({
-                            title: `🎓 Generate certificate for ${course.title}`,
-                            due: 'Ready!',
-                            isCert: true
-                        });
-                    }
-                }
-            });
-
-            if (tasks.length === 0) {
-                container.innerHTML = `<li style="color:var(--gray);">No pending tasks. Great job! 🎉</li>`;
-                return;
-            }
-
-            container.innerHTML = tasks.map(t => `
-                        <li>
-                            <span>${t.isCert ? '🎓 ' : '📝 '} ${t.title}</span>
-                            <span style="color:${t.isCert ? 'var(--success)' : 'var(--gray)'};font-size:0.8rem;">
-                                ${t.isCert ? '✅ Ready' : t.due}
-                            </span>
-                        </li>
-                    `).join('');
-        }
-
-        function renderActivity(user) {
-            const container = document.getElementById('activityList');
-            // Simulated activity
-            const activities = [
-                { text: 'Completed a lesson on Computer Packages', time: '2 hours ago' },
-                { text: 'Submitted an assignment', time: '5 hours ago' },
-                { text: 'Attended live class: Web Design', time: '1 day ago' },
-                { text: 'Made a payment of $2.00', time: '2 days ago' },
+            // --- Announcements ---
+            const announcementsContainer = document.getElementById('announcements');
+            const announcements = [
+                { title: 'New Course Available!', desc: 'Full Stack Web Development course is now available.', time: '2 hours ago' },
+                { title: 'System Maintenance', desc: 'The platform will be under maintenance on 1st June 2026, from 1:00 AM – 3:00 AM ET.',
+                    time: '1 day ago' },
+                { title: 'Assignment Reminder', desc: 'Don\'t forget to submit your assignments on time to avoid penalties.',
+                    time: '2 days ago' }
             ];
 
-            container.innerHTML = activities.map(a => `
-                        <li>
-                            <span>${a.text}</span>
-                            <span class="time">${a.time}</span>
-                        </li>
+            announcementsContainer.innerHTML = announcements.map(a => `
+                        <div class="announcement-item">
+                            <div class="title">${a.title}</div>
+                            <div style="font-size:0.9rem;color:var(--gray);">${a.desc}</div>
+                            <div class="time">${a.time}</div>
+                        </div>
                     `).join('');
-        }
 
-        function renderAchievements(user) {
-            const container = document.getElementById('achievementsList');
-            const achievements = user.achievements || [];
-
-            const allAchievements = [
-                { name: 'Quick Learner', icon: 'fa-star' },
-                { name: 'Consistent', icon: 'fa-check-circle' },
-                { name: 'Assignment Master', icon: 'fa-trophy' },
-                { name: 'Rising Star', icon: 'fa-fire' },
-                { name: 'Quiz Master', icon: 'fa-brain' },
-                { name: 'Dedicated Student', icon: 'fa-graduation-cap' },
-                { name: 'Knowledge Seeker', icon: 'fa-search' },
-                { name: 'Expert in Training', icon: 'fa-award' },
-                { name: 'Course Master', icon: 'fa-crown' },
-            ];
-
-            const unlocked = allAchievements.filter(a => achievements.includes(a.name));
-
-            if (unlocked.length === 0) {
-                container.innerHTML = `<span style="color:var(--gray);">Complete courses to earn achievements! 🏆</span>`;
-                return;
-            }
-
-            container.innerHTML = unlocked.map(a =>
-                `<span class="achievement-badge"><i class="fas ${a.icon}"></i> ${a.name}</span>`
-            ).join('');
-
-            // Show locked ones dimmed
-            const locked = allAchievements.filter(a => !achievements.includes(a.name));
-            container.innerHTML += locked.map(a =>
-                `<span class="achievement-badge" style="opacity:0.3;"><i class="fas ${a.icon}"></i> ${a.name}</span>`
-            ).join('');
+            // Save updated user data
+            saveUsers(users);
         }
 
         // ============================================
-        // COURSE ACTIONS
+        // MAKE PAYMENT
         // ============================================
-        function openCourse(courseId) {
-            const course = COURSES.find(c => c.id === courseId);
-            if (course && course.file) {
-                window.location.href = course.file;
-            }
-        }
-
-        function enrollCourse(courseId) {
+        function makePayment(courseId) {
             const user = getCurrentUser();
-            if (!user) {
-                window.location.href = 'index.html';
-                return;
-            }
+            if (!user) return;
 
-            if (!user.enrolledCourses) user.enrolledCourses = [];
-            if (user.enrolledCourses.includes(courseId)) {
-                showToast('Already enrolled in this course!', 'warning');
-                return;
-            }
-
-            user.enrolledCourses.push(courseId);
-            if (!user.completedLessons) user.completedLessons = {};
-            user.completedLessons[courseId] = [];
-
-            // Update user in database
             const users = getUsers();
-            const index = users.findIndex(u => u.id === user.id);
-            if (index !== -1) {
-                users[index] = user;
-                saveUsers(users);
-                setCurrentUser(user);
+            const userData = users.find(u => u.id === user.id);
+            const course = COURSES.find(c => c.id === courseId);
+
+            if (!userData || !course) return;
+
+            if (!userData.payments) userData.payments = [];
+            const payments = userData.payments.filter(p => p.courseId === courseId);
+            const totalPaid = payments.reduce((sum, p) => sum + p.amount, 0);
+            const remaining = Math.round((course.price - totalPaid) * 100) / 100;
+
+            if (remaining <= 0) {
+                showToast('Course fully paid! ✅', 'success');
+                return;
             }
 
-            showToast('🎉 Successfully enrolled! Start learning now!');
+            const amount = Math.min(remaining, 2);
+            userData.payments.push({
+                id: Date.now(),
+                courseId: courseId,
+                amount: amount,
+                date: new Date().toISOString()
+            });
+
+            saveUsers(users);
+            setCurrentUser(userData);
+            showToast(`💰 Payment of $${amount} successful!`);
             renderDashboard();
-        }
-
-        function showAllCourses() {
-            const container = document.getElementById('allCourses');
-            const user = getCurrentUser();
-            const enrolled = user?.enrolledCourses || [];
-
-            container.innerHTML = COURSES.filter(c => !enrolled.includes(c.id)).map(c => {
-                return `
-                            <div class="course-card" onclick="enrollCourse(${c.id})">
-                                <div class="icon"><i class="fas ${c.icon}"></i></div>
-                                <h3>${c.title}</h3>
-                                <div class="meta">
-                                    <span>⭐ ${c.rating} (${c.reviews})</span>
-                                    <span>${c.level}</span>
-                                </div>
-                                <p style="font-size:0.85rem;color:var(--gray);margin:0.5rem 0;">${c.description}</p>
-                                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.8rem;">
-                                    <span class="price">$${c.price}</span>
-                                    <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();enrollCourse(${c.id})">
-                                        <i class="fas fa-plus"></i> Enroll
-                                    </button>
-                                </div>
-                            </div>
-                        `;
-            }).join('');
-
-            // Scroll to courses
-            document.getElementById('allCourses').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function showAchievements() {
-            document.getElementById('achievementsList').scrollIntoView({ behavior: 'smooth' });
         }
 
         // ============================================
@@ -1239,6 +1334,9 @@
                 });
             });
         });
+
+        console.log('📊 Nexora Academy Dashboard - All data from user registration');
+        console.log('👤 Current User:', getCurrentUser());
     </script>
 
 </body>
