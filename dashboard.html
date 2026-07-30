@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Nexora Academy - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6C3CE1;
+            --primary-dark: #5228b5;
+            --primary-light: #8b6cf3;
+            --secondary: #00d4aa;
+            --dark: #1a1a2e;
+            --dark-light: #2d2d44;
+            --gray: #6b6b8a;
+            --light-gray: #f0f0f7;
+            --white: #ffffff;
+            --danger: #e74c3c;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --radius: 16px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background: var(--light-gray);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ============================================
+           NAVBAR
+           ============================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 0 2rem;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--white);
+            cursor: pointer;
+        }
+
+        .navbar .logo i {
+            color: var(--secondary);
+            font-size: 1.8rem;
+        }
+
+        .navbar .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-auth {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-auth .user-info {
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-auth .user-info .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background: #00b894;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: var(--white);
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        .btn-sm {
+            padding: 6px 16px;
+            font-size: 0.8rem;
+        }
+
+        .btn-block {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--white);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        /* ============================================
+           DASHBOARD
+           ============================================ */
+        .dashboard {
+            padding: 100px 2rem 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: var(--radius);
+            padding: 2.5rem 3rem;
+            color: var(--white);
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner::after {
+            content: '🎓';
+            position: absolute;
+            right: 3rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 6rem;
+            opacity: 0.15;
+        }
+
+        .welcome-banner h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .welcome-banner h1 span {
+            color: var(--secondary);
+        }
+
+        .welcome-banner p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.05rem;
+        }
+
+        .welcome-banner .stats-row {
+            display: flex;
+            gap: 3rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .welcome-banner .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .welcome-banner .stat-item .number {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .welcome-banner .stat-item .label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card .icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .stat-card .label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Course Grid */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.6rem;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .course-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 1.8rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .course-card .icon {
+            font-size: 2.4rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .course-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .course-card .meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin: 0.5rem 0 1rem;
+        }
+
+        .course-card .price {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .course-card .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin: 0.5rem 0;
+        }
+
+        .course-card .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--light-gray);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .course-card .progress-bar .fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 1s ease;
+        }
+
+        .course-card .badge {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .badge-enrolled {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-completed {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        /* Activity & Tasks */
+        .activity-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .activity-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .activity-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .activity-list {
+            list-style: none;
+        }
+
+        .activity-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--light-gray);
+            font-size: 0.9rem;
+        }
+
+        .activity-list li:last-child {
+            border-bottom: none;
+        }
+
+        .activity-list .time {
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* Achievements */
+        .achievements {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .achievement-badge {
+            background: var(--light-gray);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .achievement-badge i {
+            color: var(--warning);
+        }
+
+        /* Toast */
+        .toast-container {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            background: var(--dark);
+            color: var(--white);
+            padding: 14px 24px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 280px;
+        }
+
+        .toast.success {
+            border-left: 4px solid var(--success);
+        }
+        .toast.error {
+            border-left: 4px solid var(--danger);
+        }
+        .toast.warning {
+            border-left: 4px solid var(--warning);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links,
+            .nav-auth .user-info .name {
+                display: none;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .welcome-banner {
+                padding: 1.5rem;
+            }
+            .welcome-banner::after {
+                display: none;
+            }
+            .welcome-banner h1 {
+                font-size: 1.6rem;
+            }
+            .welcome-banner .stats-row {
+                gap: 1.5rem;
+            }
+            .activity-grid {
+                grid-template-columns: 1fr;
+            }
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-open .nav-links {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: var(--dark);
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            .nav-open .nav-links a {
+                font-size: 1.1rem;
+            }
+            .nav-open .nav-auth .user-info .name {
+                display: inline;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard {
+                padding: 80px 1rem 40px;
+            }
+            .welcome-banner .stats-row {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================
+    NAVBAR
+    ========================================== -->
+    <nav class="navbar" id="navbar">
+        <a href="dashboard.html" class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            Nexora<span>Academy</span>
+        </a>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="#" onclick="showAllCourses()">Courses</a></li>
+            <li><a href="#" onclick="showAchievements()">Achievements</a></li>
+        </ul>
+
+        <div class="nav-auth">
+            <div class="user-info" id="userInfo">
+                <div class="avatar" id="userAvatar">D</div>
+                <span class="name" id="userName">Student</span>
+            </div>
+            <button class="btn btn-danger btn-sm" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+
+        <div class="hamburger" onclick="toggleNav()">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- ==========================================
+    TOAST CONTAINER
+    ========================================== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ==========================================
+    DASHBOARD
+    ========================================== -->
+    <div class="dashboard" id="dashboard">
+
+        <!-- Welcome Banner -->
+        <div class="welcome-banner" id="welcomeBanner">
+            <h1>👋 Welcome back, <span id="welcomeName">Student</span>!</h1>
+            <p id="welcomeMessage">Keep learning, keep growing. You're one step closer to achieving your goals!</p>
+            <div class="stats-row">
+                <div class="stat-item">
+                    <span class="number" id="statEnrolled">0</span>
+                    <span class="label">Enrolled Courses</span>
+                </div>
+                <div class="stat-item">
+                    <span class="number" id="statProgress">0%</span>
+                    <span class="label">Overall Progress</span>
+                </div>
+                <div class="stat-item">
+                    <span class="number" id="statCertificates">0</span>
+                    <span class="label">Certificates</span>
+                </div>
+                <div class="stat-item">
+                    <span class="number" id="statHours">0h</span>
+                    <span class="label">Learning Hours</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="icon"><i class="fas fa-book-open"></i></div>
+                <div class="number" id="statsCourses">0</div>
+                <div class="label">Available Courses</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon"><i class="fas fa-check-circle"></i></div>
+                <div class="number" id="statsCompleted">0</div>
+                <div class="label">Lessons Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon"><i class="fas fa-trophy"></i></div>
+                <div class="number" id="statsAchievements">0</div>
+                <div class="label">Achievements</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon"><i class="fas fa-fire"></i></div>
+                <div class="number" id="statsStreak">0</div>
+                <div class="label">Day Streak</div>
+            </div>
+        </div>
+
+        <!-- My Courses -->
+        <div class="section-header">
+            <h2>📚 My Courses</h2>
+            <button class="btn btn-primary btn-sm" onclick="showAllCourses()">
+                <i class="fas fa-plus"></i> Browse All
+            </button>
+        </div>
+        <div class="courses-grid" id="myCourses">
+            <!-- Dynamic content -->
+        </div>
+
+        <!-- All Courses -->
+        <div class="section-header" style="margin-top:2rem;">
+            <h2>🌟 Popular Courses</h2>
+        </div>
+        <div class="courses-grid" id="allCourses">
+            <!-- Dynamic content -->
+        </div>
+
+        <!-- Activity & Tasks -->
+        <div class="activity-grid">
+            <div class="activity-card">
+                <h3>📋 Upcoming Tasks</h3>
+                <ul class="activity-list" id="taskList">
+                    <li style="color:var(--gray);">No pending tasks. Great job! 🎉</li>
+                </ul>
+            </div>
+            <div class="activity-card">
+                <h3>🕐 Recent Activity</h3>
+                <ul class="activity-list" id="activityList">
+                    <li style="color:var(--gray);">No recent activity.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Achievements -->
+        <div class="activity-card" style="margin-top:1.5rem;padding:1.5rem;background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);">
+            <h3>🏆 Your Achievements</h3>
+            <div class="achievements" id="achievementsList">
+                <span style="color:var(--gray);">Complete courses to earn achievements!</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+    FOOTER
+    ========================================== -->
+    <footer class="footer">
+        <p>&copy; 2026 Nexora Academy. All rights reserved.</p>
+    </footer>
+
+    <!-- ==========================================
+    JAVASCRIPT
+    ========================================== -->
+    <script>
+        // ============================================
+        // COURSE DATA
+        // ============================================
+        const COURSES = [{
+            id: 1,
+            title: 'Computer Packages',
+            icon: 'fa-laptop',
+            category: 'web',
+            price: 20,
+            rating: 4.8,
+            reviews: 120,
+            level: 'Beginner',
+            description: 'Master essential computer skills from basics to advanced.',
+            file: 'computer-packages.html',
+            totalLessons: 40
+        }, {
+            id: 2,
+            title: 'Web Design Bootcamp',
+            icon: 'fa-code',
+            category: 'web',
+            price: 20,
+            rating: 4.9,
+            reviews: 314,
+            level: 'Beginner',
+            description: 'Learn HTML, CSS, JavaScript and build stunning websites.',
+            file: 'web-design.html',
+            totalLessons: 35
+        }, {
+            id: 3,
+            title: 'Python Programming',
+            icon: 'fa-python',
+            category: 'data',
+            price: 20,
+            rating: 4.7,
+            reviews: 314,
+            level: 'Beginner',
+            description: 'Python from zero to hero. Learn programming fundamentals.',
+            file: 'python.html',
+            totalLessons: 30
+        }, {
+            id: 4,
+            title: 'Graphic Design Masterclass',
+            icon: 'fa-paint-brush',
+            category: 'design',
+            price: 20,
+            rating: 4.7,
+            reviews: 314,
+            level: 'Beginner',
+            description: 'Become a professional graphic designer.',
+            file: 'graphic-design.html',
+            totalLessons: 28
+        }, {
+            id: 5,
+            title: 'Digital Marketing Full Course',
+            icon: 'fa-bullhorn',
+            category: 'design',
+            price: 20,
+            rating: 4.7,
+            reviews: 314,
+            level: 'Beginner',
+            description: 'Complete digital marketing strategy and implementation.',
+            file: 'digital-marketing.html',
+            totalLessons: 32
+        }, {
+            id: 6,
+            title: 'AI & Machine Learning Basics',
+            icon: 'fa-robot',
+            category: 'data',
+            price: 20,
+            rating: 4.7,
+            reviews: 314,
+            level: 'Beginner',
+            description: 'Introduction to artificial intelligence and machine learning.',
+            file: 'ai-ml.html',
+            totalLessons: 25
+        }, {
+            id: 7,
+            title: 'Data Analysis Professional',
+            icon: 'fa-chart-bar',
+            category: 'data',
+            price: 20,
+            rating: 4.8,
+            reviews: 200,
+            level: 'Intermediate',
+            description: 'Professional data analysis with Excel and Python.',
+            file: 'data-analysis.html',
+            totalLessons: 30
+        }, {
+            id: 8,
+            title: 'Cybersecurity Fundamentals',
+            icon: 'fa-shield-alt',
+            category: 'web',
+            price: 20,
+            rating: 4.9,
+            reviews: 180,
+            level: 'Intermediate',
+            description: 'Essential cybersecurity skills and best practices.',
+            file: 'cybersecurity.html',
+            totalLessons: 28
+        }, {
+            id: 9,
+            title: 'Mobile App Development',
+            icon: 'fa-mobile-alt',
+            category: 'web',
+            price: 20,
+            rating: 4.8,
+            reviews: 150,
+            level: 'Intermediate',
+            description: 'Build mobile apps for iOS and Android.',
+            file: 'mobile-app.html',
+            totalLessons: 32
+        }];
+
+        // ============================================
+        // TOAST
+        // ============================================
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icons = { success: '✅', error: '❌', warning: '⚠️' };
+            toast.innerHTML = `<span>${icons[type] || '📢'}</span> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                setTimeout(() => toast.remove(), 400);
+            }, 4000);
+        }
+
+        // ============================================
+        // AUTH
+        // ============================================
+        function getCurrentUser() {
+            const user = localStorage.getItem('nexora_current_user');
+            return user ? JSON.parse(user) : null;
+        }
+
+        function setCurrentUser(user) {
+            localStorage.setItem('nexora_current_user', JSON.stringify(user));
+        }
+
+        function clearCurrentUser() {
+            localStorage.removeItem('nexora_current_user');
+        }
+
+        function getUsers() {
+            const users = localStorage.getItem('nexora_users');
+            return users ? JSON.parse(users) : [];
+        }
+
+        function saveUsers(users) {
+            localStorage.setItem('nexora_users', JSON.stringify(users));
+        }
+
+        function logout() {
+            clearCurrentUser();
+            showToast('Logged out successfully.');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 800);
+        }
+
+        function toggleNav() {
+            document.body.classList.toggle('nav-open');
+        }
+
+        // ============================================
+        // DASHBOARD
+        // ============================================
+        function renderDashboard() {
+            const user = getCurrentUser();
+
+            if (!user) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Welcome Banner
+            document.getElementById('welcomeName').textContent = user.name;
+
+            const hour = new Date().getHours();
+            let greeting = 'Keep learning, keep growing!';
+            if (hour < 12) greeting = 'Good morning! Start your day with learning. ☀️';
+            else if (hour < 17) greeting = 'Good afternoon! Keep up the great work. 🌤️';
+            else greeting = 'Good evening! Perfect time for some learning. 🌙';
+
+            document.getElementById('welcomeMessage').textContent = greeting;
+
+            // Avatar
+            document.getElementById('userAvatar').textContent = user.name.charAt(0).toUpperCase();
+            document.getElementById('userName').textContent = user.name;
+
+            // Stats
+            const enrolled = user.enrolledCourses || [];
+            const completedLessons = user.completedLessons || {};
+            const totalCompleted = Object.values(completedLessons).reduce((sum, arr) => sum + arr.length, 0);
+            const achievements = user.achievements || [];
+            const learningHours = user.learningHours || 0;
+
+            document.getElementById('statEnrolled').textContent = enrolled.length;
+            document.getElementById('statCertificates').textContent = achievements.filter(a => a.includes('Certificate'))
+                .length || 0;
+            document.getElementById('statHours').textContent = learningHours + 'h';
+
+            // Calculate overall progress
+            let totalProgress = 0;
+            let totalLessons = 0;
+            COURSES.forEach(c => {
+                const completed = completedLessons[c.id] || [];
+                const progress = (completed.length / c.totalLessons) * 100;
+                totalProgress += progress;
+                totalLessons += c.totalLessons;
+            });
+            const avgProgress = COURSES.length > 0 ? Math.round(totalProgress / COURSES.length) : 0;
+            document.getElementById('statProgress').textContent = avgProgress + '%';
+            document.getElementById('statsCourses').textContent = COURSES.length;
+            document.getElementById('statsCompleted').textContent = totalCompleted;
+            document.getElementById('statsAchievements').textContent = achievements.length;
+
+            // Streak (simulated)
+            document.getElementById('statsStreak').textContent = Math.min(30, Math.floor(totalCompleted / 3));
+
+            // My Courses
+            renderMyCourses(user);
+
+            // All Courses
+            renderAllCourses(user);
+
+            // Tasks
+            renderTasks(user);
+
+            // Activity
+            renderActivity(user);
+
+            // Achievements
+            renderAchievements(user);
+        }
+
+        function renderMyCourses(user) {
+            const container = document.getElementById('myCourses');
+            const enrolled = user.enrolledCourses || [];
+
+            if (enrolled.length === 0) {
+                container.innerHTML = `
+                            <div style="grid-column:1/-1;text-align:center;padding:2rem;background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);">
+                                <p style="color:var(--gray);">You haven't enrolled in any courses yet.</p>
+                                <button class="btn btn-primary" onclick="showAllCourses()">Browse Courses</button>
+                            </div>
+                        `;
+                return;
+            }
+
+            container.innerHTML = COURSES.filter(c => enrolled.includes(c.id)).map(c => {
+                const completed = user.completedLessons?.[c.id] || [];
+                const progress = Math.round((completed.length / c.totalLessons) * 100);
+                const isComplete = progress === 100;
+
+                return `
+                            <div class="course-card" onclick="openCourse(${c.id})">
+                                <div class="icon"><i class="fas ${c.icon}"></i></div>
+                                <h3>${c.title}</h3>
+                                <div class="meta">
+                                    <span>⭐ ${c.rating} (${c.reviews})</span>
+                                    <span>${c.level}</span>
+                                </div>
+                                <div class="progress-text">
+                                    <span>Progress</span>
+                                    <span>${progress}%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="fill" style="width:${progress}%;"></div>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.8rem;">
+                                    <span class="price">$${c.price}</span>
+                                    <span class="badge ${isComplete ? 'badge-completed' : 'badge-enrolled'}">
+                                        ${isComplete ? '✅ Completed' : '📖 In Progress'}
+                                    </span>
+                                </div>
+                            </div>
+                        `;
+            }).join('');
+        }
+
+        function renderAllCourses(user) {
+            const container = document.getElementById('allCourses');
+            const enrolled = user.enrolledCourses || [];
+
+            const available = COURSES.filter(c => !enrolled.includes(c.id));
+
+            if (available.length === 0) {
+                container.innerHTML = `
+                            <div style="grid-column:1/-1;text-align:center;padding:1rem;color:var(--gray);">
+                                You're enrolled in all available courses! 🎉
+                            </div>
+                        `;
+                return;
+            }
+
+            container.innerHTML = available.slice(0, 4).map(c => {
+                return `
+                            <div class="course-card" onclick="enrollCourse(${c.id})">
+                                <div class="icon"><i class="fas ${c.icon}"></i></div>
+                                <h3>${c.title}</h3>
+                                <div class="meta">
+                                    <span>⭐ ${c.rating} (${c.reviews})</span>
+                                    <span>${c.level}</span>
+                                </div>
+                                <p style="font-size:0.85rem;color:var(--gray);margin:0.5rem 0;">${c.description}</p>
+                                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.8rem;">
+                                    <span class="price">$${c.price}</span>
+                                    <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();enrollCourse(${c.id})">
+                                        <i class="fas fa-plus"></i> Enroll
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+            }).join('');
+        }
+
+        function renderTasks(user) {
+            const container = document.getElementById('taskList');
+            const tasks = [];
+
+            // Find incomplete courses
+            const enrolled = user.enrolledCourses || [];
+            const completed = user.completedLessons || {};
+
+            enrolled.forEach(cid => {
+                const course = COURSES.find(c => c.id === cid);
+                if (!course) return;
+                const done = completed[cid] || [];
+                const remaining = course.totalLessons - done.length;
+                if (remaining > 0) {
+                    tasks.push({
+                        title: `${course.title} - ${remaining} lessons remaining`,
+                        due: 'In progress'
+                    });
+                }
+            });
+
+            // Check for certificate eligibility
+            enrolled.forEach(cid => {
+                const course = COURSES.find(c => c.id === cid);
+                if (!course) return;
+                const done = completed[cid] || [];
+                if (done.length === course.totalLessons) {
+                    const certs = user.achievements || [];
+                    if (!certs.includes(`Certificate - ${course.title}`)) {
+                        tasks.push({
+                            title: `🎓 Generate certificate for ${course.title}`,
+                            due: 'Ready!',
+                            isCert: true
+                        });
+                    }
+                }
+            });
+
+            if (tasks.length === 0) {
+                container.innerHTML = `<li style="color:var(--gray);">No pending tasks. Great job! 🎉</li>`;
+                return;
+            }
+
+            container.innerHTML = tasks.map(t => `
+                        <li>
+                            <span>${t.isCert ? '🎓 ' : '📝 '} ${t.title}</span>
+                            <span style="color:${t.isCert ? 'var(--success)' : 'var(--gray)'};font-size:0.8rem;">
+                                ${t.isCert ? '✅ Ready' : t.due}
+                            </span>
+                        </li>
+                    `).join('');
+        }
+
+        function renderActivity(user) {
+            const container = document.getElementById('activityList');
+            // Simulated activity
+            const activities = [
+                { text: 'Completed a lesson on Computer Packages', time: '2 hours ago' },
+                { text: 'Submitted an assignment', time: '5 hours ago' },
+                { text: 'Attended live class: Web Design', time: '1 day ago' },
+                { text: 'Made a payment of $2.00', time: '2 days ago' },
+            ];
+
+            container.innerHTML = activities.map(a => `
+                        <li>
+                            <span>${a.text}</span>
+                            <span class="time">${a.time}</span>
+                        </li>
+                    `).join('');
+        }
+
+        function renderAchievements(user) {
+            const container = document.getElementById('achievementsList');
+            const achievements = user.achievements || [];
+
+            const allAchievements = [
+                { name: 'Quick Learner', icon: 'fa-star' },
+                { name: 'Consistent', icon: 'fa-check-circle' },
+                { name: 'Assignment Master', icon: 'fa-trophy' },
+                { name: 'Rising Star', icon: 'fa-fire' },
+                { name: 'Quiz Master', icon: 'fa-brain' },
+                { name: 'Dedicated Student', icon: 'fa-graduation-cap' },
+                { name: 'Knowledge Seeker', icon: 'fa-search' },
+                { name: 'Expert in Training', icon: 'fa-award' },
+                { name: 'Course Master', icon: 'fa-crown' },
+            ];
+
+            const unlocked = allAchievements.filter(a => achievements.includes(a.name));
+
+            if (unlocked.length === 0) {
+                container.innerHTML = `<span style="color:var(--gray);">Complete courses to earn achievements! 🏆</span>`;
+                return;
+            }
+
+            container.innerHTML = unlocked.map(a =>
+                `<span class="achievement-badge"><i class="fas ${a.icon}"></i> ${a.name}</span>`
+            ).join('');
+
+            // Show locked ones dimmed
+            const locked = allAchievements.filter(a => !achievements.includes(a.name));
+            container.innerHTML += locked.map(a =>
+                `<span class="achievement-badge" style="opacity:0.3;"><i class="fas ${a.icon}"></i> ${a.name}</span>`
+            ).join('');
+        }
+
+        // ============================================
+        // COURSE ACTIONS
+        // ============================================
+        function openCourse(courseId) {
+            const course = COURSES.find(c => c.id === courseId);
+            if (course && course.file) {
+                window.location.href = course.file;
+            }
+        }
+
+        function enrollCourse(courseId) {
+            const user = getCurrentUser();
+            if (!user) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            if (!user.enrolledCourses) user.enrolledCourses = [];
+            if (user.enrolledCourses.includes(courseId)) {
+                showToast('Already enrolled in this course!', 'warning');
+                return;
+            }
+
+            user.enrolledCourses.push(courseId);
+            if (!user.completedLessons) user.completedLessons = {};
+            user.completedLessons[courseId] = [];
+
+            // Update user in database
+            const users = getUsers();
+            const index = users.findIndex(u => u.id === user.id);
+            if (index !== -1) {
+                users[index] = user;
+                saveUsers(users);
+                setCurrentUser(user);
+            }
+
+            showToast('🎉 Successfully enrolled! Start learning now!');
+            renderDashboard();
+        }
+
+        function showAllCourses() {
+            const container = document.getElementById('allCourses');
+            const user = getCurrentUser();
+            const enrolled = user?.enrolledCourses || [];
+
+            container.innerHTML = COURSES.filter(c => !enrolled.includes(c.id)).map(c => {
+                return `
+                            <div class="course-card" onclick="enrollCourse(${c.id})">
+                                <div class="icon"><i class="fas ${c.icon}"></i></div>
+                                <h3>${c.title}</h3>
+                                <div class="meta">
+                                    <span>⭐ ${c.rating} (${c.reviews})</span>
+                                    <span>${c.level}</span>
+                                </div>
+                                <p style="font-size:0.85rem;color:var(--gray);margin:0.5rem 0;">${c.description}</p>
+                                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.8rem;">
+                                    <span class="price">$${c.price}</span>
+                                    <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();enrollCourse(${c.id})">
+                                        <i class="fas fa-plus"></i> Enroll
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+            }).join('');
+
+            // Scroll to courses
+            document.getElementById('allCourses').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showAchievements() {
+            document.getElementById('achievementsList').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ============================================
+        // INIT
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = getCurrentUser();
+            if (!user) {
+                window.location.href = 'index.html';
+                return;
+            }
+            renderDashboard();
+
+            // Close mobile nav on link click
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    document.body.classList.remove('nav-open');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
