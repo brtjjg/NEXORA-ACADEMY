@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Web Design - Nexora Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <style>
+        /* ===== Shared Styles ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        :root {
+            --primary: #6C3CE1;
+            --primary-dark: #5228b5;
+            --secondary: #00d4aa;
+            --dark: #1a1a2e;
+            --dark-light: #2d2d44;
+            --gray: #6b6b8a;
+            --light-gray: #f0f0f7;
+            --white: #ffffff;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --radius: 16px;
+            --transition: all 0.3s ease;
+        }
+        body { background: var(--light-gray); color: var(--dark); line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 0 2rem;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--white);
+            cursor: pointer;
+        }
+        .navbar .logo i { color: var(--secondary); }
+        .navbar .logo span { color: var(--secondary); }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .nav-links a:hover { color: var(--white); }
+        .nav-auth {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .nav-auth .user-info {
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-auth .user-info .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-primary { background: var(--primary); color: var(--white); }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+        .btn-secondary { background: var(--secondary); color: var(--dark); }
+        .btn-secondary:hover { background: #00b894; transform: translateY(-2px); }
+        .btn-success { background: var(--success); color: var(--white); }
+        .btn-success:hover { background: #27ae60; }
+        .btn-danger { background: var(--danger); color: var(--white); }
+        .btn-sm { padding: 6px 16px; font-size: 0.8rem; }
+        .btn-block { width: 100%; justify-content: center; }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--white);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .course-container {
+            padding: 100px 2rem 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .course-header {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        .course-header h1 { font-size: 2.4rem; color: var(--primary); }
+        .course-header .meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+            color: var(--gray);
+        }
+        .course-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 2rem;
+        }
+        .lessons-container {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+        .module {
+            border: 1px solid var(--light-gray);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        .module-header {
+            padding: 1rem 1.5rem;
+            background: var(--light-gray);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+        .module-header:hover { background: #e8e8f0; }
+        .module-header h3 { font-size: 1.1rem; }
+        .module-header .badge {
+            background: var(--primary);
+            color: white;
+            padding: 2px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+        }
+        .module-content {
+            padding: 0 1.5rem 1.5rem;
+            display: none;
+        }
+        .module-content.open { display: block; }
+        .lesson-item {
+            padding: 0.8rem 1rem 0.8rem 2rem;
+            border-bottom: 1px solid var(--light-gray);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lesson-item:last-child { border-bottom: none; }
+        .lesson-item:hover { background: #f8f8fc; }
+        .lesson-item.completed { border-left: 4px solid var(--success); }
+        .lesson-item.locked { opacity: 0.6; cursor: not-allowed; }
+        .lesson-item .lesson-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .lesson-item .lesson-title .icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light-gray);
+            color: var(--gray);
+        }
+        .lesson-item.completed .lesson-title .icon {
+            background: var(--success);
+            color: white;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 100px;
+        }
+        .sidebar-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+        .sidebar-card h3 { margin-bottom: 1rem; }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: var(--light-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0.5rem 0 1rem;
+        }
+        .progress-bar .fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 1s ease;
+            width: 0%;
+        }
+        .payment-status .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        .payment-status .row:last-child { border-bottom: none; }
+        .achievements {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+        .achievement-badge {
+            background: var(--light-gray);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .achievement-badge i { color: var(--warning); }
+
+        .lesson-detail {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            display: none;
+            margin-bottom: 2rem;
+        }
+        .lesson-detail.active { display: block; }
+        .lesson-detail .back-btn { margin-bottom: 1rem; }
+        .lesson-detail .content .notes {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+        .lesson-detail .content .notes ul {
+            list-style: none;
+            padding: 0;
+        }
+        .lesson-detail .content .notes ul li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .lesson-detail .content .notes ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+        .lesson-detail .content .exercise {
+            background: #e8f5e9;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--success);
+            margin: 1rem 0;
+        }
+        .lesson-detail .content .quiz {
+            background: #fff3e0;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--warning);
+            margin: 1rem 0;
+        }
+        .quiz-option {
+            display: block;
+            padding: 0.5rem 1rem;
+            margin: 0.3rem 0;
+            background: var(--white);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .quiz-option:hover { background: #fff8e1; }
+        .quiz-option.correct { background: var(--success); color: white; }
+        .quiz-option.wrong { background: var(--danger); color: white; }
+
+        .toast-container {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .toast {
+            background: var(--dark);
+            color: var(--white);
+            padding: 14px 24px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 280px;
+        }
+        .toast.success { border-left: 4px solid var(--success); }
+        .toast.error { border-left: 4px solid var(--danger); }
+        .toast.warning { border-left: 4px solid var(--warning); }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 992px) {
+            .course-grid { grid-template-columns: 1fr; }
+            .sidebar { position: static; }
+        }
+        @media (max-width: 768px) {
+            .nav-links, .nav-auth .user-info .name { display: none; }
+            .hamburger { display: flex; }
+            .course-header h1 { font-size: 1.8rem; }
+            .course-container { padding: 80px 1rem 40px; }
+            .nav-open .nav-links {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: var(--dark);
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            .nav-open .nav-links a { font-size: 1.1rem; }
+            .nav-open .nav-auth .user-info .name { display: inline; }
+        }
+        @media (max-width: 480px) {
+            .navbar { padding: 0 1rem; }
+            .lesson-item { padding: 0.8rem; flex-wrap: wrap; }
+            .lesson-item .lesson-title { font-size: 0.9rem; }
+        }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <a href="dashboard.html" class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            Nexora<span>Academy</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="dashboard.html">Courses</a></li>
+        </ul>
+        <div class="nav-auth">
+            <div class="user-info">
+                <div class="avatar" id="userAvatar">D</div>
+                <span class="name" id="userName">Student</span>
+            </div>
+            <button class="btn btn-danger btn-sm" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+        <div class="hamburger" onclick="toggleNav()">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Course Content -->
+    <div class="course-container">
+        <div class="course-header">
+            <h1>🌐 Web Design Bootcamp</h1>
+            <div class="meta">
+                <span><i class="fas fa-clock"></i> 35 Lessons</span>
+                <span><i class="fas fa-star" style="color:var(--warning);"></i> 4.9 (314 reviews)</span>
+                <span><i class="fas fa-user-graduate"></i> Beginner to Advanced</span>
+                <span><i class="fas fa-certificate"></i> Certificate Included</span>
+            </div>
+        </div>
+
+        <div class="course-grid">
+            <div>
+                <div class="lesson-detail" id="lessonDetail">
+                    <button class="btn btn-secondary btn-sm back-btn" onclick="closeLesson()">
+                        <i class="fas fa-arrow-left"></i> Back to Lessons
+                    </button>
+                    <div id="lessonContent"></div>
+                </div>
+
+                <div class="lessons-container" id="lessonsContainer">
+                    <h2 style="margin-bottom:1.5rem;">📚 Course Modules</h2>
+                    <div id="modulesContainer"></div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="sidebar-card">
+                    <h3>📊 Your Progress</h3>
+                    <div style="display:flex;justify-content:space-between;font-size:0.9rem;">
+                        <span>Overall Progress</span>
+                        <span id="overallProgress">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="fill" id="progressFill" style="width:0%;"></div>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;font-size:0.9rem;">
+                        <span>Lessons Completed</span>
+                        <span id="completedCount">0 / 0</span>
+                    </div>
+                </div>
+
+                <div class="payment-status sidebar-card">
+                    <h3>💳 Payment Status</h3>
+                    <div class="row"><span>Total Course Fee</span><span>$20.00</span></div>
+                    <div class="row"><span>Total Paid</span><span id="totalPaid">$0.00 (0%)</span></div>
+                    <div class="row" style="font-weight:700;color:var(--danger);">
+                        <span>Balance</span>
+                        <span id="balance">$20.00</span>
+                    </div>
+                    <button class="btn btn-success btn-sm btn-block" style="margin-top:1rem;" onclick="makePayment()">
+                        <i class="fas fa-credit-card"></i> Pay $2.00
+                    </button>
+                </div>
+
+                <div class="sidebar-card">
+                    <h3>🏆 Achievements</h3>
+                    <div class="achievements" id="achievementsList">
+                        <span style="color:var(--gray);">Complete lessons to earn achievements!</span>
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <h3>📋 Next Steps</h3>
+                    <ul style="list-style:none;padding:0;font-size:0.9rem;" id="nextSteps">
+                        <li style="color:var(--gray);">Start your first lesson!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 Nexora Academy. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // ============================================
+        // COURSE DATA - WEB DESIGN
+        // ============================================
+        const COURSE_ID = 2;
+        const COURSE_TITLE = 'Web Design';
+        const COURSE_PRICE = 20;
+        const TOTAL_LESSONS = 35;
+
+        const MODULES = [{
+            id: 'm1',
+            title: 'Module 1: HTML Basics',
+            lessons: [
+                { id: 1, title: 'Introduction to HTML' },
+                { id: 2, title: 'HTML Structure & Tags' },
+                { id: 3, title: 'Text Formatting' },
+                { id: 4, title: 'Links & Images' },
+                { id: 5, title: 'Lists & Tables' },
+            ]
+        }, {
+            id: 'm2',
+            title: 'Module 2: CSS Styling',
+            lessons: [
+                { id: 6, title: 'Introduction to CSS' },
+                { id: 7, title: 'Colors & Typography' },
+                { id: 8, title: 'Box Model' },
+                { id: 9, title: 'Flexbox & Grid' },
+                { id: 10, title: 'Responsive Design' },
+            ]
+        }, {
+            id: 'm3',
+            title: 'Module 3: JavaScript Basics',
+            lessons: [
+                { id: 11, title: 'Introduction to JavaScript' },
+                { id: 12, title: 'Variables & Data Types' },
+                { id: 13, title: 'Functions & Events' },
+                { id: 14, title: 'DOM Manipulation' },
+                { id: 15, title: 'Form Validation' },
+            ]
+        }, {
+            id: 'm4',
+            title: 'Module 4: Advanced CSS',
+            lessons: [
+                { id: 16, title: 'CSS Animations' },
+                { id: 17, title: 'CSS Transitions' },
+                { id: 18, title: 'CSS Variables' },
+                { id: 19, title: 'SASS/SCSS' },
+                { id: 20, title: 'CSS Frameworks' },
+            ]
+        }, {
+            id: 'm5',
+            title: 'Module 5: Advanced JavaScript',
+            lessons: [
+                { id: 21, title: 'ES6 Features' },
+                { id: 22, title: 'Async/Await' },
+                { id: 23, title: 'APIs & Fetch' },
+                { id: 24, title: 'LocalStorage' },
+                { id: 25, title: 'JavaScript Frameworks' },
+            ]
+        }, {
+            id: 'm6',
+            title: 'Module 6: UI/UX Design',
+            lessons: [
+                { id: 26, title: 'Design Principles' },
+                { id: 27, title: 'Color Theory' },
+                { id: 28, title: 'Typography' },
+                { id: 29, title: 'User Experience' },
+                { id: 30, title: 'Prototyping' },
+            ]
+        }, {
+            id: 'm7',
+            title: 'Module 7: Final Project',
+            lessons: [
+                { id: 31, title: 'Project Planning' },
+                { id: 32, title: 'Design Phase' },
+                { id: 33, title: 'Development' },
+                { id: 34, title: 'Testing' },
+                { id: 35, title: 'Deployment' },
+            ]
+        }];
+
+        // All the shared functions from computer-packages.html
+        // (The same JavaScript with updated course data)
+        // ============================================
+        // APP STATE
+        // ============================================
+        let currentUser = null;
+        let completedLessons = [];
+        let payments = [];
+        let achievements = [];
+
+        // ============================================
+        // AUTH HELPERS
+        // ============================================
+        function getCurrentUser() {
+            const user = localStorage.getItem('nexora_current_user');
+            return user ? JSON.parse(user) : null;
+        }
+
+        function getUsers() {
+            const users = localStorage.getItem('nexora_users');
+            return users ? JSON.parse(users) : [];
+        }
+
+        function saveUsers(users) {
+            localStorage.setItem('nexora_users', JSON.stringify(users));
+        }
+
+        function setCurrentUser(user) {
+            localStorage.setItem('nexora_current_user', JSON.stringify(user));
+        }
+
+        function logout() {
+            localStorage.removeItem('nexora_current_user');
+            showToast('Logged out successfully.');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 800);
+        }
+
+        function toggleNav() {
+            document.body.classList.toggle('nav-open');
+        }
+
+        // ============================================
+        // TOAST
+        // ============================================
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icons = { success: '✅', error: '❌', warning: '⚠️' };
+            toast.innerHTML = `<span>${icons[type] || '📢'}</span> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                setTimeout(() => toast.remove(), 400);
+            }, 4000);
+        }
+
+        // ============================================
+        // LOAD USER DATA
+        // ============================================
+        function loadUserData() {
+            currentUser = getCurrentUser();
+            if (!currentUser) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const users = getUsers();
+            const userData = users.find(u => u.id === currentUser.id);
+            if (userData) {
+                completedLessons = userData.completedLessons?.[COURSE_ID] || [];
+                payments = userData.payments || [];
+                achievements = userData.achievements || [];
+            }
+
+            document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+            document.getElementById('userName').textContent = currentUser.name;
+
+            renderModules();
+            updateSidebar();
+        }
+
+        // ============================================
+        // SAVE USER DATA
+        // ============================================
+        function saveUserData() {
+            const users = getUsers();
+            const index = users.findIndex(u => u.id === currentUser.id);
+            if (index !== -1) {
+                if (!users[index].completedLessons) users[index].completedLessons = {};
+                users[index].completedLessons[COURSE_ID] = completedLessons;
+                users[index].payments = payments;
+                users[index].achievements = achievements;
+                saveUsers(users);
+                setCurrentUser(users[index]);
+            }
+        }
+
+        // ============================================
+        // RENDER MODULES
+        // ============================================
+        function renderModules() {
+            const container = document.getElementById('modulesContainer');
+            container.innerHTML = '';
+
+            MODULES.forEach((module, index) => {
+                const completedCount = module.lessons.filter(l => completedLessons.includes(l.id)).length;
+                const total = module.lessons.length;
+                const isComplete = completedCount === total;
+
+                const div = document.createElement('div');
+                div.className = 'module';
+                div.innerHTML = `
+                            <div class="module-header" onclick="toggleModule(${index})">
+                                <div style="display:flex;align-items:center;gap:1rem;">
+                                    <span style="font-weight:700;color:var(--primary);">${module.title}</span>
+                                    <span class="badge">${completedCount}/${total}</span>
+                                    ${isComplete ? '<span style="color:var(--success);">✅ Complete</span>' : ''}
+                                </div>
+                                <span>${isComplete ? '🎉' : '▼'}</span>
+                            </div>
+                            <div class="module-content open" id="module-${index}">
+                                ${module.lessons.map(lesson => {
+                                    const isCompleted = completedLessons.includes(lesson.id);
+                                    const isLocked = !isCompleted && !canAccessLesson(module, lesson);
+                                    return `
+                                        <div class="lesson-item ${isCompleted ? 'completed' : ''} ${isLocked ? 'locked' : ''}"
+                                             onclick="${!isLocked ? `openLesson(${lesson.id})` : 'showToast(\'Complete previous lessons first!\',\'warning\')'}">
+                                            <div class="lesson-title">
+                                                <div class="icon">
+                                                    <i class="fas ${isCompleted ? 'fa-check' : 'fa-play'}"></i>
+                                                </div>
+                                                <span>${lesson.title}</span>
+                                            </div>
+                                            <div>
+                                                ${isCompleted ? '<span style="color:var(--success);font-size:0.8rem;">✅</span>' : 
+                                                  isLocked ? '<span style="color:var(--gray);font-size:0.8rem;">🔒</span>' :
+                                                  '<span style="color:var(--primary);font-size:0.8rem;">Ready</span>'}
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        `;
+                container.appendChild(div);
+            });
+        }
+
+        function toggleModule(index) {
+            const content = document.getElementById(`module-${index}`);
+            if (content) {
+                content.classList.toggle('open');
+            }
+        }
+
+        function canAccessLesson(module, lesson) {
+            const lessonIndex = module.lessons.findIndex(l => l.id === lesson.id);
+            if (lessonIndex === 0) return true;
+            const prevLesson = module.lessons[lessonIndex - 1];
+            return completedLessons.includes(prevLesson.id);
+        }
+
+        function getAllLessons() {
+            const all = [];
+            MODULES.forEach(m => m.lessons.forEach(l => all.push(l)));
+            return all;
+        }
+
+        function getTotalLessons() {
+            return getAllLessons().length;
+        }
+
+        function findLesson(id) {
+            for (const module of MODULES) {
+                for (const lesson of module.lessons) {
+                    if (lesson.id === id) return lesson;
+                }
+            }
+            return null;
+        }
+
+        function findModuleByLesson(lessonId) {
+            for (const module of MODULES) {
+                for (const lesson of module.lessons) {
+                    if (lesson.id === lessonId) return module;
+                }
+            }
+            return null;
+        }
+
+        // ============================================
+        // OPEN LESSON
+        // ============================================
+        function openLesson(lessonId) {
+            const lesson = findLesson(lessonId);
+            if (!lesson) return;
+
+            const container = document.getElementById('lessonContent');
+            const isCompleted = completedLessons.includes(lessonId);
+
+            container.innerHTML = `
+                        <h2>${lesson.title}</h2>
+                        <div class="content">
+                            <div class="notes">
+                                <h4>📝 Lesson Notes</h4>
+                                <p>This lesson covers <strong>${lesson.title}</strong> - an important topic in ${COURSE_TITLE}.</p>
+                                <ul>
+                                    <li>Key concept 1: Understanding the fundamentals</li>
+                                    <li>Key concept 2: Practical applications</li>
+                                    <li>Key concept 3: Best practices and tips</li>
+                                    <li>Key concept 4: Common mistakes to avoid</li>
+                                </ul>
+                                <h4>💡 Pro Tip</h4>
+                                <p>Practice what you learn by building small projects. The best way to learn web design is by doing!</p>
+                            </div>
+                            <div class="exercise">
+                                <h4>✏️ Practical Exercise</h4>
+                                <p>Apply what you've learned:</p>
+                                <ul>
+                                    <li>Create a simple example using the concepts from this lesson</li>
+                                    <li>Test your understanding by explaining it to someone else</li>
+                                    <li>Write down 3 questions you have about the topic</li>
+                                </ul>
+                            </div>
+                            <div class="quiz">
+                                <h4>📝 Quick Quiz</h4>
+                                <p><strong>What is the most important skill for a web designer?</strong></p>
+                                <div class="quiz-option" onclick="showToast('🎉 Correct! Practice makes perfect!')">
+                                    A. Practice and continuous learning
+                                </div>
+                                <div class="quiz-option" onclick="showToast('❌ Not quite. Keep learning!', 'error')">
+                                    B. Knowing everything
+                                </div>
+                                <div class="quiz-option" onclick="showToast('❌ Not quite. Keep learning!', 'error')">
+                                    C. Having expensive tools
+                                </div>
+                                <div class="quiz-option" onclick="showToast('❌ Not quite. Keep learning!', 'error')">
+                                    D. Working alone
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap;">
+                            ${!isCompleted ? `
+                                <button class="btn btn-success" onclick="completeLesson(${lessonId})">
+                                    <i class="fas fa-check"></i> Mark as Complete
+                                </button>
+                            ` : `
+                                <span style="color:var(--success);font-weight:600;">✅ Lesson Completed!</span>
+                            `}
+                            <button class="btn btn-secondary" onclick="closeLesson()">
+                                <i class="fas fa-arrow-left"></i> Back to Lessons
+                            </button>
+                        </div>
+                    `;
+
+            document.getElementById('lessonDetail').classList.add('active');
+            document.getElementById('lessonsContainer').style.display = 'none';
+
+            const module = findModuleByLesson(lessonId);
+            if (module && !canAccessLesson(module, lesson) && !isCompleted) {
+                const btn = document.querySelector('#lessonContent .btn-success');
+                if (btn) {
+                    btn.disabled = true;
+                    btn.textContent = '🔒 Complete previous lesson first';
+                }
+            }
+
+            document.getElementById('lessonDetail').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeLesson() {
+            document.getElementById('lessonDetail').classList.remove('active');
+            document.getElementById('lessonsContainer').style.display = 'block';
+        }
+
+        // ============================================
+        // COMPLETE LESSON
+        // ============================================
+        function completeLesson(lessonId) {
+            if (!currentUser) {
+                showToast('Please login to track progress.', 'warning');
+                return;
+            }
+
+            if (completedLessons.includes(lessonId)) {
+                showToast('Lesson already completed!', 'warning');
+                return;
+            }
+
+            const totalPaid = getTotalPaid();
+            const completedCount = completedLessons.length;
+            const expectedPaidPercent = Math.min(100, Math.round(((completedCount + 1) / getTotalLessons()) * 100));
+
+            if (totalPaid < COURSE_PRICE * (expectedPaidPercent / 100) && expectedPaidPercent < 100) {
+                showToast(`Please pay ${expectedPaidPercent}% of course fee to unlock more lessons.`, 'warning');
+                return;
+            }
+
+            completedLessons.push(lessonId);
+            saveUserData();
+            checkAchievements();
+
+            showToast(`✅ Lesson completed!`);
+            renderModules();
+            updateSidebar();
+
+            const allLessons = getAllLessons();
+            const currentIndex = allLessons.findIndex(l => l.id === lessonId);
+            if (currentIndex < allLessons.length - 1) {
+                const nextLesson = allLessons[currentIndex + 1];
+                const module = findModuleByLesson(nextLesson.id);
+                if (module && canAccessLesson(module, nextLesson)) {
+                    setTimeout(() => {
+                        closeLesson();
+                        setTimeout(() => openLesson(nextLesson.id), 300);
+                    }, 1500);
+                }
+            } else {
+                if (getTotalPaid() >= COURSE_PRICE) {
+                    generateCertificate();
+                }
+            }
+        }
+
+        // ============================================
+        // PAYMENT
+        // ============================================
+        function getTotalPaid() {
+            return payments.reduce((sum, p) => sum + p.amount, 0);
+        }
+
+        function makePayment() {
+            if (!currentUser) {
+                showToast('Please login first.', 'warning');
+                return;
+            }
+
+            const totalPaid = getTotalPaid();
+            const remaining = Math.round((COURSE_PRICE - totalPaid) * 100) / 100;
+
+            if (remaining <= 0) {
+                showToast('Course fully paid! ✅', 'success');
+                return;
+            }
+
+            const amount = Math.min(remaining, 2);
+            payments.push({
+                id: Date.now(),
+                amount: amount,
+                date: new Date().toISOString()
+            });
+
+            saveUserData();
+            showToast(`💰 Payment of $${amount} successful!`);
+            updateSidebar();
+
+            if (getTotalPaid() >= COURSE_PRICE) {
+                showToast('🎉 Course fully paid! You own this course!');
+                if (completedLessons.length === getTotalLessons()) {
+                    generateCertificate();
+                }
+            }
+        }
+
+        // ============================================
+        // CERTIFICATE
+        // ============================================
+        function generateCertificate() {
+            const certName = `Certificate - ${COURSE_TITLE}`;
+            if (achievements.includes(certName)) {
+                showToast('Certificate already generated!', 'success');
+                return;
+            }
+
+            if (completedLessons.length < getTotalLessons()) {
+                showToast('Complete all lessons first!', 'warning');
+                return;
+            }
+
+            if (getTotalPaid() < COURSE_PRICE) {
+                showToast('Complete full payment first!', 'warning');
+                return;
+            }
+
+            achievements.push(certName);
+            saveUserData();
+            showToast('🎓 Certificate Generated! Check your achievements!');
+            updateSidebar();
+        }
+
+        // ============================================
+        // ACHIEVEMENTS
+        // ============================================
+        function addAchievement(name) {
+            if (!achievements.includes(name)) {
+                achievements.push(name);
+                saveUserData();
+                showToast(`🏆 Achievement Unlocked: ${name}!`);
+                updateSidebar();
+            }
+        }
+
+        function checkAchievements() {
+            const count = completedLessons.length;
+            const total = getTotalLessons();
+
+            if (count >= 5) addAchievement('Quick Learner');
+            if (count >= 10) addAchievement('Dedicated Student');
+            if (count >= 20) addAchievement('Knowledge Seeker');
+            if (count >= 30) addAchievement('Expert in Training');
+            if (count === total) addAchievement('Course Master');
+        }
+
+        // ============================================
+        // UPDATE SIDEBAR
+        // ============================================
+        function updateSidebar() {
+            const total = getTotalLessons();
+            const completed = completedLessons.length;
+            const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+            document.getElementById('overallProgress').textContent = percent + '%';
+            document.getElementById('progressFill').style.width = percent + '%';
+            document.getElementById('completedCount').textContent = `${completed} / ${total}`;
+
+            const totalPaid = getTotalPaid();
+            const paidPercent = Math.min(100, Math.round((totalPaid / COURSE_PRICE) * 100));
+            document.getElementById('totalPaid').textContent = `$${totalPaid.toFixed(2)} (${paidPercent}%)`;
+            document.getElementById('balance').textContent = `$${Math.max(0, COURSE_PRICE - totalPaid).toFixed(2)}`;
+
+            const container = document.getElementById('achievementsList');
+            const allAchievements = [
+                { name: 'Quick Learner', icon: 'fa-star' },
+                { name: 'Dedicated Student', icon: 'fa-graduation-cap' },
+                { name: 'Knowledge Seeker', icon: 'fa-search' },
+                { name: 'Expert in Training', icon: 'fa-award' },
+                { name: 'Course Master', icon: 'fa-crown' },
+            ];
+
+            const unlocked = allAchievements.filter(a => achievements.includes(a.name));
+            const locked = allAchievements.filter(a => !achievements.includes(a.name));
+
+            container.innerHTML = unlocked.map(a =>
+                `<span class="achievement-badge"><i class="fas ${a.icon}" style="color:var(--warning);"></i> ${a.name}</span>`
+            ).join('') +
+            locked.map(a =>
+                `<span class="achievement-badge" style="opacity:0.3;"><i class="fas ${a.icon}"></i> ${a.name}</span>`
+            ).join('');
+
+            const steps = document.getElementById('nextSteps');
+            const certName = `Certificate - ${COURSE_TITLE}`;
+
+            if (completed === total) {
+                steps.innerHTML = `
+                            <li style="color:var(--success);font-weight:600;">🎉 All lessons complete!</li>
+                            ${getTotalPaid() >= COURSE_PRICE ? 
+                                achievements.includes(certName) ?
+                                    '<li style="color:var(--success);">✅ Certificate earned! 🎓</li>' :
+                                    '<li style="color:var(--success);">✅ Course fully paid! Generate certificate above</li>' :
+                                '<li style="color:var(--warning);">💳 Complete payment to get certificate</li>'}
+                        `;
+            } else {
+                const nextLesson = getAllLessons().find(l => !completedLessons.includes(l.id));
+                if (nextLesson) {
+                    steps.innerHTML = `
+                                <li>📖 Next: <strong>${nextLesson.title}</strong></li>
+                                <li style="color:var(--gray);font-size:0.8rem;">${completed}/${total} lessons complete</li>
+                                <li style="color:var(--gray);font-size:0.8rem;">💰 Paid: $${getTotalPaid().toFixed(2)} / $${COURSE_PRICE}</li>
+                            `;
+                }
+            }
+
+            if (completed === total && getTotalPaid() >= COURSE_PRICE && !achievements.includes(certName)) {
+                steps.innerHTML += `
+                            <li style="margin-top:0.5rem;">
+                                <button class="btn btn-success btn-sm" onclick="generateCertificate()">
+                                    <i class="fas fa-certificate"></i> Generate Certificate
+                                </button>
+                            </li>
+                        `;
+            }
+        }
+
+        // ============================================
+        // INIT
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUserData();
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    document.body.classList.remove('nav-open');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
