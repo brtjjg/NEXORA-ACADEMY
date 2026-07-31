@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>Certificate Verification - Nexora Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6C3CE1;
+            --secondary: #00d4aa;
+            --dark: #1a1a2e;
+            --gray: #6b6b8a;
+            --light-gray: #f0f0f7;
+            --white: #ffffff;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --radius: 16px;
+        }
+
+        body {
+            background: var(--light-gray);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .verify-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .verify-card .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .verify-card .logo i {
+            color: var(--secondary);
+        }
+
+        .verify-card .logo span {
+            color: var(--secondary);
+        }
+
+        .verify-card .status-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .verify-card .status-icon.valid {
+            color: var(--success);
+        }
+
+        .verify-card .status-icon.invalid {
+            color: var(--danger);
+        }
+
+        .verify-card .status-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .verify-card .status-title.valid {
+            color: var(--success);
+        }
+
+        .verify-card .status-title.invalid {
+            color: var(--danger);
+        }
+
+        .verify-card .status-subtitle {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .verify-card .divider {
+            border-top: 2px solid var(--light-gray);
+            margin: 1.5rem 0;
+        }
+
+        .verify-card .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem 2rem;
+            text-align: left;
+        }
+
+        .verify-card .detail-grid .detail-item {
+            display: flex;
+            flex-direction: column;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .verify-card .detail-grid .detail-item .label {
+            font-size: 0.7rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .verify-card .detail-grid .detail-item .value {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .verify-card .verify-badge {
+            display: inline-block;
+            padding: 4px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .verify-card .verify-badge.valid {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .verify-card .verify-badge.invalid {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .verify-card .timestamp {
+            font-size: 0.75rem;
+            color: var(--gray);
+            margin-top: 1.5rem;
+        }
+
+        .verify-card .footer-text {
+            font-size: 0.7rem;
+            color: var(--gray);
+            margin-top: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #5228b5;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+        }
+
+        .no-data i {
+            font-size: 3rem;
+            color: var(--primary-light);
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 480px) {
+            .verify-card {
+                padding: 1.5rem;
+            }
+
+            .verify-card .detail-grid {
+                grid-template-columns: 1fr;
+                gap: 0.3rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn-group .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .loading-spinner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .loading-spinner i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-spinner p {
+            color: var(--gray);
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="verify-card" id="verifyCard">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                Nexora<span>Academy</span>
+            </div>
+
+            <!-- Loading State -->
+            <div class="loading-spinner" id="loadingState">
+                <i class="fas fa-spinner"></i>
+                <p>Verifying certificate...</p>
+            </div>
+
+            <!-- Verification Result -->
+            <div id="resultState" class="hidden">
+                <div class="status-icon" id="statusIcon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="status-title" id="statusTitle">Certificate Verified</div>
+                <div class="status-subtitle" id="statusSubtitle">This certificate has been successfully verified</div>
+
+                <div class="divider"></div>
+
+                <div class="detail-grid" id="detailGrid">
+                    <div class="detail-item">
+                        <span class="label">Student Name</span>
+                        <span class="value" id="verifyName">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Course Name</span>
+                        <span class="value" id="verifyCourse">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Certificate Number</span>
+                        <span class="value" id="verifyCertNumber">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Student ID</span>
+                        <span class="value" id="verifyStudentId">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Date Issued</span>
+                        <span class="value" id="verifyIssued">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Verification Status</span>
+                        <span class="value" id="verifyStatus">-</span>
+                    </div>
+                </div>
+
+                <div class="verify-badge" id="verifyBadge">✅ Valid Certificate</div>
+
+                <div class="timestamp" id="verifyTimestamp">
+                    Verified: <span id="verifyTime">-</span>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="window.print()">
+                        <i class="fas fa-print"></i> Print Verification
+                    </button>
+                    <button class="btn btn-outline" onclick="window.location.href='dashboard.html'">
+                        <i class="fas fa-arrow-left"></i> Back to Dashboard
+                    </button>
+                </div>
+
+                <div class="footer-text">
+                    <i class="fas fa-shield-alt"></i>
+                    This certificate was issued by Nexora Academy.
+                    <br />For any issues, contact support@nexoraacademy.com
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // LOAD VERIFICATION DATA
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingState = document.getElementById('loadingState');
+            const resultState = document.getElementById('resultState');
+
+            // Get verification data
+            let verifyData = null;
+
+            // Try to get from localStorage (from certificate page)
+            const storedData = localStorage.getItem('nexora_verify_data');
+            if (storedData) {
+                try {
+                    verifyData = JSON.parse(storedData);
+                    localStorage.removeItem('nexora_verify_data');
+                } catch (e) {
+                    console.error('Error parsing verification data:', e);
+                }
+            }
+
+            // If no data, try URL parameters
+            if (!verifyData) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const certNumber = urlParams.get('cert');
+                if (certNumber) {
+                    // Try to find certificate in user data
+                    const users = JSON.parse(localStorage.getItem('nexora_users') || '[]');
+                    const currentUser = JSON.parse(localStorage.getItem('nexora_current_user') || 'null');
+
+                    let foundCert = null;
+                    users.forEach(u => {
+                        if (u.certificates) {
+                            const cert = u.certificates.find(c => c.certNumber === certNumber);
+                            if (cert) {
+                                foundCert = { ...cert, userName: u.name };
+                            }
+                        }
+                    });
+
+                    if (foundCert) {
+                        const course = getCourse(foundCert.courseId);
+                        verifyData = {
+                            name: foundCert.userName,
+                            course: course ? course.title : 'Unknown Course',
+                            certificate: foundCert.certNumber,
+                            studentId: foundCert.studentId || 'NXA-2026-000123',
+                            issued: new Date(foundCert.issueDate).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            }),
+                            status: 'valid'
+                        };
+                    }
+                }
+            }
+
+            // Simulate verification delay
+            setTimeout(() => {
+                loadingState.classList.add('hidden');
+                resultState.classList.remove('hidden');
+
+                if (verifyData && verifyData.status === 'valid') {
+                    showValidVerification(verifyData);
+                } else {
+                    showInvalidVerification();
+                }
+            }, 1500);
+        });
+
+        function getCourse(courseId) {
+            const courses = {
+                1: { id: 1, title: 'Computer Packages', code: 'CP' },
+                2: { id: 2, title: 'Web Design Bootcamp', code: 'WD' },
+                3: { id: 3, title: 'Python Programming', code: 'PY' },
+                4: { id: 4, title: 'Graphic Design Masterclass', code: 'GD' },
+                5: { id: 5, title: 'Digital Marketing', code: 'DM' },
+                6: { id: 6, title: 'AI & Machine Learning', code: 'AI' },
+                7: { id: 7, title: 'Data Analysis Professional', code: 'DA' },
+                8: { id: 8, title: 'Cybersecurity Fundamentals', code: 'CY' },
+                9: { id: 9, title: 'Mobile App Development', code: 'MA' }
+            };
+            return courses[courseId] || null;
+        }
+
+        function showValidVerification(data) {
+            document.getElementById('statusIcon').innerHTML = '<i class="fas fa-check-circle"></i>';
+            document.getElementById('statusIcon').className = 'status-icon valid';
+            document.getElementById('statusTitle').textContent = '✅ Certificate Verified';
+            document.getElementById('statusTitle').className = 'status-title valid';
+            document.getElementById('statusSubtitle').textContent = 'This certificate has been successfully verified by Nexora Academy.';
+
+            document.getElementById('verifyName').textContent = data.name || 'N/A';
+            document.getElementById('verifyCourse').textContent = data.course || 'N/A';
+            document.getElementById('verifyCertNumber').textContent = data.certificate || 'N/A';
+            document.getElementById('verifyStudentId').textContent = data.studentId || 'N/A';
+            document.getElementById('verifyIssued').textContent = data.issued || 'N/A';
+            document.getElementById('verifyStatus').textContent = '✅ Valid';
+            document.getElementById('verifyStatus').style.color = 'var(--success)';
+
+            document.getElementById('verifyBadge').className = 'verify-badge valid';
+            document.getElementById('verifyBadge').textContent = '✅ Valid Certificate';
+
+            document.getElementById('verifyTime').textContent = new Date().toLocaleString();
+        }
+
+        function showInvalidVerification() {
+            document.getElementById('statusIcon').innerHTML = '<i class="fas fa-times-circle"></i>';
+            document.getElementById('statusIcon').className = 'status-icon invalid';
+            document.getElementById('statusTitle').textContent = '❌ Invalid Certificate';
+            document.getElementById('statusTitle').className = 'status-title invalid';
+            document.getElementById('statusSubtitle').textContent = 'This certificate could not be verified. Please contact Nexora Academy for assistance.';
+
+            document.getElementById('verifyName').textContent = '—';
+            document.getElementById('verifyCourse').textContent = '—';
+            document.getElementById('verifyCertNumber').textContent = '—';
+            document.getElementById('verifyStudentId').textContent = '—';
+            document.getElementById('verifyIssued').textContent = '—';
+            document.getElementById('verifyStatus').textContent = '❌ Invalid';
+            document.getElementById('verifyStatus').style.color = 'var(--danger)';
+
+            document.getElementById('verifyBadge').className = 'verify-badge invalid';
+            document.getElementById('verifyBadge').textContent = '❌ Invalid Certificate';
+
+            document.getElementById('verifyTime').textContent = new Date().toLocaleString();
+        }
+
+        console.log('🔍 Nexora Academy - Certificate Verification');
+        console.log('✅ Scan QR code to verify certificates');
+    </script>
+
+</body>
+</html>
