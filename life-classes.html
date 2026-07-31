@@ -1,0 +1,2065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Live Classes - Nexora Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <style>
+        /* ============================================
+           ROOT & RESET
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6C3CE1;
+            --primary-dark: #5228b5;
+            --primary-light: #8b6cf3;
+            --secondary: #00d4aa;
+            --dark: #1a1a2e;
+            --dark-light: #2d2d44;
+            --gray: #6b6b8a;
+            --light-gray: #f0f0f7;
+            --white: #ffffff;
+            --danger: #e74c3c;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --radius: 16px;
+            --transition: all 0.3s ease;
+            --sidebar-width: 260px;
+        }
+
+        body {
+            background: var(--light-gray);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ============================================
+           SIDEBAR
+           ============================================ */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.7);
+            z-index: 2000;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+            padding-top: 1rem;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .sidebar .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 1.5rem 2rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--white);
+            cursor: pointer;
+        }
+
+        .sidebar .logo i {
+            color: var(--secondary);
+            font-size: 1.8rem;
+        }
+
+        .sidebar .logo span {
+            color: var(--secondary);
+        }
+
+        .sidebar .user-profile {
+            padding: 0 1.5rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .sidebar .user-profile .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .sidebar .user-profile .user-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .sidebar .user-profile .user-info .name {
+            font-weight: 600;
+            color: var(--white);
+            font-size: 0.95rem;
+        }
+
+        .sidebar .user-profile .user-info .role {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .sidebar .nav-section {
+            padding: 0.5rem 0;
+        }
+
+        .sidebar .nav-section .section-title {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .sidebar .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0.7rem 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .sidebar .nav-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--white);
+        }
+
+        .sidebar .nav-item.active {
+            background: rgba(108, 60, 225, 0.15);
+            border-left-color: var(--primary);
+            color: var(--white);
+        }
+
+        .sidebar .nav-item i {
+            width: 20px;
+            font-size: 1.1rem;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .sidebar .nav-item .badge {
+            margin-left: auto;
+            background: var(--danger);
+            color: white;
+            padding: 1px 10px;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+
+        .sidebar-toggle {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            z-index: 2100;
+            background: var(--dark);
+            border: none;
+            color: var(--white);
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar-toggle:hover {
+            background: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .sidebar-toggle .hamburger-icon {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .sidebar-toggle .hamburger-icon span {
+            display: block;
+            width: 20px;
+            height: 2.5px;
+            background: var(--white);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1999;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        /* ============================================
+           MAIN CONTENT
+           ============================================ */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            transition: margin-left 0.3s ease;
+            min-height: 100vh;
+        }
+
+        .top-navbar {
+            background: var(--white);
+            padding: 0.8rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-navbar .page-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .top-navbar .page-title span {
+            color: var(--primary);
+        }
+
+        .top-navbar .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .top-navbar .top-actions .icon-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: none;
+            background: var(--light-gray);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: var(--dark);
+            position: relative;
+        }
+
+        .top-navbar .top-actions .icon-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .top-navbar .top-actions .icon-btn .dot {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--danger);
+        }
+
+        /* ============================================
+           LIVE CLASSES PAGE
+           ============================================ */
+        .page-content {
+            padding: 2rem 2rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-content.hidden {
+            display: none;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.4rem;
+            color: var(--dark);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(108, 60, 225, 0.35);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background: #00b894;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        .btn-success:hover {
+            background: #27ae60;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: var(--white);
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-sm {
+            padding: 6px 16px;
+            font-size: 0.8rem;
+        }
+
+        .btn-block {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* ============================================
+           CLASS CARDS
+           ============================================ */
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .class-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .class-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .class-card .status {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .status-live {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-upcoming {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .status-ended {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .class-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .class-card .meta {
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin: 0.3rem 0;
+        }
+
+        .class-card .meta i {
+            width: 20px;
+            color: var(--primary);
+        }
+
+        .class-card .students {
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin: 0.5rem 0;
+        }
+
+        .class-card .bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .class-card .timer {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* ============================================
+           CLASSROOM VIEW
+           ============================================ */
+        .classroom {
+            background: var(--dark);
+            border-radius: var(--radius);
+            overflow: hidden;
+            min-height: 500px;
+            position: relative;
+        }
+
+        .classroom .video-grid {
+            display: grid;
+            grid-template-columns: 70% 30%;
+            gap: 0;
+            min-height: 500px;
+        }
+
+        .classroom .main-video {
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .classroom .main-video .tutor-label {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: white;
+        }
+
+        .classroom .main-video .live-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--danger);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .classroom .main-video .video-placeholder {
+            text-align: center;
+        }
+
+        .classroom .main-video .video-placeholder i {
+            font-size: 4rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .classroom .main-video .video-placeholder h3 {
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .classroom .main-video .video-placeholder p {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .classroom .side-panel {
+            background: #1a1a2e;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .classroom .side-panel .panel-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.5rem;
+        }
+
+        .classroom .side-panel .panel-tabs button {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            padding: 0.3rem 0.8rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .classroom .side-panel .panel-tabs button.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .classroom .side-panel .panel-tabs button:hover {
+            color: white;
+        }
+
+        .classroom .side-panel .panel-content {
+            flex: 1;
+            overflow-y: auto;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            max-height: 400px;
+        }
+
+        .classroom .side-panel .panel-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .classroom .side-panel .panel-content::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .chat-message {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .chat-message .sender {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .chat-message .text {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .chat-message .time {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        .chat-input input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .chat-input button {
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .chat-input button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* ============================================
+           KNOWLEDGE CHECK
+           ============================================ */
+        .knowledge-check-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .knowledge-check-overlay.active {
+            display: flex;
+        }
+
+        .knowledge-check-modal {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .knowledge-check-modal .timer {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+            margin: 0.5rem 0;
+        }
+
+        .knowledge-check-modal .timer.warning {
+            color: var(--danger);
+        }
+
+        .knowledge-check-modal .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .knowledge-check-modal .options button {
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            background: var(--white);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            text-align: left;
+        }
+
+        .knowledge-check-modal .options button:hover {
+            border-color: var(--primary);
+            background: #f8f4ff;
+        }
+
+        .knowledge-check-modal .options button.correct {
+            border-color: var(--success);
+            background: #e8f5e9;
+        }
+
+        .knowledge-check-modal .options button.wrong {
+            border-color: var(--danger);
+            background: #fce4ec;
+        }
+
+        .knowledge-check-modal .options button:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        /* ============================================
+           ATTENDANCE CONFIRMATION
+           ============================================ */
+        .attendance-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .attendance-overlay.active {
+            display: flex;
+        }
+
+        .attendance-modal {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        .attendance-modal .icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .attendance-modal h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .attendance-modal p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        /* ============================================
+           TOAST
+           ============================================ */
+        .toast-container {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            z-index: 4000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            background: var(--dark);
+            color: var(--white);
+            padding: 14px 24px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 280px;
+        }
+
+        .toast.success {
+            border-left: 4px solid var(--success);
+        }
+        .toast.error {
+            border-left: 4px solid var(--danger);
+        }
+        .toast.warning {
+            border-left: 4px solid var(--warning);
+        }
+        .toast.info {
+            border-left: 4px solid var(--primary);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* ============================================
+           NOTIFICATIONS PANEL
+           ============================================ */
+        .notification-dropdown {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 1rem;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            width: 320px;
+            display: none;
+            z-index: 1100;
+        }
+
+        .notification-dropdown.active {
+            display: block;
+        }
+
+        .notification-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light-gray);
+            font-size: 0.85rem;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-item .time {
+            color: var(--gray);
+            font-size: 0.7rem;
+        }
+
+        .notification-item .btn {
+            margin-top: 0.3rem;
+            font-size: 0.75rem;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 992px) {
+            .classes-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            .classroom .video-grid {
+                grid-template-columns: 1fr;
+            }
+            .classroom .side-panel {
+                border-left: none;
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
+                max-height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: 280px;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+            }
+
+            .sidebar-toggle {
+                display: flex;
+            }
+
+            .top-navbar {
+                padding: 0.8rem 1rem;
+            }
+
+            .page-content {
+                padding: 1rem 1rem 2rem;
+            }
+
+            .classes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .knowledge-check-modal {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-navbar .top-actions {
+                gap: 0.8rem;
+            }
+
+            .notification-dropdown {
+                width: 280px;
+                right: -20px;
+            }
+
+            .classroom .main-video .video-placeholder i {
+                font-size: 2.5rem;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray);
+        }
+
+        .no-data i {
+            font-size: 3rem;
+            color: var(--primary-light);
+            margin-bottom: 1rem;
+        }
+
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .mt-1 {
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================
+    SIDEBAR OVERLAY (Mobile)
+    ========================================== -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <!-- ==========================================
+    SIDEBAR
+    ========================================== -->
+    <nav class="sidebar" id="sidebar">
+        <div class="logo" onclick="navigateTo('dashboard')">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Nexora</span>Academy
+        </div>
+
+        <div class="user-profile">
+            <div class="avatar" id="sideAvatar">D</div>
+            <div class="user-info">
+                <div class="name" id="sideName">Student</div>
+                <div class="role">Student</div>
+                <div class="email" id="sideEmail">student@email.com</div>
+            </div>
+        </div>
+
+        <div class="nav-section">
+            <div class="section-title">Main</div>
+            <div class="nav-item" data-page="dashboard" onclick="navigateTo('dashboard')">
+                <i class="fas fa-th-large"></i>
+                <span>Dashboard</span>
+            </div>
+            <div class="nav-item" data-page="my-courses" onclick="navigateTo('my-courses')">
+                <i class="fas fa-book"></i>
+                <span>My Courses</span>
+            </div>
+            <div class="nav-item active" data-page="live-classes" onclick="navigateTo('live-classes')">
+                <i class="fas fa-video"></i>
+                <span>Live Classes</span>
+                <span class="badge" id="liveBadge">0</span>
+            </div>
+        </div>
+
+        <div class="nav-section">
+            <div class="section-title">Credentials</div>
+            <div class="nav-item" data-page="certificates" onclick="navigateTo('certificates')">
+                <i class="fas fa-certificate"></i>
+                <span>My Certificates</span>
+            </div>
+        </div>
+
+        <div class="nav-section" style="border-top:1px solid rgba(255,255,255,0.05);margin-top:0.5rem;padding-top:0.5rem;">
+            <div class="nav-item" onclick="logout()" style="color:var(--danger);">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==========================================
+    SIDEBAR TOGGLE BUTTON
+    ========================================== -->
+    <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">
+        <div class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </button>
+
+    <!-- ==========================================
+    TOAST CONTAINER
+    ========================================== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ==========================================
+    KNOWLEDGE CHECK OVERLAY
+    ========================================== -->
+    <div class="knowledge-check-overlay" id="knowledgeCheckOverlay">
+        <div class="knowledge-check-modal">
+            <h3 id="knowledgeCheckTitle">Knowledge Check</h3>
+            <div class="timer" id="knowledgeTimer">30s</div>
+            <p id="knowledgeCheckQuestion">What is the purpose of RAM?</p>
+            <div class="options" id="knowledgeOptions">
+                <button onclick="answerKnowledgeCheck(0)">A. Permanent storage</button>
+                <button onclick="answerKnowledgeCheck(1)">B. Temporary memory for running programs</button>
+                <button onclick="answerKnowledgeCheck(2)">C. Processing unit</button>
+                <button onclick="answerKnowledgeCheck(3)">D. Power supply</button>
+            </div>
+            <div id="knowledgeResult" style="text-align:center;font-weight:600;margin-top:0.5rem;"></div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+    ATTENDANCE OVERLAY
+    ========================================== -->
+    <div class="attendance-overlay" id="attendanceOverlay">
+        <div class="attendance-modal">
+            <div class="icon"><i class="fas fa-check-circle"></i></div>
+            <h3>Confirm Your Attendance</h3>
+            <p>Please confirm you were present for this class.</p>
+            <button class="btn btn-success btn-block" onclick="confirmAttendance()">
+                <i class="fas fa-check"></i> Confirm Attendance
+            </button>
+            <button class="btn btn-outline btn-block mt-1" onclick="closeAttendance()">
+                Skip
+            </button>
+        </div>
+    </div>
+
+    <!-- ==========================================
+    MAIN CONTENT
+    ========================================== -->
+    <div class="main-content" id="mainContent">
+
+        <!-- Top Navbar -->
+        <div class="top-navbar">
+            <div class="page-title" id="pageTitle">
+                <i class="fas fa-video" style="color:var(--primary);"></i>
+                <span>Live Classes</span>
+            </div>
+            <div class="top-actions" style="position:relative;">
+                <button class="icon-btn" onclick="toggleNotifications()">
+                    <i class="fas fa-bell"></i>
+                    <span class="dot" id="notificationDot"></span>
+                </button>
+                <div class="notification-dropdown" id="notificationDropdown">
+                    <h4 style="margin-bottom:0.5rem;">Notifications</h4>
+                    <div id="notificationList">
+                        <div class="notification-item">
+                            <div>📅 Computer Packages - Module 3 starts in 1 hour</div>
+                            <div class="time">10 minutes ago</div>
+                        </div>
+                        <div class="notification-item">
+                            <div>⏰ Live Class: Web Design starts in 30 minutes</div>
+                            <div class="time">30 minutes ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+        PAGE: LIVE CLASSES
+        ========================================== -->
+        <div class="page-content" id="page-live-classes">
+
+            <!-- Upcoming Classes -->
+            <div class="section-header">
+                <h2>📅 Upcoming Live Classes</h2>
+            </div>
+            <div class="classes-grid" id="upcomingClasses">
+                <!-- Dynamic content -->
+            </div>
+
+            <!-- Live Now -->
+            <div class="section-header" style="margin-top:2rem;">
+                <h2>🔴 Live Now</h2>
+            </div>
+            <div class="classes-grid" id="liveClasses">
+                <!-- Dynamic content -->
+            </div>
+
+            <!-- Past Classes -->
+            <div class="section-header" style="margin-top:2rem;">
+                <h2>📚 Past Classes</h2>
+            </div>
+            <div class="classes-grid" id="pastClasses">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+
+        <!-- ==========================================
+        PAGE: CLASSROOM (Hidden until class starts)
+        ========================================== -->
+        <div class="page-content hidden" id="page-classroom">
+            <div class="classroom">
+                <div class="video-grid">
+                    <div class="main-video">
+                        <span class="live-badge">🔴 LIVE</span>
+                        <div class="video-placeholder">
+                            <i class="fas fa-video"></i>
+                            <h3 id="classroomTitle">Computer Packages - Module 3</h3>
+                            <p id="classroomTutor">Instructor: John Mwangi</p>
+                            <p style="color:rgba(255,255,255,0.3);font-size:0.8rem;">🎙️ Audio active • 📹 Video active</p>
+                            <div style="margin-top:1rem;display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
+                                <button class="btn btn-secondary btn-sm" onclick="showToast('📄 Downloading notes...', 'success')">
+                                    <i class="fas fa-download"></i> Notes
+                                </button>
+                                <button class="btn btn-primary btn-sm" onclick="toggleScreenShare()">
+                                    <i class="fas fa-desktop"></i> Share Screen
+                                </button>
+                                <button class="btn btn-outline btn-sm" onclick="toggleHand()">
+                                    <i class="fas fa-hand"></i> <span id="handText">Raise Hand</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="tutor-label">👨‍🏫 Tutor: John Mwangi</div>
+                    </div>
+                    <div class="side-panel">
+                        <div class="panel-tabs">
+                            <button class="active" onclick="switchPanel('chat')">💬 Chat</button>
+                            <button onclick="switchPanel('questions')">❓ Questions</button>
+                            <button onclick="switchPanel('students')">👥 Students</button>
+                        </div>
+                        <div class="panel-content" id="panelContent">
+                            <!-- Chat -->
+                            <div id="panel-chat">
+                                <div class="chat-message">
+                                    <div class="sender">Tutor: John Mwangi</div>
+                                    <div class="text">Welcome to today's class! We'll cover formulas in Excel.</div>
+                                    <div class="time">10:30 AM</div>
+                                </div>
+                                <div class="chat-message">
+                                    <div class="sender">Brian Ondieki</div>
+                                    <div class="text">Can you explain SUM formula again?</div>
+                                    <div class="time">10:32 AM</div>
+                                </div>
+                                <div class="chat-message">
+                                    <div class="sender">Tutor: John Mwangi</div>
+                                    <div class="text">Sure! =SUM(A1:A10) adds all numbers in that range.</div>
+                                    <div class="time">10:33 AM</div>
+                                </div>
+                            </div>
+                            <!-- Questions -->
+                            <div id="panel-questions" style="display:none;">
+                                <div class="chat-message">
+                                    <div class="sender">Question Queue</div>
+                                    <div class="text">1. Brian – "Can you explain formulas again?"</div>
+                                </div>
+                                <div class="chat-message">
+                                    <div class="sender">Question Queue</div>
+                                    <div class="text">2. Alice – "What is the difference between RAM and ROM?"</div>
+                                </div>
+                                <div class="chat-message">
+                                    <div class="sender">Question Queue</div>
+                                    <div class="text">3. David – "Can you repeat the last example?"</div>
+                                </div>
+                            </div>
+                            <!-- Students -->
+                            <div id="panel-students" style="display:none;">
+                                <div class="chat-message">
+                                    <div class="sender">👥 Students (12 present)</div>
+                                    <div class="text">• Brian Ondieki</div>
+                                    <div class="text">• Alice Njoki</div>
+                                    <div class="text">• David Mutua</div>
+                                    <div class="text">• Sarah Wanjiru</div>
+                                    <div class="text">• Michael Ochieng</div>
+                                    <div class="text">• ... and 7 more</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-input">
+                            <input type="text" placeholder="Type a message..." id="chatInput" />
+                            <button onclick="sendChat()"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div style="display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap;">
+                <button class="btn btn-danger" onclick="endClass()">
+                    <i class="fas fa-phone-slash"></i> End Class
+                </button>
+                <button class="btn btn-secondary" onclick="muteAudio()">
+                    <i class="fas fa-microphone"></i> <span id="muteText">Mute</span>
+                </button>
+                <button class="btn btn-secondary" onclick="toggleVideo()">
+                    <i class="fas fa-video"></i> <span id="videoText">Stop Video</span>
+                </button>
+                <button class="btn btn-primary" onclick="showToast('📊 Opening analytics...', 'info')">
+                    <i class="fas fa-chart-bar"></i> Analytics
+                </button>
+            </div>
+
+            <!-- Knowledge Check Progress -->
+            <div style="margin-top:1rem;background:var(--white);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow);">
+                <h4>📊 Knowledge Check Progress</h4>
+                <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.5rem;">
+                    <span>Q1: <span id="q1status">⏳</span></span>
+                    <span>Q2: <span id="q2status">⏳</span></span>
+                    <span>Q3: <span id="q3status">⏳</span></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ==========================================
+    JAVASCRIPT
+    ========================================== -->
+    <script>
+        // ============================================
+        // LIVE CLASSES DATA
+        // ============================================
+        const LIVE_CLASSES = [{
+            id: 1,
+            course: 'Computer Packages',
+            module: 'Module 3: Microsoft Word',
+            topic: 'Advanced Formatting',
+            tutor: 'John Mwangi',
+            date: '2026-07-30',
+            time: '09:00',
+            duration: '90',
+            maxStudents: 50,
+            status: 'live',
+            students: 32,
+            questions: 5
+        }, {
+            id: 2,
+            course: 'Web Design Bootcamp',
+            module: 'Module 2: CSS Styling',
+            topic: 'Flexbox & Grid',
+            tutor: 'Faith Wanjiku',
+            date: '2026-07-31',
+            time: '11:00',
+            duration: '90',
+            maxStudents: 40,
+            status: 'upcoming',
+            students: 28,
+            questions: 3
+        }, {
+            id: 3,
+            course: 'Python Programming',
+            module: 'Module 1: Basics',
+            topic: 'Variables & Data Types',
+            tutor: 'Daniel Otieno',
+            date: '2026-08-01',
+            time: '14:00',
+            duration: '90',
+            maxStudents: 35,
+            status: 'upcoming',
+            students: 25,
+            questions: 2
+        }, {
+            id: 4,
+            course: 'Computer Packages',
+            module: 'Module 2: Excel',
+            topic: 'Formulas & Functions',
+            tutor: 'John Mwangi',
+            date: '2026-07-28',
+            time: '09:00',
+            duration: '90',
+            maxStudents: 50,
+            status: 'ended',
+            students: 45,
+            questions: 6,
+            recorded: true
+        }, {
+            id: 5,
+            course: 'Graphic Design',
+            module: 'Module 1: Basics',
+            topic: 'Design Principles',
+            tutor: 'Lucy Akinyi',
+            date: '2026-07-27',
+            time: '13:00',
+            duration: '90',
+            maxStudents: 30,
+            status: 'ended',
+            students: 22,
+            questions: 4,
+            recorded: true
+        }];
+
+        // ============================================
+        // KNOWLEDGE CHECK DATA
+        // ============================================
+        const KNOWLEDGE_CHECKS = [{
+            id: 1,
+            question: 'What is the purpose of RAM?',
+            options: [
+                'Permanent storage',
+                'Temporary memory for running programs',
+                'Processing unit',
+                'Power supply'
+            ],
+            correct: 1,
+            time: 30,
+            trigger: 20 // minutes into class
+        }, {
+            id: 2,
+            question: 'Which formula adds numbers in Excel?',
+            options: [
+                '=AVERAGE()',
+                '=SUM()',
+                '=COUNT()',
+                '=MAX()'
+            ],
+            correct: 1,
+            time: 30,
+            trigger: 50
+        }, {
+            id: 3,
+            question: 'What does CPU stand for?',
+            options: [
+                'Central Processing Unit',
+                'Computer Personal Unit',
+                'Core Processing Utility',
+                'Central Program Unit'
+            ],
+            correct: 0,
+            time: 30,
+            trigger: 80
+        }];
+
+        // ============================================
+        // APP STATE
+        // ============================================
+        let currentUser = null;
+        let currentClass = null;
+        let inClass = false;
+        let knowledgeCheckIndex = 0;
+        let answeredChecks = [];
+        let attendanceConfirmed = false;
+        let chatMessages = [];
+        let isHandRaised = false;
+
+        // ============================================
+        // AUTH HELPERS
+        // ============================================
+        function getCurrentUser() {
+            const user = localStorage.getItem('nexora_current_user');
+            return user ? JSON.parse(user) : null;
+        }
+
+        function getUsers() {
+            const users = localStorage.getItem('nexora_users');
+            return users ? JSON.parse(users) : [];
+        }
+
+        function saveUsers(users) {
+            localStorage.setItem('nexora_users', JSON.stringify(users));
+        }
+
+        function logout() {
+            localStorage.removeItem('nexora_current_user');
+            showToast('Logged out successfully.');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 800);
+        }
+
+        // ============================================
+        // SIDEBAR
+        // ============================================
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            if (window.innerWidth <= 768) {
+                sidebar.classList.toggle('open');
+                overlay.classList.toggle('active');
+            }
+        }
+
+        function closeSidebar() {
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.remove('open');
+                document.getElementById('sidebarOverlay').classList.remove('active');
+            }
+        }
+
+        // ============================================
+        // NAVIGATION
+        // ============================================
+        function navigateTo(page) {
+            if (page === 'dashboard') {
+                window.location.href = 'dashboard.html';
+                return;
+            }
+            if (page === 'my-courses') {
+                window.location.href = 'dashboard.html#my-courses';
+                return;
+            }
+            if (page === 'certificates') {
+                window.location.href = 'dashboard.html#certificates';
+                return;
+            }
+            closeSidebar();
+        }
+
+        // ============================================
+        // TOAST
+        // ============================================
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icons = { success: '✅', error: '❌', warning: '⚠️', info: 'ℹ️' };
+            toast.innerHTML = `<span>${icons[type] || '📢'}</span> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                setTimeout(() => toast.remove(), 400);
+            }, 4000);
+        }
+
+        // ============================================
+        // RENDER LIVE CLASSES
+        // ============================================
+        function renderLiveClasses() {
+            const upcomingContainer = document.getElementById('upcomingClasses');
+            const liveContainer = document.getElementById('liveClasses');
+            const pastContainer = document.getElementById('pastClasses');
+
+            const now = new Date();
+            const today = now.toISOString().split('T')[0];
+            const currentTime = now.getHours() * 60 + now.getMinutes();
+
+            let upcoming = [];
+            let live = [];
+            let past = [];
+
+            LIVE_CLASSES.forEach(cls => {
+                const classDate = new Date(cls.date + 'T' + cls.time);
+                const classTime = parseInt(cls.time.split(':')[0]) * 60 + parseInt(cls.time.split(':')[1]);
+
+                if (cls.status === 'live') {
+                    live.push(cls);
+                } else if (cls.status === 'upcoming') {
+                    upcoming.push(cls);
+                } else {
+                    past.push(cls);
+                }
+            });
+
+            // Render Live
+            if (live.length === 0) {
+                liveContainer.innerHTML = `
+                            <div class="no-data" style="grid-column:1/-1;">
+                                <i class="fas fa-video-slash"></i>
+                                <p>No live classes right now. Check back later!</p>
+                            </div>
+                        `;
+            } else {
+                liveContainer.innerHTML = live.map(cls => createClassCard(cls, true)).join('');
+            }
+
+            // Render Upcoming
+            if (upcoming.length === 0) {
+                upcomingContainer.innerHTML = `
+                            <div class="no-data" style="grid-column:1/-1;">
+                                <i class="fas fa-calendar-plus"></i>
+                                <p>No upcoming classes. Check back later!</p>
+                            </div>
+                        `;
+            } else {
+                upcomingContainer.innerHTML = upcoming.map(cls => createClassCard(cls, false)).join('');
+            }
+
+            // Render Past
+            if (past.length === 0) {
+                pastContainer.innerHTML = `
+                            <div class="no-data" style="grid-column:1/-1;">
+                                <i class="fas fa-history"></i>
+                                <p>No past classes yet.</p>
+                            </div>
+                        `;
+            } else {
+                pastContainer.innerHTML = past.map(cls => createClassCard(cls, false)).join('');
+            }
+
+            // Update badge
+            document.getElementById('liveBadge').textContent = live.length;
+        }
+
+        function createClassCard(cls, isLive) {
+            const statusClass = isLive ? 'status-live' : (cls.status === 'upcoming' ? 'status-upcoming' : 'status-ended');
+            const statusText = isLive ? '🔴 LIVE' : (cls.status === 'upcoming' ? '📅 Upcoming' : '✅ Ended');
+
+            return `
+                        <div class="class-card">
+                            <span class="status ${statusClass}">${statusText}</span>
+                            <h3>${cls.course}</h3>
+                            <div style="font-weight:600;color:var(--primary);">${cls.module}</div>
+                            <div style="font-size:0.9rem;margin:0.3rem 0;">${cls.topic}</div>
+                            <div class="meta"><i class="fas fa-user-tie"></i> ${cls.tutor}</div>
+                            <div class="meta"><i class="fas fa-calendar"></i> ${cls.date} at ${cls.time}</div>
+                            <div class="meta"><i class="fas fa-clock"></i> ${cls.duration} minutes</div>
+                            <div class="students"><i class="fas fa-users"></i> ${cls.students}/${cls.maxStudents} students</div>
+                            ${cls.questions ? `<div class="meta"><i class="fas fa-question-circle"></i> ${cls.questions} questions</div>` : ''}
+                            ${cls.recorded ? `<div class="meta"><i class="fas fa-video"></i> Recording available</div>` : ''}
+                            <div class="bottom-row">
+                                ${isLive ? 
+                                    `<button class="btn btn-success btn-sm" onclick="joinClass(${cls.id})">
+                                        <i class="fas fa-play"></i> Join Now
+                                    </button>` : 
+                                    cls.status === 'upcoming' ?
+                                    `<span class="timer">⏰ ${getTimeUntil(cls.date, cls.time)}</span>` :
+                                    `<button class="btn btn-secondary btn-sm" onclick="showToast('📺 Recording loading...', 'info')">
+                                        <i class="fas fa-play"></i> Watch Recording
+                                    </button>`
+                                }
+                            </div>
+                        </div>
+                    `;
+        }
+
+        function getTimeUntil(date, time) {
+            const target = new Date(date + 'T' + time);
+            const now = new Date();
+            const diff = target - now;
+
+            if (diff <= 0) return 'Starting soon';
+
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+            if (hours > 24) {
+                const days = Math.floor(hours / 24);
+                return `${days}d ${hours % 24}h`;
+            }
+            if (hours > 0) return `${hours}h ${minutes}m`;
+            return `${minutes}m`;
+        }
+
+        // ============================================
+        // JOIN CLASS
+        // ============================================
+        function joinClass(classId) {
+            const user = getCurrentUser();
+            if (!user) {
+                showToast('Please login first.', 'warning');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const cls = LIVE_CLASSES.find(c => c.id === classId);
+            if (!cls) {
+                showToast('Class not found.', 'error');
+                return;
+            }
+
+            // Check enrollment - Check if user is enrolled in this course
+            const users = getUsers();
+            const userData = users.find(u => u.id === user.id);
+            if (!userData) {
+                showToast('Please complete registration.', 'warning');
+                return;
+            }
+
+            if (!userData.enrolledCourses) userData.enrolledCourses = [];
+            const courseId = getCourseId(cls.course);
+            if (!userData.enrolledCourses.includes(courseId)) {
+                showToast('You need to enroll in this course first.', 'warning');
+                return;
+            }
+
+            // Check if payment is sufficient
+            const completedLessons = userData.completedLessons || {};
+            const completed = completedLessons[courseId] || [];
+            const totalLessons = getTotalLessonsForCourse(courseId);
+
+            // Check if class is live
+            if (cls.status !== 'live') {
+                showToast('This class is not currently live.', 'warning');
+                return;
+            }
+
+            // All checks passed - Join class
+            currentClass = cls;
+            inClass = true;
+            showToast(`🎥 Joining ${cls.course}: ${cls.topic}`, 'success');
+
+            // Start attendance tracking
+            startAttendance();
+
+            // Show classroom
+            document.getElementById('page-live-classes').classList.add('hidden');
+            document.getElementById('page-classroom').classList.remove('hidden');
+            document.getElementById('pageTitle').innerHTML =
+                `<i class="fas fa-video" style="color:var(--danger);"></i> ${cls.course} - ${cls.topic}`;
+
+            document.getElementById('classroomTitle').textContent = `${cls.course} - ${cls.module}`;
+            document.getElementById('classroomTutor').textContent = `Instructor: ${cls.tutor}`;
+
+            // Start knowledge checks
+            startKnowledgeChecks();
+        }
+
+        function getCourseId(courseName) {
+            const mapping = {
+                'Computer Packages': 1,
+                'Web Design Bootcamp': 2,
+                'Python Programming': 3,
+                'Graphic Design': 4,
+                'Digital Marketing': 5,
+                'AI & Machine Learning': 6,
+                'Data Analysis': 7,
+                'Cybersecurity': 8,
+                'Mobile App Development': 9
+            };
+            return mapping[courseName] || 1;
+        }
+
+        function getTotalLessonsForCourse(courseId) {
+            const totals = { 1: 40, 2: 35, 3: 30, 4: 28, 5: 32, 6: 25, 7: 30, 8: 28, 9: 32 };
+            return totals[courseId] || 30;
+        }
+
+        // ============================================
+        // ATTENDANCE
+        // ============================================
+        let attendanceTimer = null;
+
+        function startAttendance() {
+            // Show attendance confirmation near end of class (simulated)
+            setTimeout(() => {
+                document.getElementById('attendanceOverlay').classList.add('active');
+            }, 30000); // 30 seconds for demo (would be 80 minutes in production)
+        }
+
+        function confirmAttendance() {
+            attendanceConfirmed = true;
+            document.getElementById('attendanceOverlay').classList.remove('active');
+            showToast('✅ Attendance confirmed! Thank you.', 'success');
+
+            // Save attendance
+            const user = getCurrentUser();
+            if (user) {
+                const users = getUsers();
+                const userData = users.find(u => u.id === user.id);
+                if (userData) {
+                    if (!userData.attendance) userData.attendance = [];
+                    userData.attendance.push({
+                        classId: currentClass?.id,
+                        date: new Date().toISOString(),
+                        confirmed: true
+                    });
+                    saveUsers(users);
+                }
+            }
+        }
+
+        function closeAttendance() {
+            document.getElementById('attendanceOverlay').classList.remove('active');
+        }
+
+        // ============================================
+        // KNOWLEDGE CHECKS
+        // ============================================
+        function startKnowledgeChecks() {
+            let index = 0;
+
+            function showNextCheck() {
+                if (index >= KNOWLEDGE_CHECKS.length) {
+                    showToast('📊 All knowledge checks completed!', 'success');
+                    return;
+                }
+
+                const check = KNOWLEDGE_CHECKS[index];
+                showKnowledgeCheck(check, index);
+                index++;
+            }
+
+            // Show first check after 5 seconds (demo)
+            setTimeout(showNextCheck, 5000);
+
+            // Schedule second check
+            setTimeout(() => {
+                if (index < KNOWLEDGE_CHECKS.length) showNextCheck();
+            }, 15000);
+
+            // Schedule third check
+            setTimeout(() => {
+                if (index < KNOWLEDGE_CHECKS.length) showNextCheck();
+            }, 25000);
+        }
+
+        function showKnowledgeCheck(check, index) {
+            const overlay = document.getElementById('knowledgeCheckOverlay');
+            document.getElementById('knowledgeCheckTitle').textContent =
+                `Knowledge Check ${index + 1} of ${KNOWLEDGE_CHECKS.length}`;
+            document.getElementById('knowledgeCheckQuestion').textContent = check.question;
+
+            const optionsContainer = document.getElementById('knowledgeOptions');
+            optionsContainer.innerHTML = '';
+            check.options.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.textContent = `${String.fromCharCode(65 + i)}. ${opt}`;
+                btn.onclick = () => answerKnowledgeCheck(i, check);
+                optionsContainer.appendChild(btn);
+            });
+
+            document.getElementById('knowledgeResult').textContent = '';
+            overlay.classList.add('active');
+
+            // Start timer
+            let timeLeft = check.time;
+            const timerEl = document.getElementById('knowledgeTimer');
+            timerEl.textContent = `${timeLeft}s`;
+            timerEl.className = 'timer';
+
+            const timer = setInterval(() => {
+                timeLeft--;
+                timerEl.textContent = `${timeLeft}s`;
+                if (timeLeft <= 5) timerEl.className = 'timer warning';
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    document.querySelectorAll('#knowledgeOptions button').forEach(b => b.disabled = true);
+                    document.getElementById('knowledgeResult').textContent = '⏰ Time\'s up! Moving to next question.';
+                    document.getElementById('knowledgeResult').style.color = 'var(--warning)';
+                    setTimeout(() => {
+                        overlay.classList.remove('active');
+                    }, 1500);
+                }
+            }, 1000);
+
+            // Store timer reference
+            overlay.dataset.timer = timer;
+            overlay.dataset.checkIndex = index;
+        }
+
+        function answerKnowledgeCheck(selected, check) {
+            const overlay = document.getElementById('knowledgeCheckOverlay');
+            const options = document.querySelectorAll('#knowledgeOptions button');
+
+            // Disable all options
+            options.forEach(btn => btn.disabled = true);
+
+            // Clear timer
+            if (overlay.dataset.timer) {
+                clearInterval(parseInt(overlay.dataset.timer));
+            }
+
+            // Check answer
+            const correct = selected === check.correct;
+            const resultEl = document.getElementById('knowledgeResult');
+
+            if (correct) {
+                options[selected].classList.add('correct');
+                resultEl.textContent = '✅ Correct! Great job!';
+                resultEl.style.color = 'var(--success)';
+                // Save answer
+                answeredChecks.push({ checkId: check.id, correct: true });
+                updateKnowledgeProgress(overlay.dataset.checkIndex, true);
+            } else {
+                options[selected].classList.add('wrong');
+                options[check.correct].classList.add('correct');
+                resultEl.textContent = `❌ Incorrect. The correct answer was ${String.fromCharCode(65 + check.correct)}.`;
+                resultEl.style.color = 'var(--danger)';
+                answeredChecks.push({ checkId: check.id, correct: false });
+                updateKnowledgeProgress(overlay.dataset.checkIndex, false);
+            }
+
+            setTimeout(() => {
+                overlay.classList.remove('active');
+            }, 2000);
+        }
+
+        function updateKnowledgeProgress(index, correct) {
+            const statusEl = document.getElementById(`q${index + 1}status`);
+            if (statusEl) {
+                statusEl.textContent = correct ? '✅' : '❌';
+                statusEl.style.color = correct ? 'var(--success)' : 'var(--danger)';
+            }
+        }
+
+        // ============================================
+        // CHAT
+        // ============================================
+        function sendChat() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            const user = getCurrentUser();
+            const name = user ? user.name : 'Student';
+
+            const chatContainer = document.getElementById('panel-chat');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'chat-message';
+            msgDiv.innerHTML = `
+                        <div class="sender">${name}</div>
+                        <div class="text">${message}</div>
+                        <div class="time">${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</div>
+                    `;
+            chatContainer.appendChild(msgDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            input.value = '';
+            showToast('💬 Message sent!', 'info');
+        }
+
+        // ============================================
+        // PANEL SWITCHING
+        // ============================================
+        function switchPanel(panel) {
+            document.querySelectorAll('.panel-tabs button').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.panel-content > div').forEach(d => d.style.display = 'none');
+
+            const tabs = document.querySelectorAll('.panel-tabs button');
+            const panels = {
+                'chat': 0,
+                'questions': 1,
+                'students': 2
+            };
+
+            tabs[panels[panel]].classList.add('active');
+            document.getElementById(`panel-${panel}`).style.display = 'block';
+        }
+
+        // ============================================
+        // CLASSROOM CONTROLS
+        // ============================================
+        function toggleHand() {
+            isHandRaised = !isHandRaised;
+            document.getElementById('handText').textContent = isHandRaised ? 'Lower Hand' : 'Raise Hand';
+            showToast(isHandRaised ? '🙋 Hand raised!' : '✋ Hand lowered.', 'info');
+        }
+
+        function toggleScreenShare() {
+            showToast('🖥️ Screen sharing started!', 'success');
+        }
+
+        function muteAudio() {
+            const text = document.getElementById('muteText');
+            text.textContent = text.textContent === 'Mute' ? 'Unmute' : 'Mute';
+            showToast(`🎤 ${text.textContent === 'Mute' ? 'Muted' : 'Unmuted'}`, 'info');
+        }
+
+        function toggleVideo() {
+            const text = document.getElementById('videoText');
+            text.textContent = text.textContent === 'Stop Video' ? 'Start Video' : 'Stop Video';
+            showToast(`📹 ${text.textContent === 'Stop Video' ? 'Video stopped' : 'Video started'}`, 'info');
+        }
+
+        function endClass() {
+            if (confirm('End the class?')) {
+                inClass = false;
+                showToast('📊 Class ended! Recording saved.', 'success');
+
+                // Show analytics summary
+                const totalStudents = currentClass?.students || 0;
+                const answered = answeredChecks.length;
+                const correct = answeredChecks.filter(a => a.correct).length;
+
+                showToast(`📊 Class Summary: ${totalStudents} students, ${answered} knowledge checks, ${correct} correct`, 'info');
+
+                setTimeout(() => {
+                    document.getElementById('page-classroom').classList.add('hidden');
+                    document.getElementById('page-live-classes').classList.remove('hidden');
+                    document.getElementById('pageTitle').innerHTML =
+                        `<i class="fas fa-video" style="color:var(--primary);"></i> Live Classes`;
+                    renderLiveClasses();
+                }, 2000);
+            }
+        }
+
+        // ============================================
+        // NOTIFICATIONS
+        // ============================================
+        function toggleNotifications() {
+            const dropdown = document.getElementById('notificationDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        // ============================================
+        // SEND NOTIFICATION
+        // ============================================
+        function sendNotification(title, message, time) {
+            const list = document.getElementById('notificationList');
+            const item = document.createElement('div');
+            item.className = 'notification-item';
+            item.innerHTML = `
+                        <div><strong>${title}</strong></div>
+                        <div>${message}</div>
+                        <div class="time">${time}</div>
+                    `;
+            list.prepend(item);
+            document.getElementById('notificationDot').style.display = 'block';
+            document.getElementById('liveBadge').textContent = parseInt(document.getElementById('liveBadge').textContent) + 1;
+
+            // Show toast
+            showToast(`🔔 ${title}`, 'info');
+        }
+
+        // ============================================
+        // RENDER DASHBOARD
+        // ============================================
+        function renderDashboard() {
+            const user = getCurrentUser();
+
+            if (!user) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            document.getElementById('sideAvatar').textContent = user.name.charAt(0).toUpperCase();
+            document.getElementById('sideName').textContent = user.name;
+            document.getElementById('sideEmail').textContent = user.email || 'student@email.com';
+
+            renderLiveClasses();
+
+            // Send notifications for upcoming classes
+            const now = new Date();
+            LIVE_CLASSES.forEach(cls => {
+                if (cls.status === 'upcoming') {
+                    const classDate = new Date(cls.date + 'T' + cls.time);
+                    const diff = classDate - now;
+
+                    // 1 day before
+                    if (diff > 0 && diff < 86400000 + 3600000) {
+                        sendNotification(
+                            '📅 Class Tomorrow!',
+                            `${cls.course} - ${cls.topic} with ${cls.tutor}`,
+                            '1 day before'
+                        );
+                    }
+                    // 1 hour before
+                    if (diff > 0 && diff < 3600000 + 600000) {
+                        sendNotification(
+                            '⏰ Class in 1 Hour!',
+                            `${cls.course} - ${cls.topic} starts soon`,
+                            '1 hour before'
+                        );
+                    }
+                    // 10 minutes before
+                    if (diff > 0 && diff < 600000) {
+                        sendNotification(
+                            '🔔 Class Starts Now!',
+                            `${cls.course} - ${cls.topic} is starting`,
+                            'Now'
+                        );
+                    }
+                }
+            });
+        }
+
+        // ============================================
+        // INIT
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            renderDashboard();
+
+            // Handle enter key in chat
+            document.getElementById('chatInput')?.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') sendChat();
+            });
+
+            // Close notifications on click outside
+            document.addEventListener('click', function(e) {
+                const dropdown = document.getElementById('notificationDropdown');
+                const btn = e.target.closest('.icon-btn');
+                if (!btn && dropdown) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        });
+
+        console.log('🎥 Nexora Academy - Smart Interactive Live Classes');
+        console.log(`📊 ${LIVE_CLASSES.length} classes loaded`);
+        console.log('✅ Features: Live teaching, Knowledge checks, Attendance tracking, Analytics');
+    </script>
+
+</body>
+</html>
