@@ -214,27 +214,68 @@
             margin: 0 auto;
         }
 
+        /* Course Header */
         .course-header {
-            background: var(--white);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             border-radius: var(--radius);
-            padding: 2rem;
-            box-shadow: var(--shadow);
+            padding: 2.5rem;
+            color: var(--white);
             margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-header::after {
+            content: '💻';
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 5rem;
+            opacity: 0.1;
+        }
+
+        .course-header .course-code {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 2px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
 
         .course-header h1 {
-            font-size: 2.4rem;
-            color: var(--primary);
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.3rem;
         }
 
         .course-header .meta {
             display: flex;
             gap: 2rem;
             flex-wrap: wrap;
-            margin-top: 1rem;
-            color: var(--gray);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
         }
 
+        .course-header .meta i {
+            color: var(--secondary);
+            margin-right: 0.3rem;
+        }
+
+        .course-header .badge {
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 2px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Course Grid */
         .course-grid {
             display: grid;
             grid-template-columns: 1fr 350px;
@@ -274,10 +315,23 @@
 
         .module-header h3 {
             font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .module-header .badge {
+        .module-header .module-badge {
             background: var(--primary);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 50px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .module-header .progress-badge {
+            background: var(--success);
             color: white;
             padding: 2px 12px;
             border-radius: 50px;
@@ -335,11 +389,19 @@
             justify-content: center;
             background: var(--light-gray);
             color: var(--gray);
+            font-size: 0.8rem;
         }
 
         .lesson-item.completed .lesson-title .icon {
             background: var(--success);
             color: white;
+        }
+
+        .lesson-item .lesson-type {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: var(--gray);
+            font-weight: 600;
         }
 
         .lesson-item .lesson-status {
@@ -372,123 +434,145 @@
 
         .lesson-detail.active {
             display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .lesson-detail .back-btn {
             margin-bottom: 1rem;
         }
 
-        .lesson-detail h2 {
-            color: var(--primary);
-            margin-bottom: 1rem;
+        .lesson-detail .lesson-header {
+            border-bottom: 2px solid var(--light-gray);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
-        .lesson-detail .content {
+        .lesson-detail .lesson-header h2 {
+            color: var(--primary);
+            font-size: 1.6rem;
+        }
+
+        .lesson-detail .lesson-header .lesson-meta {
+            display: flex;
+            gap: 1.5rem;
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            flex-wrap: wrap;
+        }
+
+        .lesson-detail .lesson-header .lesson-meta i {
+            margin-right: 0.3rem;
+        }
+
+        /* Content Sections */
+        .lesson-detail .content-section {
             margin: 1.5rem 0;
-        }
-
-        .lesson-detail .content .video-placeholder {
-            background: var(--dark);
+            padding: 1.5rem;
             border-radius: 12px;
-            padding: 3rem 2rem;
-            text-align: center;
-            color: white;
-            margin: 1rem 0;
         }
 
-        .lesson-detail .content .video-placeholder i {
-            font-size: 3rem;
-            color: var(--secondary);
-            margin-bottom: 1rem;
+        .lesson-detail .content-section h4 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
         }
 
-        .lesson-detail .content .notes {
+        .lesson-detail .content-section ul,
+        .lesson-detail .content-section ol {
+            padding-left: 1.5rem;
+        }
+
+        .lesson-detail .content-section ul li,
+        .lesson-detail .content-section ol li {
+            padding: 0.2rem 0;
+        }
+
+        .content-objectives {
+            background: #e8edff;
+            border-left: 4px solid var(--primary);
+        }
+
+        .content-content {
             background: var(--light-gray);
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin: 1rem 0;
         }
 
-        .lesson-detail .content .notes h4 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .lesson-detail .content .notes ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .lesson-detail .content .notes ul li {
-            padding: 0.3rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .lesson-detail .content .notes ul li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-        }
-
-        .lesson-detail .content .exercise {
+        .content-examples {
             background: #e8f5e9;
-            padding: 1.5rem;
-            border-radius: 12px;
             border-left: 4px solid var(--success);
-            margin: 1rem 0;
         }
 
-        .lesson-detail .content .exercise h4 {
-            color: #2e7d32;
-            margin-bottom: 0.5rem;
-        }
-
-        .lesson-detail .content .exercise ul {
-            padding-left: 1.5rem;
-        }
-
-        .lesson-detail .content .quiz {
+        .content-summary {
             background: #fff3e0;
-            padding: 1.5rem;
-            border-radius: 12px;
             border-left: 4px solid var(--warning);
-            margin: 1rem 0;
         }
 
-        .lesson-detail .content .quiz h4 {
-            color: #e65100;
-            margin-bottom: 0.5rem;
+        .content-knowledge {
+            background: #f3e5f5;
+            border-left: 4px solid var(--primary-light);
         }
 
+        .content-practical {
+            background: #e0f7fa;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .content-discussion {
+            background: #fce4ec;
+            border-left: 4px solid var(--danger);
+        }
+
+        .content-assignment {
+            background: #fff8e1;
+            border-left: 4px solid #f9a825;
+        }
+
+        .content-resources {
+            background: #e8eaf6;
+            border-left: 4px solid #3f51b5;
+        }
+
+        /* Quiz */
         .quiz-option {
             display: block;
-            padding: 0.5rem 1rem;
+            padding: 0.8rem 1rem;
             margin: 0.3rem 0;
             background: var(--white);
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             transition: var(--transition);
+            border: 2px solid var(--light-gray);
         }
 
         .quiz-option:hover {
-            background: #fff8e1;
-        }
-
-        .quiz-option.selected {
-            background: var(--primary);
-            color: white;
+            border-color: var(--primary);
+            background: #f8f4ff;
         }
 
         .quiz-option.correct {
-            background: var(--success);
-            color: white;
+            border-color: var(--success);
+            background: #e8f5e9;
         }
 
         .quiz-option.wrong {
-            background: var(--danger);
-            color: white;
+            border-color: var(--danger);
+            background: #fce4ec;
+        }
+
+        .quiz-option:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
         }
 
         .lesson-detail .action-buttons {
@@ -516,6 +600,7 @@
 
         .sidebar-card h3 {
             margin-bottom: 1rem;
+            font-size: 1.1rem;
         }
 
         .sidebar-card .progress-text {
@@ -657,7 +742,11 @@
                 display: flex;
             }
             .course-header h1 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
+            }
+            .course-header .meta {
+                gap: 0.8rem;
+                font-size: 0.85rem;
             }
             .course-container {
                 padding: 80px 1rem 40px;
@@ -690,18 +779,28 @@
             .nav-open .nav-auth .user-info .name {
                 display: inline;
             }
+            .module-header {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
         }
 
         @media (max-width: 480px) {
             .navbar {
                 padding: 0 1rem;
             }
-            .course-header .meta {
-                gap: 0.8rem;
-                font-size: 0.85rem;
+            .course-header {
+                padding: 1.5rem;
             }
-            .module-header {
-                padding: 0.8rem 1rem;
+            .course-header h1 {
+                font-size: 1.3rem;
+            }
+            .course-header .meta {
+                font-size: 0.8rem;
+            }
+            .course-header::after {
+                font-size: 3rem;
+                right: 1rem;
             }
             .module-header h3 {
                 font-size: 0.95rem;
@@ -712,47 +811,41 @@
             .lesson-item {
                 padding: 0.6rem;
             }
+            .lesson-detail {
+                padding: 1rem;
+            }
+            .lesson-detail .lesson-header h2 {
+                font-size: 1.2rem;
+            }
+            .lesson-detail .content-section {
+                padding: 1rem;
+            }
         }
 
         .hidden {
             display: none !important;
         }
 
-        .no-courses {
+        /* No courses message */
+        .no-data {
             text-align: center;
             padding: 2rem;
             color: var(--gray);
         }
 
-        .no-courses i {
+        .no-data i {
             font-size: 3rem;
             color: var(--primary-light);
             margin-bottom: 1rem;
         }
 
-        /* Certificate button flash */
-        @keyframes pulse {
-            0%,
-            100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        .pulse {
-            animation: pulse 1.5s ease-in-out 3;
-        }
-
-        /* ============================================
-           PROGRESS INDICATOR
-           ============================================ */
+        /* Lesson progress indicator */
         .lesson-progress-indicator {
             display: flex;
             align-items: center;
             gap: 0.3rem;
             margin: 0.5rem 0;
+            flex-wrap: wrap;
         }
 
         .lesson-progress-indicator .dot {
@@ -774,6 +867,21 @@
 
         .lesson-progress-indicator .dot.locked {
             background: var(--gray);
+        }
+
+        /* Certificate card pulse */
+        @keyframes pulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .pulse {
+            animation: pulse 1.5s ease-in-out 3;
         }
     </style>
 </head>
@@ -818,13 +926,16 @@
     ========================================== -->
     <div class="course-container">
 
+        <!-- Course Header -->
         <div class="course-header">
-            <h1>💻 Computer Packages - Complete Course</h1>
+            <div class="course-code">COURSE CODE: CP001</div>
+            <h1>💻 Computer Packages</h1>
             <div class="meta">
-                <span><i class="fas fa-clock"></i> 40 Lessons</span>
+                <span><i class="fas fa-clock"></i> 12 Weeks</span>
                 <span><i class="fas fa-star" style="color:var(--warning);"></i> 4.8 (120 reviews)</span>
-                <span><i class="fas fa-user-graduate"></i> Beginner to Advanced</span>
-                <span><i class="fas fa-certificate"></i> Certificate Included</span>
+                <span><i class="fas fa-user-graduate"></i> Beginner to Professional</span>
+                <span><i class="fas fa-certificate"></i> Professional Certificate</span>
+                <span><span class="badge">Most Popular</span></span>
             </div>
         </div>
 
@@ -833,7 +944,7 @@
                 <!-- Lesson Detail -->
                 <div class="lesson-detail" id="lessonDetail">
                     <button class="btn btn-secondary btn-sm back-btn" onclick="closeLesson()">
-                        <i class="fas fa-arrow-left"></i> Back to Lessons
+                        <i class="fas fa-arrow-left"></i> Back to Modules
                     </button>
                     <div id="lessonContent">
                         <!-- Dynamic content -->
@@ -862,7 +973,7 @@
                     </div>
                     <div class="progress-text">
                         <span>Lessons Completed</span>
-                        <span id="completedCount">0 / 40</span>
+                        <span id="completedCount">0 / 66</span>
                     </div>
                     <div class="lesson-progress-indicator" id="progressDots">
                         <!-- Dynamic dots -->
@@ -899,7 +1010,7 @@
                 <div class="sidebar-card" id="certificateCard" style="display:none;">
                     <h3>🎓 Certificate Ready!</h3>
                     <p style="color:var(--gray);font-size:0.9rem;">You've completed all requirements!</p>
-                    <button class="btn btn-primary btn-sm btn-block" onclick="generateCertificate()">
+                    <button class="btn btn-primary btn-sm btn-block pulse" onclick="generateCertificate()">
                         <i class="fas fa-certificate"></i> Generate Certificate
                     </button>
                 </div>
@@ -919,1897 +1030,345 @@
     ========================================== -->
     <script>
         // ============================================
-        // COMPLETE COURSE DATA - 40 LESSONS
+        // COMPLETE COURSE DATA - 10 MODULES, 66 LESSONS
         // ============================================
         const COURSE_ID = 1;
         const COURSE_TITLE = 'Computer Packages';
         const COURSE_PRICE = 20;
-        const TOTAL_LESSONS = 40;
+        const TOTAL_LESSONS = 66;
 
         const MODULES = [{
             id: 'm1',
-            title: 'Module 1: Introduction to Computers',
+            title: 'Module 1: Computer Fundamentals',
             lessons: [
-                { id: 1, title: 'What is a Computer?' },
-                { id: 2, title: 'Hardware Components' },
-                { id: 3, title: 'Software Fundamentals' },
-                { id: 4, title: 'Types of Computers' },
-                { id: 5, title: 'Computer History' },
+                { id: 1, title: 'Introduction to Computers', type: 'video' },
+                { id: 2, title: 'Types of Computers', type: 'video' },
+                { id: 3, title: 'Computer Hardware', type: 'video' },
+                { id: 4, title: 'Computer Software', type: 'video' },
+                { id: 5, title: 'Input Devices', type: 'video' },
+                { id: 6, title: 'Output Devices', type: 'video' },
+                { id: 7, title: 'Storage Devices', type: 'video' },
+                { id: 8, title: 'Operating Systems', type: 'video' },
+                { id: 9, title: 'Computer Safety', type: 'video' },
+                { id: 10, title: 'Module Quiz', type: 'quiz' },
+                { id: 11, title: 'Assignment 1', type: 'assignment' },
             ]
         }, {
             id: 'm2',
-            title: 'Module 2: Operating Systems',
+            title: 'Module 2: Microsoft Windows',
             lessons: [
-                { id: 6, title: 'Introduction to Operating Systems' },
-                { id: 7, title: 'Windows OS Basics' },
-                { id: 8, title: 'macOS Overview' },
-                { id: 9, title: 'Linux Fundamentals' },
-                { id: 10, title: 'File Management' },
+                { id: 12, title: 'Desktop Navigation', type: 'video' },
+                { id: 13, title: 'File Explorer', type: 'video' },
+                { id: 14, title: 'File Management', type: 'video' },
+                { id: 15, title: 'Installing Programs', type: 'video' },
+                { id: 16, title: 'Control Panel', type: 'video' },
+                { id: 17, title: 'Settings', type: 'video' },
+                { id: 18, title: 'Keyboard Shortcuts', type: 'video' },
+                { id: 19, title: 'Module Quiz', type: 'quiz' },
+                { id: 20, title: 'Practical Assignment', type: 'assignment' },
             ]
         }, {
             id: 'm3',
             title: 'Module 3: Microsoft Word',
             lessons: [
-                { id: 11, title: 'Getting Started with Word' },
-                { id: 12, title: 'Formatting Text' },
-                { id: 13, title: 'Inserting Elements' },
-                { id: 14, title: 'Tables & Charts' },
-                { id: 15, title: 'Advanced Word Features' },
+                { id: 21, title: 'Creating Documents', type: 'video' },
+                { id: 22, title: 'Formatting Text', type: 'video' },
+                { id: 23, title: 'Tables', type: 'video' },
+                { id: 24, title: 'Pictures', type: 'video' },
+                { id: 25, title: 'Headers & Footers', type: 'video' },
+                { id: 26, title: 'Page Layout', type: 'video' },
+                { id: 27, title: 'References', type: 'video' },
+                { id: 28, title: 'Mail Merge', type: 'video' },
+                { id: 29, title: 'Printing', type: 'video' },
+                { id: 30, title: 'Module Quiz', type: 'quiz' },
+                { id: 31, title: 'Project: Design a Professional CV', type: 'project' },
             ]
         }, {
             id: 'm4',
             title: 'Module 4: Microsoft Excel',
             lessons: [
-                { id: 16, title: 'Introduction to Excel' },
-                { id: 17, title: 'Formulas & Functions' },
-                { id: 18, title: 'Charts & Graphs' },
-                { id: 19, title: 'Data Analysis Tools' },
-                { id: 20, title: 'Advanced Excel' },
+                { id: 32, title: 'Excel Interface', type: 'video' },
+                { id: 33, title: 'Data Entry', type: 'video' },
+                { id: 34, title: 'Formatting', type: 'video' },
+                { id: 35, title: 'Basic Formulas', type: 'video' },
+                { id: 36, title: 'Functions', type: 'video' },
+                { id: 37, title: 'Charts', type: 'video' },
+                { id: 38, title: 'Sorting', type: 'video' },
+                { id: 39, title: 'Filtering', type: 'video' },
+                { id: 40, title: 'Printing', type: 'video' },
+                { id: 41, title: 'Module Quiz', type: 'quiz' },
+                { id: 42, title: 'Project: Monthly Budget Spreadsheet', type: 'project' },
             ]
         }, {
             id: 'm5',
             title: 'Module 5: Microsoft PowerPoint',
             lessons: [
-                { id: 21, title: 'Creating Presentations' },
-                { id: 22, title: 'Slide Design' },
-                { id: 23, title: 'Transitions & Animations' },
-                { id: 24, title: 'Multimedia in PowerPoint' },
-                { id: 25, title: 'Advanced PowerPoint' },
+                { id: 43, title: 'Creating Slides', type: 'video' },
+                { id: 44, title: 'Themes', type: 'video' },
+                { id: 45, title: 'Images', type: 'video' },
+                { id: 46, title: 'Animations', type: 'video' },
+                { id: 47, title: 'Transitions', type: 'video' },
+                { id: 48, title: 'Audio & Video', type: 'video' },
+                { id: 49, title: 'Presentations', type: 'video' },
+                { id: 50, title: 'Module Quiz', type: 'quiz' },
+                { id: 51, title: 'Project: Business Presentation', type: 'project' },
             ]
         }, {
             id: 'm6',
-            title: 'Module 6: Internet & Email',
+            title: 'Module 6: Microsoft Access',
             lessons: [
-                { id: 26, title: 'Internet Fundamentals' },
-                { id: 27, title: 'Web Browsers' },
-                { id: 28, title: 'Email Basics' },
-                { id: 29, title: 'Email Etiquette' },
-                { id: 30, title: 'Online Safety' },
+                { id: 52, title: 'Databases', type: 'video' },
+                { id: 53, title: 'Tables', type: 'video' },
+                { id: 54, title: 'Queries', type: 'video' },
+                { id: 55, title: 'Forms', type: 'video' },
+                { id: 56, title: 'Reports', type: 'video' },
+                { id: 57, title: 'Module Quiz', type: 'quiz' },
             ]
         }, {
             id: 'm7',
-            title: 'Module 7: Practical Applications',
+            title: 'Module 7: Microsoft Publisher',
             lessons: [
-                { id: 31, title: 'Creating Documents' },
-                { id: 32, title: 'Spreadsheet Projects' },
-                { id: 33, title: 'Presentation Projects' },
-                { id: 34, title: 'Internet Research' },
-                { id: 35, title: 'Email Communication' },
+                { id: 58, title: 'Brochures', type: 'video' },
+                { id: 59, title: 'Business Cards', type: 'video' },
+                { id: 60, title: 'Flyers', type: 'video' },
+                { id: 61, title: 'Posters', type: 'video' },
+                { id: 62, title: 'Certificates', type: 'video' },
+                { id: 63, title: 'Module Quiz', type: 'quiz' },
             ]
         }, {
             id: 'm8',
-            title: 'Module 8: Final Project',
+            title: 'Module 8: Internet & Email',
             lessons: [
-                { id: 36, title: 'Project Planning' },
-                { id: 37, title: 'Project Execution' },
-                { id: 38, title: 'Project Review' },
-                { id: 39, title: 'Project Submission' },
-                { id: 40, title: 'Course Completion' },
+                { id: 64, title: 'Internet Basics', type: 'video' },
+                { id: 65, title: 'Browsers', type: 'video' },
+                { id: 66, title: 'Search Techniques', type: 'video' },
+                { id: 67, title: 'Gmail', type: 'video' },
+                { id: 68, title: 'Google Drive', type: 'video' },
+                { id: 69, title: 'Online Meetings', type: 'video' },
+                { id: 70, title: 'Cloud Storage', type: 'video' },
+                { id: 71, title: 'Cyber Safety', type: 'video' },
+                { id: 72, title: 'Module Quiz', type: 'quiz' },
+            ]
+        }, {
+            id: 'm9',
+            title: 'Module 9: Artificial Intelligence Tools',
+            lessons: [
+                { id: 73, title: 'Introduction to AI', type: 'video' },
+                { id: 74, title: 'ChatGPT', type: 'video' },
+                { id: 75, title: 'Microsoft Copilot', type: 'video' },
+                { id: 76, title: 'AI for Students', type: 'video' },
+                { id: 77, title: 'AI for Business', type: 'video' },
+                { id: 78, title: 'Responsible AI Use', type: 'video' },
+                { id: 79, title: 'Module Quiz', type: 'quiz' },
+            ]
+        }, {
+            id: 'm10',
+            title: 'Module 10: Final Project',
+            lessons: [
+                { id: 80, title: 'Choose Your Project', type: 'project' },
+                { id: 81, title: 'Project Planning', type: 'project' },
+                { id: 82, title: 'Project Execution', type: 'project' },
+                { id: 83, title: 'Project Review', type: 'project' },
+                { id: 84, title: 'Project Submission', type: 'project' },
+                { id: 85, title: 'Final Assessment', type: 'quiz' },
             ]
         }];
 
         // ============================================
-        // COMPLETE LESSON CONTENT
+        // LESSON CONTENT
         // ============================================
-        const LESSON_CONTENT = {
-            1: {
-                notes: `
-                            <h4>📝 What is a Computer?</h4>
-                            <ul>
-                                <li>A computer is an electronic device that processes data</li>
-                                <li>Input → Processing → Output cycle</li>
-                                <li>Types: Desktops, Laptops, Tablets, Smartphones</li>
-                                <li>Hardware = Physical components you can touch</li>
-                                <li>Software = Programs and applications</li>
-                            </ul>
-                            <h4>💡 Did You Know?</h4>
-                            <p>The first computer, ENIAC, weighed 30 tons and filled a 1,800 sq ft room!</p>
-                            <h4>🎯 Key Takeaway</h4>
-                            <p>Computers are everywhere - from phones to cars to medical equipment. Understanding the basics is essential in today's digital world.</p>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Look around your workspace or home. Identify at least 5 different types of computers or computing devices.</p>
-                            <ul>
-                                <li>Write down each device name</li>
-                                <li>Describe its primary use</li>
-                                <li>Identify whether it's input, output, or processing</li>
-                            </ul>
-                            <p><strong>Bonus:</strong> Check how many devices in your home have a computer inside!</p>
-                        `,
-                quiz: {
-                    question: 'What is the basic cycle of a computer?',
-                    options: [
-                        'Output → Input → Processing',
-                        'Input → Processing → Output',
-                        'Processing → Input → Output',
-                        'Output → Processing → Input'
+        function getLessonContent(lessonId) {
+            const content = {
+                1: {
+                    title: 'Introduction to Computers',
+                    objectives: [
+                        'Understand what a computer is',
+                        'Learn the basic components of a computer',
+                        'Understand the Input-Processing-Output cycle',
+                        'Identify different types of computers'
                     ],
-                    correct: 1
-                }
-            },
-            2: {
-                notes: `
-                            <h4>🖥️ Hardware Components</h4>
-                            <ul>
-                                <li><strong>CPU (Central Processing Unit):</strong> The "brain" of the computer</li>
-                                <li><strong>RAM (Random Access Memory):</strong> Temporary memory for running programs</li>
-                                <li><strong>Hard Drive/SSD:</strong> Permanent storage for files</li>
-                                <li><strong>Motherboard:</strong> Connects all components</li>
-                                <li><strong>Power Supply:</strong> Provides power to components</li>
-                                <li><strong>Input Devices:</strong> Keyboard, Mouse, Scanner</li>
-                                <li><strong>Output Devices:</strong> Monitor, Printer, Speakers</li>
-                            </ul>
-                            <h4>🔧 How They Work Together</h4>
-                            <p>Input devices send data → CPU processes → RAM stores temporary data → Hard Drive stores permanently → Output devices display results</p>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Identify the hardware components on your computer:</p>
-                            <ul>
-                                <li>What model is your CPU? (Check System Information)</li>
-                                <li>How much RAM do you have?</li>
-                                <li>What storage drive do you use (HDD or SSD)?</li>
-                                <li>What input and output devices do you use?</li>
-                            </ul>
-                            <p>💡 <strong>Tip:</strong> On Windows, press Windows+Pause/Break to see system specs.</p>
-                        `,
-                quiz: {
-                    question: 'Which component is considered the "brain" of the computer?',
-                    options: [
-                        'RAM',
-                        'Hard Drive',
-                        'CPU',
-                        'Motherboard'
-                    ],
-                    correct: 2
-                }
-            },
-            3: {
-                notes: `
-                            <h4>💿 Software Fundamentals</h4>
-                            <ul>
-                                <li><strong>System Software:</strong> Operating Systems (Windows, macOS, Linux)</li>
-                                <li><strong>Application Software:</strong> Programs for specific tasks</li>
-                                <li><strong>Firmware:</strong> Software built into hardware</li>
-                                <li><strong>Open Source:</strong> Free to use and modify</li>
-                                <li><strong>Proprietary:</strong> Commercial, licensed software</li>
-                            </ul>
-                            <h4>📌 Popular Software Categories</h4>
-                            <ul>
-                                <li>Office Productivity: Microsoft Office, Google Docs</li>
-                                <li>Graphics: Adobe Photoshop, Canva</li>
-                                <li>Web Browsers: Chrome, Firefox, Edge</li>
-                                <li>Anti-virus: Norton, McAfee, Windows Defender</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>List all the software installed on your computer. Categorize them as:</p>
-                            <ul>
-                                <li>System Software (Operating System)</li>
-                                <li>Application Software (Productivity, Entertainment, etc.)</li>
-                                <li>Utility Software (Anti-virus, Cleaners, etc.)</li>
-                            </ul>
-                            <p>💡 Check your Start Menu or Applications folder to see what's installed.</p>
-                        `,
-                quiz: {
-                    question: 'Which of these is system software?',
-                    options: [
-                        'Microsoft Word',
-                        'Google Chrome',
-                        'Windows 11',
-                        'Adobe Photoshop'
-                    ],
-                    correct: 2
-                }
-            },
-            4: {
-                notes: `
-                            <h4>📱 Types of Computers</h4>
-                            <ul>
-                                <li><strong>Supercomputers:</strong> Fastest, most powerful (scientific research)</li>
-                                <li><strong>Mainframes:</strong> Large-scale data processing (banking, government)</li>
-                                <li><strong>Servers:</strong> Provide services to other computers</li>
-                                <li><strong>Workstations:</strong> High-performance for professionals</li>
-                                <li><strong>Personal Computers:</strong> Desktops and laptops</li>
-                                <li><strong>Mobile Devices:</strong> Smartphones, tablets, wearables</li>
-                                <li><strong>Embedded Systems:</strong> Computers inside other devices</li>
-                            </ul>
-                            <h4>🎯 Which One Do You Use?</h4>
-                            <p>Most people use Personal Computers and Mobile Devices daily. Each type serves a different purpose!</p>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Identify which types of computers you interact with daily:</p>
-                            <ul>
-                                <li>Your main computer (desktop/laptop) - Personal Computer</li>
-                                <li>Your smartphone - Mobile Device</li>
-                                <li>Any devices you use (smart TV, smartwatch, etc.) - Embedded Systems</li>
-                            </ul>
-                            <p>💡 Think about how each device makes your life easier!</p>
-                        `,
-                quiz: {
-                    question: 'Which type of computer is used for scientific research and weather forecasting?',
-                    options: [
-                        'Personal Computer',
-                        'Mainframe',
-                        'Supercomputer',
-                        'Server'
-                    ],
-                    correct: 2
-                }
-            },
-            5: {
-                notes: `
-                            <h4>📜 Computer History</h4>
-                            <ul>
-                                <li><strong>1642:</strong> Blaise Pascal invents the mechanical calculator</li>
-                                <li><strong>1837:</strong> Charles Babbage designs the Analytical Engine</li>
-                                <li><strong>1936:</strong> Alan Turing develops the Turing Machine concept</li>
-                                <li><strong>1946:</strong> ENIAC - first general-purpose electronic computer</li>
-                                <li><strong>1976:</strong> Apple I - first personal computer</li>
-                                <li><strong>1981:</strong> IBM PC - brought computers to homes</li>
-                                <li><strong>1991:</strong> World Wide Web goes public</li>
-                                <li><strong>2007:</strong> iPhone - revolutionizes mobile computing</li>
-                            </ul>
-                            <h4>🚀 The Future</h4>
-                            <p>AI, Quantum Computing, and IoT are shaping the next generation of computers.</p>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Research one of the pioneers of computing:</p>
-                            <ul>
-                                <li>Alan Turing</li>
-                                <li>Ada Lovelace</li>
-                                <li>Steve Jobs</li>
-                                <li>Bill Gates</li>
-                            </ul>
-                            <p>Write a short paragraph about their contribution to computer science.</p>
-                        `,
-                quiz: {
-                    question: 'In which year was the first personal computer (Apple I) released?',
-                    options: [
-                        '1965',
-                        '1976',
-                        '1981',
-                        '1991'
-                    ],
-                    correct: 1
-                }
-            },
-            6: {
-                notes: `
-                            <h4>🔄 What is an Operating System?</h4>
-                            <ul>
-                                <li>An OS manages computer hardware and software resources</li>
-                                <li>It provides common services for computer programs</li>
-                                <li>Acts as an intermediary between programs and hardware</li>
-                            </ul>
-                            <h4>📊 Popular Operating Systems</h4>
-                            <ul>
-                                <li><strong>Windows:</strong> Most popular (Windows 10, 11)</li>
-                                <li><strong>macOS:</strong> Apple's OS (Ventura, Sonoma, Sequoia)</li>
-                                <li><strong>Linux:</strong> Open-source (Ubuntu, Fedora, Debian)</li>
-                                <li><strong>Android:</strong> Mobile OS (most popular)</li>
-                                <li><strong>iOS:</strong> Apple's mobile OS</li>
-                                <li><strong>Chrome OS:</strong> Lightweight OS for Chromebooks</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Check your computer's operating system:</p>
-                            <ul>
-                                <li><strong>Windows:</strong> Settings → System → About</li>
-                                <li><strong>macOS:</strong> Click Apple logo → About This Mac</li>
-                                <li><strong>Linux:</strong> Open terminal → type "lsb_release -a"</li>
-                            </ul>
-                            <p>💡 Write down your OS name and version.</p>
-                        `,
-                quiz: {
-                    question: 'Which OS is open-source and free to use?',
-                    options: [
-                        'Windows',
-                        'macOS',
-                        'Linux',
-                        'iOS'
-                    ],
-                    correct: 2
-                }
-            },
-            7: {
-                notes: `
-                            <h4>🪟 Windows OS Basics</h4>
-                            <ul>
-                                <li><strong>Start Menu:</strong> Access all programs and settings</li>
-                                <li><strong>Taskbar:</strong> Quick access to running apps</li>
-                                <li><strong>File Explorer:</strong> Manage files and folders (Windows+E)</li>
-                                <li><strong>Control Panel/Settings:</strong> System configuration</li>
-                                <li><strong>Task Manager:</strong> Monitor system performance (Ctrl+Shift+Esc)</li>
-                            </ul>
-                            <h4>⌨️ Essential Windows Shortcuts</h4>
-                            <ul>
-                                <li>Windows + D: Show Desktop</li>
-                                <li>Windows + E: Open File Explorer</li>
-                                <li>Windows + L: Lock Screen</li>
-                                <li>Windows + Tab: Task View</li>
-                                <li>Ctrl + Alt + Del: Security options</li>
-                                <li>Alt + Tab: Switch between apps</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Practice using Windows shortcuts:</p>
-                            <ul>
-                                <li>Open File Explorer using Windows + E</li>
-                                <li>Lock your screen with Windows + L</li>
-                                <li>Open Task Manager (Ctrl + Shift + Esc)</li>
-                                <li>Create a new folder on your desktop</li>
-                                <li>Use Alt + Tab to switch between open windows</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'What shortcut opens File Explorer in Windows?',
-                    options: [
-                        'Windows + F',
-                        'Windows + E',
-                        'Windows + D',
-                        'Windows + R'
-                    ],
-                    correct: 1
-                }
-            },
-            8: {
-                notes: `
-                            <h4>🍎 macOS Overview</h4>
-                            <ul>
-                                <li><strong>Dock:</strong> Quick access to apps and files</li>
-                                <li><strong>Finder:</strong> File management (similar to File Explorer)</li>
-                                <li><strong>Spotlight:</strong> Search and launch apps (Cmd+Space)</li>
-                                <li><strong>System Settings:</strong> Configure your Mac</li>
-                                <li><strong>Mission Control:</strong> View all open windows (F3)</li>
-                            </ul>
-                            <h4>⌨️ Essential macOS Shortcuts</h4>
-                            <ul>
-                                <li>Cmd + Space: Open Spotlight</li>
-                                <li>Cmd + Tab: Switch between apps</li>
-                                <li>Cmd + Q: Quit an app</li>
-                                <li>Cmd + W: Close a window</li>
-                                <li>Cmd + Shift + 4: Screenshot selection</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>If you have access to a Mac, practice:</p>
-                            <ul>
-                                <li>Open Spotlight with Cmd+Space and search for an app</li>
-                                <li>Use Finder to navigate your files</li>
-                                <li>Add an app to your Dock</li>
-                                <li>Take a screenshot using Cmd+Shift+4</li>
-                            </ul>
-                            <p>💡 If you don't have a Mac, watch a tutorial online!</p>
-                        `,
-                quiz: {
-                    question: 'What shortcut opens Spotlight on macOS?',
-                    options: [
-                        'Cmd + F',
-                        'Cmd + Space',
-                        'Cmd + Shift + F',
-                        'Ctrl + Space'
-                    ],
-                    correct: 1
-                }
-            },
-            9: {
-                notes: `
-                            <h4>🐧 Linux Fundamentals</h4>
-                            <ul>
-                                <li><strong>Linux:</strong> Open-source operating system</li>
-                                <li><strong>Distributions:</strong> Ubuntu, Fedora, Debian, CentOS</li>
-                                <li><strong>Terminal:</strong> Command-line interface</li>
-                                <li><strong>Package Manager:</strong> Install software (apt, yum, pacman)</li>
-                                <li><strong>File System:</strong> Everything is a file!</li>
-                            </ul>
-                            <h4>📌 Basic Linux Commands</h4>
-                            <ul>
-                                <li><code>ls</code> - List files and directories</li>
-                                <li><code>cd</code> - Change directory</li>
-                                <li><code>mkdir</code> - Create a directory</li>
-                                <li><code>cp</code> - Copy files</li>
-                                <li><code>mv</code> - Move files</li>
-                                <li><code>rm</code> - Remove files</li>
-                                <li><code>sudo</code> - Run as superuser</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>If you have Linux or WSL installed:</p>
-                            <ul>
-                                <li>Open the terminal</li>
-                                <li>Use <code>ls</code> to list files in your home directory</li>
-                                <li>Use <code>mkdir test</code> to create a folder</li>
-                                <li>Use <code>cd test</code> to enter the folder</li>
-                                <li>Use <code>touch hello.txt</code> to create a file</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'Which command is used to list files in Linux?',
-                    options: [
-                        'list',
-                        'dir',
-                        'ls',
-                        'show'
-                    ],
-                    correct: 2
-                }
-            },
-            10: {
-                notes: `
-                            <h4>📁 File Management</h4>
-                            <ul>
-                                <li><strong>File:</strong> A digital document (text, image, video)</li>
-                                <li><strong>Folder/Directory:</strong> A container for files</li>
-                                <li><strong>File Path:</strong> Location of a file (C:/Documents/File.txt)</li>
-                                <li><strong>File Extension:</strong> Identifies file type (.txt, .jpg, .pdf)</li>
-                            </ul>
-                            <h4>📌 Best Practices</h4>
-                            <ul>
-                                <li>Use descriptive file names</li>
-                                <li>Organize files in folders by category</li>
-                                <li>Backup important files regularly</li>
-                                <li>Use cloud storage for access anywhere</li>
-                                <li>Delete files you no longer need</li>
-                            </ul>
-                            <h4>💡 Common File Extensions</h4>
-                            <ul>
-                                <li>Documents: .docx, .pdf, .txt, .xlsx</li>
-                                <li>Images: .jpg, .png, .gif, .svg</li>
-                                <li>Videos: .mp4, .mov, .avi</li>
-                                <li>Audio: .mp3, .wav, .aac</li>
-                                <li>Code: .html, .css, .js, .py</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Organize your files:</p>
-                            <ul>
-                                <li>Create a folder structure on your computer</li>
-                                <li>Suggested: Documents/Work, Documents/Personal, Downloads</li>
-                                <li>Move files into appropriate folders</li>
-                                <li>Rename files with descriptive names</li>
-                                <li>Delete any files you no longer need</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'What does the file extension .pdf indicate?',
-                    options: [
-                        'Word Document',
-                        'Image File',
-                        'PDF Document',
-                        'Text File'
-                    ],
-                    correct: 2
-                }
-            },
-            11: {
-                notes: `
-                            <h4>📄 Microsoft Word Interface</h4>
-                            <ul>
-                                <li><strong>Title Bar:</strong> Shows document name</li>
-                                <li><strong>Ribbon:</strong> Tabs with tools (Home, Insert, Design, etc.)</li>
-                                <li><strong>Quick Access Toolbar:</strong> Save, Undo, Redo</li>
-                                <li><strong>Document Area:</strong> Where you type</li>
-                                <li><strong>Status Bar:</strong> Page count, word count, zoom</li>
-                            </ul>
-                            <h4>📌 Key Features</h4>
-                            <ul>
-                                <li>Creating new documents (Ctrl+N)</li>
-                                <li>Opening existing documents (Ctrl+O)</li>
-                                <li>Saving documents (Ctrl+S)</li>
-                                <li>Printing documents (Ctrl+P)</li>
-                                <li>Spelling and grammar check (F7)</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Open Microsoft Word and:</p>
-                            <ul>
-                                <li>Create a new blank document</li>
-                                <li>Type "My First Word Document" as the title</li>
-                                <li>Type a paragraph about your day</li>
-                                <li>Save the document as "MyFirstDoc.docx"</li>
-                                <li>Check the word count</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'What shortcut saves a Word document?',
-                    options: [
-                        'Ctrl + S',
-                        'Ctrl + P',
-                        'Ctrl + O',
-                        'Ctrl + N'
-                    ],
-                    correct: 0
-                }
-            },
-            12: {
-                notes: `
-                            <h4>🎨 Formatting Text in Word</h4>
-                            <ul>
-                                <li><strong>Font:</strong> Style of text (Arial, Times New Roman, Calibri)</li>
-                                <li><strong>Font Size:</strong> Size of text (12, 14, 16, etc.)</li>
-                                <li><strong>Bold:</strong> Ctrl+B | <strong>Bold text</strong></li>
-                                <li><strong>Italic:</strong> Ctrl+I | <em>Italic text</em></li>
-                                <li><strong>Underline:</strong> Ctrl+U | <u>Underlined text</u></li>
-                                <li><strong>Text Color:</strong> Change color of text</li>
-                                <li><strong>Highlight:</strong> Mark text with background color</li>
-                            </ul>
-                            <h4>📐 Paragraph Formatting</h4>
-                            <ul>
-                                <li><strong>Alignment:</strong> Left, Center, Right, Justify</li>
-                                <li><strong>Line Spacing:</strong> Single, 1.5, Double</li>
-                                <li><strong>Indentation:</strong> Increase/Decrease indent</li>
-                                <li><strong>Bullets & Numbering:</strong> Create lists</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Create a document with:</p>
-                            <ul>
-                                <li>A title centered, bold, font size 24</li>
-                                <li>3 paragraphs about your favorite hobby</li>
-                                <li>Use different text colors and highlights</li>
-                                <li>Create a bulleted list of 5 things you learned</li>
-                                <li>Use 1.5 line spacing</li>
-                                <li>Save as "FormattingPractice.docx"</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'What shortcut makes text bold in Word?',
-                    options: [
-                        'Ctrl + I',
-                        'Ctrl + U',
-                        'Ctrl + B',
-                        'Ctrl + S'
-                    ],
-                    correct: 2
-                }
-            },
-            13: {
-                notes: `
-                            <h4>📎 Inserting Elements in Word</h4>
-                            <ul>
-                                <li><strong>Pictures:</strong> Insert images from your computer</li>
-                                <li><strong>Tables:</strong> Organize data in rows and columns</li>
-                                <li><strong>Charts:</strong> Visualize data</li>
-                                <li><strong>SmartArt:</strong> Create diagrams and flowcharts</li>
-                                <li><strong>Headers & Footers:</strong> Page numbers, document info</li>
-                                <li><strong>Page Numbers:</strong> Insert page numbers</li>
-                                <li><strong>Hyperlinks:</strong> Add clickable links</li>
-                                <li><strong>Comments:</strong> Add notes to document</li>
-                            </ul>
-                            <h4>📊 Creating Tables</h4>
-                            <ul>
-                                <li>Insert → Table</li>
-                                <li>Choose rows and columns</li>
-                                <li>Format table styles</li>
-                                <li>Merge/split cells</li>
-                                <li>Add borders and shading</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Create a document with:</p>
-                            <ul>
-                                <li>A table with 3 columns and 5 rows (e.g., Name, Age, City)</li>
-                                <li>Insert an image from your computer</li>
-                                <li>Add a header with your name</li>
-                                <li>Insert page numbers</li>
-                                <li>Add a hyperlink to a website</li>
-                                <li>Save as "InsertingElements.docx"</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'Which menu do you use to insert a table in Word?',
-                    options: [
-                        'Home → Table',
-                        'Insert → Table',
-                        'Design → Table',
-                        'Layout → Table'
-                    ],
-                    correct: 1
-                }
-            },
-            14: {
-                notes: `
-                            <h4>📊 Tables & Charts in Word</h4>
-                            <ul>
-                                <li><strong>Tables:</strong> Organize data in rows and columns</li>
-                                <li><strong>Table Styles:</strong> Pre-designed table formatting</li>
-                                <li><strong>Merge Cells:</strong> Combine multiple cells</li>
-                                <li><strong>Split Cells:</strong> Divide a cell into multiple cells</li>
-                                <li><strong>Charts:</strong> Visual representation of data</li>
-                            </ul>
-                            <h4>📈 Types of Charts</h4>
-                            <ul>
-                                <li><strong>Column Chart:</strong> Compare categories</li>
-                                <li><strong>Line Chart:</strong> Show trends over time</li>
-                                <li><strong>Pie Chart:</strong> Show proportions</li>
-                                <li><strong>Bar Chart:</strong> Horizontal comparison</li>
-                            </ul>
-                            <h4>💡 Best Practices</h4>
-                            <ul>
-                                <li>Keep tables simple and clear</li>
-                                <li>Use headers for columns</li>
-                                <li>Choose the right chart type for your data</li>
-                                <li>Label charts clearly</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Create a document with:</p>
-                            <ul>
-                                <li>A table showing monthly expenses (categories: Rent, Food, Transport, Entertainment)</li>
-                                <li>Add a chart based on your table data</li>
-                                <li>Format the table with a style</li>
-                                <li>Add a title to your chart</li>
-                                <li>Save as "TablesAndCharts.docx"</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'Which chart type is best for showing proportions of a whole?',
-                    options: [
-                        'Column Chart',
-                        'Line Chart',
-                        'Pie Chart',
-                        'Bar Chart'
-                    ],
-                    correct: 2
-                }
-            },
-            15: {
-                notes: `
-                            <h4>🚀 Advanced Word Features</h4>
-                            <ul>
-                                <li><strong>Mail Merge:</strong> Create personalized documents</li>
-                                <li><strong>Track Changes:</strong> See edits made to a document</li>
-                                <li><strong>Comments:</strong> Add feedback to documents</li>
-                                <li><strong>Table of Contents:</strong> Auto-generate document structure</li>
-                                <li><strong>Citations & Bibliography:</strong> Add academic references</li>
-                                <li><strong>Macros:</strong> Automate repetitive tasks</li>
-                                <li><strong>Protect Document:</strong> Restrict editing</li>
-                            </ul>
-                            <h4>📌 Collaboration Features</h4>
-                            <ul>
-                                <li>Co-authoring: Work on documents simultaneously</li>
-                                <li>Share documents via OneDrive or SharePoint</li>
-                                <li>Add comments and @mentions</li>
-                                <li>Version history</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Practice advanced Word features:</p>
-                            <ul>
-                                <li>Enable Track Changes and make edits to a document</li>
-                                <li>Add comments to suggest improvements</li>
-                                <li>Create a Table of Contents for a multi-page document</li>
-                                <li>Add a citation and bibliography</li>
-                                <li>Save as "AdvancedWord.docx"</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'Which feature allows you to see all edits made to a document?',
-                    options: [
-                        'Comments',
-                        'Track Changes',
-                        'Mail Merge',
-                        'Macros'
-                    ],
-                    correct: 1
-                }
-            },
-            16: {
-                notes: `
-                            <h4>📊 Excel Fundamentals</h4>
-                            <ul>
-                                <li><strong>Workbook:</strong> Excel file containing worksheets</li>
-                                <li><strong>Worksheet:</strong> Individual spreadsheet tab</li>
-                                <li><strong>Cell:</strong> Intersection of row and column (A1, B5, etc.)</li>
-                                <li><strong>Ribbon:</strong> Tabs with tools (Home, Insert, Formulas, etc.)</li>
-                                <li><strong>Formula Bar:</strong> Enter and edit data</li>
-                                <li><strong>Name Box:</strong> Shows active cell reference</li>
-                            </ul>
-                            <h4>📌 Basic Operations</h4>
-                            <ul>
-                                <li>Entering data (numbers, text, dates)</li>
-                                <li>Selecting cells (click, drag, Shift+click)</li>
-                                <li>Copy and paste (Ctrl+C, Ctrl+V)</li>
-                                <li>AutoFill: Drag the fill handle to copy data</li>
-                                <li>Undo and redo (Ctrl+Z, Ctrl+Y)</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Open Microsoft Excel and:</p>
-                            <ul>
-                                <li>Create a new workbook</li>
-                                <li>Enter your name in cell A1</li>
-                                <li>Enter the date in cell A2</li>
-                                <li>Create a list of 5 items in column A</li>
-                                <li>Use AutoFill to create a sequence of numbers in column B</li>
-                                <li>Save the workbook as "MyFirstExcel.xlsx"</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'What is an Excel file called?',
-                    options: [
-                        'Document',
-                        'Workbook',
-                        'Worksheet',
-                        'Spreadsheet'
-                    ],
-                    correct: 1
-                }
-            },
-            17: {
-                notes: `
-                            <h4>🧮 Essential Formulas & Functions</h4>
-                            <ul>
-                                <li><strong>SUM:</strong> =SUM(A1:A10) - Adds numbers</li>
-                                <li><strong>AVERAGE:</strong> =AVERAGE(A1:A10) - Calculates mean</li>
-                                <li><strong>COUNT:</strong> =COUNT(A1:A10) - Counts cells with numbers</li>
-                                <li><strong>MAX:</strong> =MAX(A1:A10) - Finds maximum value</li>
-                                <li><strong>MIN:</strong> =MIN(A1:A10) - Finds minimum value</li>
-                                <li><strong>IF:</strong> =IF(A1>10,"Yes","No") - Conditional statement</li>
-                            </ul>
-                            <h4>📌 More Useful Functions</h4>
-                            <ul>
-                                <li><strong>SUMIF:</strong> Sum based on condition</li>
-                                <li><strong>COUNTIF:</strong> Count based on condition</li>
-                                <li><strong>VLOOKUP:</strong> Look up values in a table</li>
-                                <li><strong>CONCATENATE:</strong> Join text from multiple cells</li>
-                                <li><strong>NOW:</strong> Current date and time</li>
-                                <li><strong>RAND:</strong> Random number</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Create a spreadsheet with:</p>
-                            <ul>
-                                <li>Column A: 10 numbers (5-50)</li>
-                                <li>Column B: 10 numbers (10-100)</li>
-                                <li>Cell C1: SUM of Column A</li>
-                                <li>Cell C2: AVERAGE of Column A</li>
-                                <li>Cell C3: SUM of Column B</li>
-                                <li>Cell C4: AVERAGE of Column B</li>
-                                <li>Cell C5: MAX value in Column B</li>
-                                <li>Cell C6: MIN value in Column B</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'What formula calculates the average of cells A1 to A10?',
-                    options: [
-                        '=SUM(A1:A10)',
-                        '=AVERAGE(A1:A10)',
-                        '=COUNT(A1:A10)',
-                        '=TOTAL(A1:A10)'
-                    ],
-                    correct: 1
-                }
-            },
-            18: {
-                notes: `
-                            <h4>📊 Charts & Graphs in Excel</h4>
-                            <ul>
-                                <li><strong>Chart Types:</strong> Column, Bar, Line, Pie, Scatter</li>
-                                <li><strong>Chart Elements:</strong> Title, Legend, Data Labels, Gridlines</li>
-                                <li><strong>Formatting:</strong> Colors, Styles, Fonts</li>
-                                <li><strong>Data Selection:</strong> Choose which data to display</li>
-                                <li><strong>Chart Templates:</strong> Save and reuse chart styles</li>
-                            </ul>
-                            <h4>📌 Creating a Chart</h4>
-                            <ul>
-                                <li>Select your data</li>
-                                <li>Go to Insert → Chart</li>
-                                <li>Choose chart type</li>
-                                <li>Customize chart elements</li>
-                                <li>Position chart on your worksheet</li>
-                            </ul>
-                            <h4>💡 When to Use Each Chart Type</h4>
-                            <ul>
-                                <li><strong>Column:</strong> Comparing categories</li>
-                                <li><strong>Line:</strong> Trends over time</li>
-                                <li><strong>Pie:</strong> Showing proportions</li>
-                                <li><strong>Bar:</strong> Horizontal comparison</li>
-                                <li><strong>Scatter:</strong> Correlation between variables</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Create a chart with:</p>
-                            <ul>
-                                <li>Data: Monthly sales for 6 months</li>
-                                <li>Create a column chart</li>
-                                <li>Add a title: "Monthly Sales 2026"</li>
-                                <li>Add data labels</li>
-                                <li>Change the chart style</li>
-                                <li>Save as "SalesChart.xlsx"</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'Which chart type is best for showing trends over time?',
-                    options: [
-                        'Column Chart',
-                        'Line Chart',
-                        'Pie Chart',
-                        'Bar Chart'
-                    ],
-                    correct: 1
-                }
-            },
-            19: {
-                notes: `
-                            <h4>🔍 Data Analysis Tools</h4>
-                            <ul>
-                                <li><strong>Sort:</strong> Arrange data in ascending/descending order</li>
-                                <li><strong>Filter:</strong> Show only specific data</li>
-                                <li><strong>Conditional Formatting:</strong> Highlight cells based on criteria</li>
-                                <li><strong>Pivot Tables:</strong> Summarize large datasets</li>
-                                <li><strong>What-If Analysis:</strong> Test different scenarios</li>
-                            </ul>
-                            <h4>📌 Using Pivot Tables</h4>
-                            <ul>
-                                <li>Select your data</li>
-                                <li>Insert → PivotTable</li>
-                                <li>Choose fields to analyze</li>
-                                <li>Drag fields to Rows, Columns, Values</li>
-                                <li>Format and customize</li>
-                            </ul>
-                            <h4>💡 Data Analysis Tips</h4>
-                            <ul>
-                                <li>Clean your data before analysis</li>
-                                <li>Use consistent formatting</li>
-                                <li>Check for duplicates</li>
-                                <li>Validate your results</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Practice data analysis:</p>
-                            <ul>
-                                <li>Create a dataset of 20 employees (Name, Department, Salary)</li>
-                                <li>Sort by salary (highest to lowest)</li>
-                                <li>Filter to show only one department</li>
-                                <li>Use conditional formatting to highlight salaries above $50,000</li>
-                                <li>Create a pivot table showing average salary by department</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'Which tool summarizes large datasets in Excel?',
-                    options: [
-                        'Sort',
-                        'Filter',
-                        'Pivot Table',
-                        'Conditional Formatting'
-                    ],
-                    correct: 2
-                }
-            },
-            20: {
-                notes: `
-                            <h4>🚀 Advanced Excel</h4>
-                            <ul>
-                                <li><strong>VLOOKUP:</strong> Search for data in a table</li>
-                                <li><strong>HLOOKUP:</strong> Horizontal lookup</li>
-                                <li><strong>INDEX/MATCH:</strong> Advanced lookup (more flexible than VLOOKUP)</li>
-                                <li><strong>Array Formulas:</strong> Perform multiple calculations</li>
-                                <li><strong>Macros:</strong> Automate repetitive tasks</li>
-                                <li><strong>Power Query:</strong> Import and transform data</li>
-                                <li><strong>Data Validation:</strong> Restrict data entry</li>
-                            </ul>
-                            <h4>📌 Excel Best Practices</h4>
-                            <ul>
-                                <li>Use named ranges for clarity</li>
-                                <li>Document your formulas</li>
-                                <li>Use tables for dynamic ranges</li>
-                                <li>Keep data organized</li>
-                                <li>Backup your workbooks</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Practice advanced Excel:</p>
-                            <ul>
-                                <li>Create a table with employee data (ID, Name, Department, Salary)</li>
-                                <li>Use VLOOKUP to find an employee's salary by ID</li>
-                                <li>Create a named range for your data</li>
-                                <li>Add data validation to restrict department entries</li>
-                                <li>Record a simple macro to format your data</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'Which function is used to look up data in a table vertically?',
-                    options: [
-                        'HLOOKUP',
-                        'VLOOKUP',
-                        'INDEX',
-                        'MATCH'
-                    ],
-                    correct: 1
-                }
-            },
-            21: {
-                notes: `
-                            <h4>🎯 PowerPoint Basics</h4>
-                            <ul>
-                                <li><strong>Slide:</strong> Individual page in a presentation</li>
-                                <li><strong>Layout:</strong> Arrangement of content on a slide</li>
-                                <li><strong>Theme:</strong> Design template for all slides</li>
-                                <li><strong>Transitions:</strong> Effects between slides</li>
-                                <li><strong>Animations:</strong> Effects within slides</li>
-                            </ul>
-                            <h4>📌 Presentation Structure</h4>
-                            <ul>
-                                <li>Title Slide: Presentation title and author</li>
-                                <li>Agenda/Overview: Outline of topics</li>
-                                <li>Content Slides: Main information</li>
-                                <li>Summary/Conclusion: Key takeaways</li>
-                                <li>Thank You/Q&A: Final slide</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Create a PowerPoint presentation:</p>
-                            <ul>
-                                <li>Title slide with your name and topic</li>
-                                <li>5 content slides on a topic you know well</li>
-                                <li>Add a picture on at least 2 slides</li>
-                                <li>Apply a theme to all slides</li>
-                                <li>Save as "MyPresentation.pptx"</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'What is an individual page in PowerPoint called?',
-                    options: [
-                        'Page',
-                        'Slide',
-                        'Sheet',
-                        'Frame'
-                    ],
-                    correct: 1
-                }
-            },
-            22: {
-                notes: `
-                            <h4>🎨 Slide Design</h4>
-                            <ul>
-                                <li><strong>Layouts:</strong> Title, Content, Two Content, Comparison</li>
-                                <li><strong>Design Ideas:</strong> AI-powered design suggestions</li>
-                                <li><strong>Master Slide:</strong> Edit all slides at once</li>
-                                <li><strong>Slide Background:</strong> Color, gradient, image</li>
-                                <li><strong>Branding:</strong> Consistent colors and fonts</li>
-                            </ul>
-                            <h4>📐 Design Principles</h4>
-                            <ul>
-                                <li>Keep it simple (6-8 lines per slide)</li>
-                                <li>Use high-contrast colors for readability</li>
-                                <li>Include visuals to support content</li>
-                                <li>Be consistent with fonts and colors</li>
-                                <li>Leave white space for clarity</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Enhance your presentation:</p>
-                            <ul>
-                                <li>Apply a professional theme</li>
-                                <li>Use the Master Slide to add your logo to all slides</li>
-                                <li>Add a slide background image</li>
-                                <li>Use at least 2 different slide layouts</li>
-                                <li>Add icons or shapes for visual interest</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'Which tool allows you to edit all slides at once?',
-                    options: [
-                        'Slide Layout',
-                        'Master Slide',
-                        'Design Ideas',
-                        'Theme'
-                    ],
-                    correct: 1
-                }
-            },
-            23: {
-                notes: `
-                            <h4>✨ Transitions & Animations</h4>
-                            <ul>
-                                <li><strong>Transitions:</strong> Effects between slides</li>
-                                <li><strong>Animation:</strong> Effects within slides</li>
-                                <li><strong>Morph:</strong> Smooth transition between slides</li>
-                                <li><strong>Timing:</strong> Set duration and delay</li>
-                                <li><strong>Trigger:</strong> Start animation on click or automatically</li>
-                            </ul>
-                            <h4>📌 Types of Animations</h4>
-                            <ul>
-                                <li><strong>Entrance:</strong> Appear, Fade, Fly In, Zoom</li>
-                                <li><strong>Emphasis:</strong> Grow/Shrink, Spin, Pulse</li>
-                                <li><strong>Exit:</strong> Disappear, Fade Out, Fly Out</li>
-                                <li><strong>Motion Paths:</strong> Custom movement</li>
-                            </ul>
-                            <h4>💡 Animation Best Practices</h4>
-                            <ul>
-                                <li>Use animations sparingly</li>
-                                <li>Keep animations professional</li>
-                                <li>Use consistent animation styles</li>
-                                <li>Test your presentation in slideshow mode</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Add animations to your presentation:</p>
-                            <ul>
-                                <li>Add transitions between all slides</li>
-                                <li>Add entrance animations to bullet points</li>
-                                <li>Add emphasis animations to important elements</li>
-                                <li>Adjust timing and duration</li>
-                                <li>Preview in slideshow mode</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'Which transition creates a smooth connection between similar slides?',
-                    options: [
-                        'Fade',
-                        'Push',
-                        'Morph',
-                        'Wipe'
-                    ],
-                    correct: 2
-                }
-            },
-            24: {
-                notes: `
-                            <h4>🎬 Multimedia in PowerPoint</h4>
-                            <ul>
-                                <li><strong>Audio:</strong> Add background music or narration</li>
-                                <li><strong>Video:</strong> Insert video files or online videos</li>
-                                <li><strong>Screen Recording:</strong> Record your screen</li>
-                                <li><strong>Audio Recording:</strong> Record narration</li>
-                                <li><strong>Playback Options:</strong> Autoplay, loop, hide during show</li>
-                            </ul>
-                            <h4>📌 Adding Multimedia</h4>
-                            <ul>
-                                <li>Insert → Audio → Audio from File</li>
-                                <li>Insert → Video → Video from File / Online Video</li>
-                                <li>Screen Recording: Insert → Screen Recording</li>
-                                <li>Format and position media</li>
-                                <li>Set playback options</li>
-                            </ul>
-                            <h4>💡 Multimedia Tips</h4>
-                            <ul>
-                                <li>Keep file sizes manageable</li>
-                                <li>Use high-quality visuals</li>
-                                <li>Test on the presentation device</li>
-                                <li>Have a backup plan for videos</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Enhance your presentation with multimedia:</p>
-                            <ul>
-                                <li>Add a video to one of your slides</li>
-                                <li>Add background audio (or narration)</li>
-                                <li>Set video to play automatically</li>
-                                <li>Add a screen recording demo</li>
-                                <li>Save as "MultimediaPresentation.pptx"</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'Which menu do you use to add video from a file?',
-                    options: [
-                        'File → Insert Video',
-                        'Insert → Video → Video from File',
-                        'Design → Video',
-                        'Transitions → Video'
-                    ],
-                    correct: 1
-                }
-            },
-            25: {
-                notes: `
-                            <h4>🚀 Advanced PowerPoint</h4>
-                            <ul>
-                                <li><strong>Custom Animation:</strong> Advanced animation sequences</li>
-                                <li><strong>Action Buttons:</strong> Navigate to slides, websites, or files</li>
-                                <li><strong>Hyperlinks:</strong> Link to slides or external content</li>
-                                <li><strong>Custom Show:</strong> Create custom slide sequences</li>
-                                <li><strong>Presenter View:</strong> See notes while presenting</li>
-                                <li><strong>Export:</strong> PDF, video, or JPEG</li>
-                            </ul>
-                            <h4>🎤 Presenting Tips</h4>
-                            <ul>
-                                <li>Practice your presentation</li>
-                                <li>Use Presenter View for notes</li>
-                                <li>Engage with your audience</li>
-                                <li>Handle technical issues gracefully</li>
-                                <li>Have a backup (PDF or video)</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Practice advanced PowerPoint:</p>
-                            <ul>
-                                <li>Add action buttons to navigate slides</li>
-                                <li>Create a custom show for a different audience</li>
-                                <li>Export your presentation as a PDF</li>
-                                <li>Add speaker notes to each slide</li>
-                                <li>Save as "AdvancedPresentation.pptx"</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'Which view shows speaker notes while presenting?',
-                    options: [
-                        'Normal View',
-                        'Slide Sorter View',
-                        'Presenter View',
-                        'Reading View'
-                    ],
-                    correct: 2
-                }
-            },
-            26: {
-                notes: `
-                            <h4>🌐 Internet Fundamentals</h4>
-                            <ul>
-                                <li><strong>Internet:</strong> Global network of interconnected computers</li>
-                                <li><strong>Web Browser:</strong> Software to access websites (Chrome, Firefox, Edge)</li>
-                                <li><strong>Website:</strong> Collection of web pages</li>
-                                <li><strong>URL:</strong> Web address (https://www.example.com)</li>
-                                <li><strong>Search Engine:</strong> Finds information online (Google, Bing)</li>
-                                <li><strong>ISP:</strong> Internet Service Provider</li>
-                            </ul>
-                            <h4>🔍 Using Search Engines</h4>
-                            <ul>
-                                <li>Use specific keywords for better results</li>
-                                <li>Use quotes for exact phrases "search term"</li>
-                                <li>Use "-" to exclude words: python -snake</li>
-                                <li>Use site: to search within a specific site</li>
-                                <li>Use filetype: to find specific file types</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Practice using the internet:</p>
-                            <ul>
-                                <li>Open a web browser (Chrome, Firefox, etc.)</li>
-                                <li>Search for "computer basics tutorial"</li>
-                                <li>Find and open 3 different websites</li>
-                                <li>Bookmark one useful website</li>
-                                <li>Learn how to use browser tabs</li>
-                                <li>Search for a specific file type using filetype:pdf</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'What is a URL?',
-                    options: [
-                        'Web address',
-                        'Search engine',
-                        'Browser software',
-                        'Internet connection'
-                    ],
-                    correct: 0
-                }
-            },
-            27: {
-                notes: `
-                            <h4>🌍 Web Browsers</h4>
-                            <ul>
-                                <li><strong>Google Chrome:</strong> Most popular, fast, extensions</li>
-                                <li><strong>Mozilla Firefox:</strong> Privacy-focused, open source</li>
-                                <li><strong>Microsoft Edge:</strong> Built-in, integrates with Windows</li>
-                                <li><strong>Apple Safari:</strong> Default on Mac and iOS</li>
-                                <li><strong>Opera:</strong> Built-in VPN and ad blocker</li>
-                            </ul>
-                            <h4>📌 Browser Features</h4>
-                            <ul>
-                                <li>Bookmarks/Favorites: Save websites</li>
-                                <li>History: View visited pages</li>
-                                <li>Extensions: Add functionality</li>
-                                <li>Incognito/Private: Browse without saving history</li>
-                                <li>Developer Tools: Inspect and debug websites</li>
-                            </ul>
-                            <h4>💡 Browser Security Tips</h4>
-                            <ul>
-                                <li>Keep your browser updated</li>
-                                <li>Use HTTPS websites</li>
-                                <li>Be cautious with extensions</li>
-                                <li>Clear cache and cookies regularly</li>
-                                <li>Use a password manager</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Explore your browser:</p>
-                            <ul>
-                                <li>Open your browser settings</li>
-                                <li>Bookmark 3 useful websites</li>
-                                <li>Browse your browsing history</li>
-                                <li>Install a useful extension (e.g., ad blocker)</li>
-                                <li>Try Incognito/Private mode</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'Which browser is built into Windows?',
-                    options: [
-                        'Chrome',
-                        'Firefox',
-                        'Edge',
-                        'Safari'
-                    ],
-                    correct: 2
-                }
-            },
-            28: {
-                notes: `
-                            <h4>📧 Email Basics</h4>
-                            <ul>
-                                <li><strong>Email:</strong> Electronic mail for sending messages</li>
-                                <li><strong>Email Provider:</strong> Gmail, Outlook, Yahoo</li>
-                                <li><strong>To:</strong> Recipient's email address</li>
-                                <li><strong>Subject:</strong> Brief summary of email</li>
-                                <li><strong>Body:</strong> Main content of the email</li>
-                                <li><strong>CC:</strong> Copy recipients (visible)</li>
-                                <li><strong>BCC:</strong> Copy recipients (hidden)</li>
-                                <li><strong>Attachment:</strong> Files sent with email</li>
-                            </ul>
-                            <h4>📌 Creating an Email</h4>
-                            <ul>
-                                <li>Compose: Start a new email</li>
-                                <li>Add recipients in To, CC, or BCC</li>
-                                <li>Write a clear subject line</li>
-                                <li>Write your message</li>
-                                <li>Add attachments if needed</li>
-                                <li>Send or save as draft</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Practice email communication:</p>
-                            <ul>
-                                <li>Create a free email account (if you don't have one)</li>
-                                <li>Write a professional email to a friend or colleague</li>
-                                <li>Include a subject, greeting, body, and closing</li>
-                                <li>Attach a file to the email</li>
-                                <li>Send the email and check your sent folder</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'What does "CC" stand for in email?',
-                    options: [
-                        'Critical Copy',
-                        'Carbon Copy',
-                        'Confidential Copy',
-                        'Client Copy'
-                    ],
-                    correct: 1
-                }
-            },
-            29: {
-                notes: `
-                            <h4>✉️ Email Etiquette</h4>
-                            <ul>
-                                <li>Use a clear, descriptive subject line</li>
-                                <li>Keep emails professional and concise</li>
-                                <li>Proofread for spelling and grammar</li>
-                                <li>Use appropriate greetings and closings</li>
-                                <li>Reply within 24 hours</li>
-                                <li>Use CC and BCC appropriately</li>
-                                <li>Avoid using ALL CAPS (SHOUTING)</li>
-                                <li>Be careful with "Reply All"</li>
-                            </ul>
-                            <h4>📌 Professional Email Structure</h4>
-                            <ul>
-                                <li><strong>Greeting:</strong> Dear [Name], Hello [Name]</li>
-                                <li><strong>Introduction:</strong> Who you are and why you're emailing</li>
-                                <li><strong>Body:</strong> Main message, clear and organized</li>
-                                <li><strong>Call to Action:</strong> What you need from the recipient</li>
-                                <li><strong>Closing:</strong> Thank you, Best regards</li>
-                                <li><strong>Signature:</strong> Your name, title, contact info</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Write professional emails:</p>
-                            <ul>
-                                <li>Write a email to a professor asking for a meeting</li>
-                                <li>Write a email to a colleague requesting a document</li>
-                                <li>Write a email to a client with a project update</li>
-                                <li>Write a follow-up email</li>
-                                <li>Review your emails for etiquette</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'What should you avoid using in professional emails?',
-                    options: [
-                        'Clear subject lines',
-                        'Professional greetings',
-                        'ALL CAPS',
-                        'Proofreading'
-                    ],
-                    correct: 2
-                }
-            },
-            30: {
-                notes: `
-                            <h4>🔒 Online Safety</h4>
-                            <ul>
-                                <li><strong>Passwords:</strong> Use strong, unique passwords</li>
-                                <li><strong>Phishing:</strong> Be careful of suspicious emails/links</li>
-                                <li><strong>Malware:</strong> Install antivirus software</li>
-                                <li><strong>Public WiFi:</strong> Avoid sensitive transactions</li>
-                                <li><strong>Social Media:</strong> Share carefully</li>
-                                <li><strong>Data Backup:</strong> Regular backups</li>
-                            </ul>
-                            <h4>🔑 Creating Strong Passwords</h4>
-                            <ul>
-                                <li>At least 12 characters</li>
-                                <li>Include uppercase and lowercase letters</li>
-                                <li>Include numbers</li>
-                                <li>Include special characters (!@#$%)</li>
-                                <li>Don't use personal information</li>
-                                <li>Use a password manager</li>
-                            </ul>
-                            <h4>⚠️ Red Flags to Watch For</h4>
-                            <ul>
-                                <li>Unsolicited emails requesting personal info</li>
-                                <li>Urgent requests that create panic</li>
-                                <li>Links that don't match the sender's domain</li>
-                                <li>Spelling and grammar mistakes</li>
-                                <li>Requests for money or gift cards</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Improve your online safety:</p>
-                            <ul>
-                                <li>Create a strong password using the guidelines</li>
-                                <li>Enable 2-factor authentication on an account</li>
-                                <li>Check your email for suspicious messages</li>
-                                <li>Review your social media privacy settings</li>
-                                <li>Set up automatic backups for important files</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'Which is a sign of a phishing email?',
-                    options: [
-                        'Professional formatting',
-                        'Urgent request for personal info',
-                        'Clear subject line',
-                        'Proper grammar'
-                    ],
-                    correct: 1
-                }
-            },
-            31: {
-                notes: `
-                            <h4>📄 Creating Professional Documents</h4>
-                            <ul>
-                                <li>Use consistent formatting</li>
-                                <li>Choose appropriate fonts and sizes</li>
-                                <li>Use headers and footers</li>
-                                <li>Add page numbers</li>
-                                <li>Use spell check and grammar check</li>
-                                <li>Save in appropriate format (.docx, .pdf)</li>
-                            </ul>
-                            <h4>📌 Common Document Types</h4>
-                            <ul>
-                                <li>Cover Letters</li>
-                                <li>Resumes/CVs</li>
-                                <li>Reports</li>
-                                <li>Proposals</li>
-                                <li>Business Letters</li>
-                                <li>Meeting Minutes</li>
-                                <li>Newsletters</li>
-                            </ul>
-                            <h4>💡 Document Checklist</h4>
-                            <ul>
-                                <li>Check formatting and layout</li>
-                                <li>Proofread for errors</li>
-                                <li>Verify all information is correct</li>
-                                <li>Check margins and spacing</li>
-                                <li>Test print or PDF conversion</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Create a professional document:</p>
-                            <ul>
-                                <li>Create a resume or CV</li>
-                                <li>Use a professional template</li>
-                                <li>Add your personal information</li>
-                                <li>Include your skills and experience</li>
-                                <li>Save as both .docx and .pdf</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'Which file format is best for sharing documents that shouldn\'t be edited?',
-                    options: [
-                        '.docx',
-                        '.txt',
-                        '.pdf',
-                        '.rtf'
-                    ],
-                    correct: 2
-                }
-            },
-            32: {
-                notes: `
-                            <h4>📊 Spreadsheet Projects</h4>
-                            <ul>
-                                <li>Budget Planning: Track income and expenses</li>
-                                <li>Grade Calculator: Calculate student grades</li>
-                                <li>Inventory Management: Track stock levels</li>
-                                <li>Sales Data: Analyze sales trends</li>
-                                <li>Project Timeline: Track project milestones</li>
-                            </ul>
-                            <h4>📌 Sample Project: Monthly Budget</h4>
-                            <ul>
-                                <li>Create columns for categories</li>
-                                <li>Add income and expense rows</li>
-                                <li>Use SUM for totals</li>
-                                <li>Create charts to visualize spending</li>
-                                <li>Track actual vs. budgeted</li>
-                            </ul>
-                            <h4>💡 Best Practices</h4>
-                            <ul>
-                                <li>Plan your spreadsheet structure</li>
-                                <li>Use clear headers</li>
-                                <li>Use consistent formatting</li>
-                                <li>Test your formulas</li>
-                                <li>Add comments for clarity</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Create a monthly budget spreadsheet:</p>
-                            <ul>
-                                <li>List all income sources</li>
-                                <li>List all expenses (rent, food, transport, entertainment)</li>
-                                <li>Calculate total income</li>
-                                <li>Calculate total expenses</li>
-                                <li>Calculate savings (income - expenses)</li>
-                                <li>Create a pie chart showing expense breakdown</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'What is the first step in creating a spreadsheet project?',
-                    options: [
-                        'Enter data',
-                        'Plan the structure',
-                        'Create charts',
-                        'Format cells'
-                    ],
-                    correct: 1
-                }
-            },
-            33: {
-                notes: `
-                            <h4>🎯 Presentation Projects</h4>
-                            <ul>
-                                <li>Business Pitch: Present a business idea</li>
-                                <li>Project Report: Report on a project</li>
-                                <li>Training Materials: Create training content</li>
-                                <li>Research Presentation: Present research findings</li>
-                                <li>Sales Presentation: Present products/services</li>
-                            </ul>
-                            <h4>📌 Project Structure</h4>
-                            <ul>
-                                <li>Title Slide: Title and presenter</li>
-                                <li>Agenda: What you'll cover</li>
-                                <li>Problem/Need: What problem are you solving</li>
-                                <li>Solution: Your solution</li>
-                                <li>Implementation: How it works</li>
-                                <li>Results: Expected outcomes</li>
-                                <li>Conclusion: Summary and call to action</li>
-                            </ul>
-                            <h4>💡 Presentation Tips</h4>
-                            <ul>
-                                <li>Keep slides minimal</li>
-                                <li>Use visuals to support content</li>
-                                <li>Practice your delivery</li>
-                                <li>Time your presentation</li>
-                                <li>Prepare for questions</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Create a business pitch presentation:</p>
-                            <ul>
-                                <li>Title slide with your name and business idea</li>
-                                <li>Problem slide: What problem are you solving</li>
-                                <li>Solution slide: How your business solves it</li>
-                                <li>Market slide: Who is your target market</li>
-                                <li>Financial slide: Revenue and costs</li>
-                                <li>Conclusion slide: Summary</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'How many slides should a good presentation have?',
-                    options: [
-                        'As few as possible',
-                        'Exactly 10 slides',
-                        'As many as needed',
-                        'No limit'
-                    ],
-                    correct: 2
-                }
-            },
-            34: {
-                notes: `
-                            <h4>🔍 Internet Research</h4>
-                            <ul>
-                                <li>Use academic databases</li>
-                                <li>Evaluate sources for credibility</li>
-                                <li>Cite your sources</li>
-                                <li>Use search operators</li>
-                                <li>Organize your findings</li>
-                            </ul>
-                            <h4>📌 Evaluating Sources</h4>
-                            <ul>
-                                <li><strong>Authority:</strong> Who is the author?</li>
-                                <li><strong>Accuracy:</strong> Is the information correct?</li>
-                                <li><strong>Currency:</strong> Is it up to date?</li>
-                                <li><strong>Purpose:</strong> Why was it created?</li>
-                                <li><strong>Bias:</strong> Is it objective?</li>
-                            </ul>
-                            <h4>💡 Research Tips</h4>
-                            <ul>
-                                <li>Use multiple sources</li>
-                                <li>Take notes as you research</li>
-                                <li>Save links for later reference</li>
-                                <li>Fact-check important information</li>
-                                <li>Use academic databases for research</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Practice internet research:</p>
-                            <ul>
-                                <li>Choose a topic to research</li>
-                                <li>Find 3 different sources</li>
-                                <li>Evaluate each source for credibility</li>
-                                <li>Take notes on key findings</li>
-                                <li>Cite your sources</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'What should you check when evaluating a source?',
-                    options: [
-                        'Only the date',
-                        'Authority, accuracy, currency, purpose',
-                        'Only the author',
-                        'Only the content'
-                    ],
-                    correct: 1
-                }
-            },
-            35: {
-                notes: `
-                            <h4>📧 Email Communication</h4>
-                            <ul>
-                                <li>Professional communication</li>
-                                <li>Email organization</li>
-                                <li>Email security</li>
-                                <li>Email etiquette</li>
-                                <li>Managing attachments</li>
-                            </ul>
-                            <h4>📌 Email Organization</h4>
-                            <ul>
-                                <li>Create folders for different categories</li>
-                                <li>Use filters to automatically sort emails</li>
-                                <li>Archive emails you don't need</li>
-                                <li>Delete spam and junk</li>
-                                <li>Use labels or categories</li>
-                            </ul>
-                            <h4>💡 Email Productivity Tips</h4>
-                            <ul>
-                                <li>Check email at set times</li>
-                                <li>Use templates for common responses</li>
-                                <li>Unsubscribe from unnecessary newsletters</li>
-                                <li>Use keyboard shortcuts</li>
-                                <li>Keep your inbox organized</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Organize your email:</p>
-                            <ul>
-                                <li>Create folders/categories for your emails</li>
-                                <li>Unsubscribe from 5 newsletters</li>
-                                <li>Create email filters for automatic sorting</li>
-                                <li>Archive old emails</li>
-                                <li>Set up an email signature</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'What is a good practice for email productivity?',
-                    options: [
-                        'Check email constantly',
-                        'Check email at set times',
-                        'Never check email',
-                        'Reply instantly'
-                    ],
-                    correct: 1
-                }
-            },
-            36: {
-                notes: `
-                            <h4>🎯 Project Planning</h4>
-                            <ul>
-                                <li>Define project scope</li>
-                                <li>Set goals and objectives</li>
-                                <li>Create a timeline</li>
-                                <li>Identify resources needed</li>
-                                <li>Assign tasks</li>
-                            </ul>
-                            <h4>📌 Project Elements</h4>
-                            <ul>
-                                <li><strong>Scope:</strong> What is included and excluded</li>
-                                <li><strong>Goals:</strong> What you want to achieve</li>
-                                <li><strong>Timeline:</strong> Key dates and milestones</li>
-                                <li><strong>Resources:</strong> People, money, materials</li>
-                                <li><strong>Risks:</strong> Potential problems</li>
-                            </ul>
-                            <h4>💡 Planning Tools</h4>
-                            <ul>
-                                <li>Gantt Charts</li>
-                                <li>Mind Maps</li>
-                                <li>Checklists</li>
-                                <li>Project Management Software</li>
-                                <li>Templates</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Plan a project:</p>
-                            <ul>
-                                <li>Choose a project (personal or professional)</li>
-                                <li>Define the scope</li>
-                                <li>Set 3 goals</li>
-                                <li>Create a timeline with milestones</li>
-                                <li>Identify resources needed</li>
-                                <li>Create a Gantt chart</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'What is the first step in project planning?',
-                    options: [
-                        'Assign tasks',
-                        'Define scope',
-                        'Create timeline',
-                        'Identify risks'
-                    ],
-                    correct: 1
-                }
-            },
-            37: {
-                notes: `
-                            <h4>🚀 Project Execution</h4>
-                            <ul>
-                                <li>Follow your project plan</li>
-                                <li>Track progress regularly</li>
-                                <li>Communicate with stakeholders</li>
-                                <li>Manage changes</li>
-                                <li>Document everything</li>
-                            </ul>
-                            <h4>📌 Execution Tips</h4>
-                            <ul>
-                                <li>Break down tasks into smaller steps</li>
-                                <li>Use tools to track progress</li>
-                                <li>Hold regular check-ins</li>
-                                <li>Be flexible when needed</li>
-                                <li>Celebrate milestones</li>
-                            </ul>
-                            <h4>💡 Common Challenges</h4>
-                            <ul>
-                                <li>Scope creep (adding too many features)</li>
-                                <li>Time delays</li>
-                                <li>Resource constraints</li>
-                                <li>Communication issues</li>
-                                <li>Risk management</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Execute your project:</p>
-                            <ul>
-                                <li>Start working on your project</li>
-                                <li>Track your progress daily</li>
-                                <li>Document any changes or issues</li>
-                                <li>Communicate progress to stakeholders</li>
-                                <li>Adjust your plan if needed</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'What is "scope creep"?',
-                    options: [
-                        'Completing the project early',
-                        'Adding too many features not in the plan',
-                        'Sticking to the original plan',
-                        'Removing features'
-                    ],
-                    correct: 1
-                }
-            },
-            38: {
-                notes: `
-                            <h4>📊 Project Review</h4>
-                            <ul>
-                                <li>Check if goals were met</li>
-                                <li>Evaluate outcomes</li>
-                                <li>Review timeline adherence</li>
-                                <li>Analyze budget vs actual</li>
-                                <li>Identify lessons learned</li>
-                            </ul>
-                            <h4>📌 Review Process</h4>
-                            <ul>
-                                <li>Gather all project data</li>
-                                <li>Compare planned vs actual</li>
-                                <li>Analyze successes and failures</li>
-                                <li>Document findings</li>
-                                <li>Share with stakeholders</li>
-                            </ul>
-                            <h4>💡 Lessons Learned</h4>
-                            <ul>
-                                <li>What went well</li>
-                                <li>What could have been better</li>
-                                <li>What to do differently next time</li>
-                                <li>Knowledge gained</li>
-                                <li>Recommendations</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Review your project:</p>
-                            <ul>
-                                <li>Compare planned vs actual progress</li>
-                                <li>Identify what went well</li>
-                                <li>Identify challenges you faced</li>
-                                <li>Write down lessons learned</li>
-                                <li>Create recommendations</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'What is the purpose of a project review?',
-                    options: [
-                        'To find someone to blame',
-                        'To learn from experience',
-                        'To extend the timeline',
-                        'To start over'
-                    ],
-                    correct: 1
-                }
-            },
-            39: {
-                notes: `
-                            <h4>📋 Project Submission</h4>
-                            <ul>
-                                <li>Prepare final deliverables</li>
-                                <li>Format documents professionally</li>
-                                <li>Check all requirements</li>
-                                <li>Get feedback before final submission</li>
-                                <li>Submit on time</li>
-                            </ul>
-                            <h4>📌 Submission Checklist</h4>
-                            <ul>
-                                <li>All deliverables completed</li>
-                                <li>Documents formatted correctly</li>
-                                <li>Files named properly</li>
-                                <li>All requirements met</li>
-                                <li>Spell check completed</li>
-                                <li>Submitted in correct format</li>
-                            </ul>
-                            <h4>💡 Tips for Success</h4>
-                            <ul>
-                                <li>Submit early to avoid last-minute issues</li>
-                                <li>Double-check submission instructions</li>
-                                <li>Get a second pair of eyes to review</li>
-                                <li>Keep a copy for your records</li>
-                                <li>Follow up to confirm receipt</li>
-                            </ul>
-                        `,
-                exercise: `
-                            <h4>✏️ Practical Exercise</h4>
-                            <p>Submit your project:</p>
-                            <ul>
-                                <li>Review all project requirements</li>
-                                <li>Prepare final documents</li>
-                                <li>Format professionally</li>
-                                <li>Get feedback from someone</li>
-                                <li>Submit according to instructions</li>
-                                <li>Confirm receipt</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'What should you do before submitting a project?',
-                    options: [
-                        'Submit immediately',
-                        'Review all requirements',
-                        'Skip formatting',
-                        'Delete backups'
-                    ],
-                    correct: 1
-                }
-            },
-            40: {
-                notes: `
-                            <h4>🎓 Course Completion</h4>
-                            <ul>
-                                <li>You've completed all 40 lessons!</li>
-                                <li>You've learned about:</li>
+                    content: `
+                                <p>A <strong>computer</strong> is an electronic device that processes data according to a set of instructions called a program.</p>
+                                <p><strong>Key Concepts:</strong></p>
                                 <ul>
-                                    <li>Computer basics and history</li>
-                                    <li>Operating Systems (Windows, macOS, Linux)</li>
-                                    <li>Microsoft Office (Word, Excel, PowerPoint)</li>
-                                    <li>Internet, email, and online safety</li>
-                                    <li>Practical applications and projects</li>
+                                    <li><strong>Data:</strong> Raw facts and figures</li>
+                                    <li><strong>Information:</strong> Processed data that is meaningful</li>
+                                    <li><strong>Processing:</strong> The transformation of data into information</li>
                                 </ul>
-                            </ul>
-                            <h4>🏆 What's Next?</h4>
-                            <ul>
-                                <li>Review any lessons you want to revisit</li>
-                                <li>Practice your skills regularly</li>
-                                <li>Take the final exam</li>
-                                <li>Generate your certificate</li>
-                                <li>Enroll in more courses</li>
-                            </ul>
-                            <h4>🎯 Congratulations!</h4>
-                            <p>You've completed the Computer Packages course. You now have essential computer skills that will serve you well in any career.</p>
-                            <p><strong>Remember:</strong> The best way to maintain your skills is to practice regularly!</p>
-                        `,
-                exercise: `
-                            <h4>✏️ Final Exercise</h4>
-                            <p>Reflect on your learning:</p>
-                            <ul>
-                                <li>Write down 5 things you learned in this course</li>
-                                <li>List 3 skills you want to improve</li>
-                                <li>Plan how you'll practice these skills</li>
-                                <li>Share your certificate on LinkedIn</li>
-                            </ul>
-                        `,
-                quiz: {
-                    question: 'What should you do after completing this course?',
-                    options: [
-                        'Stop learning',
-                        'Practice your skills and continue learning',
-                        'Forget everything',
-                        'Never use a computer again'
+                                <p><strong>The Basic Computer Cycle:</strong></p>
+                                <ul>
+                                    <li><strong>Input:</strong> Data entered into the computer</li>
+                                    <li><strong>Processing:</strong> Computer processes the data</li>
+                                    <li><strong>Output:</strong> Results are displayed or printed</li>
+                                </ul>
+                            `,
+                    examples: `
+                                <p><strong>Example 1:</strong> Typing a letter in Microsoft Word</p>
+                                <ul>
+                                    <li>Input: Keys pressed on the keyboard</li>
+                                    <li>Processing: Word processes the keystrokes</li>
+                                    <li>Output: Text appears on the screen</li>
+                                </ul>
+                                <p><strong>Example 2:</strong> Using a calculator app</p>
+                                <ul>
+                                    <li>Input: Numbers entered</li>
+                                    <li>Processing: Calculation performed</li>
+                                    <li>Output: Result displayed</li>
+                                </ul>
+                            `,
+                    summary: `
+                                <ul>
+                                    <li>A computer is an electronic device that processes data</li>
+                                    <li>Computers work on the Input-Processing-Output cycle</li>
+                                    <li>Computers need both hardware and software to function</li>
+                                    <li>Computers are used in almost every aspect of modern life</li>
+                                </ul>
+                            `,
+                    knowledgeCheck: {
+                        question: 'What is the basic cycle of a computer?',
+                        options: [
+                            'Output → Input → Processing',
+                            'Input → Processing → Output',
+                            'Processing → Input → Output',
+                            'Output → Processing → Input'
+                        ],
+                        correct: 1
+                    },
+                    practical: `
+                                <p><strong>Activity:</strong> Look around your workspace or home. Identify at least 5 different types of computers or computing devices.</p>
+                                <ul>
+                                    <li>Write down each device name</li>
+                                    <li>Describe its primary use</li>
+                                    <li>Identify whether it's input, output, or processing</li>
+                                </ul>
+                            `,
+                    discussion: `
+                                <p><strong>Discussion Question:</strong> How do computers impact our daily lives? Share your thoughts with the class.</p>
+                                <p>Think about:</p>
+                                <ul>
+                                    <li>How you use computers at home</li>
+                                    <li>How computers are used in your workplace</li>
+                                    <li>The role of computers in education</li>
+                                </ul>
+                            `,
+                    resources: [
+                        'Video: Introduction to Computers',
+                        'PDF: Computer Basics Guide',
+                        'Link: Computer History Timeline'
+                    ]
+                },
+                2: {
+                    title: 'Types of Computers',
+                    objectives: [
+                        'Identify different types of computers',
+                        'Understand the purpose of each type',
+                        'Recognize the computers you use daily',
+                        'Understand the differences between computer types'
                     ],
-                    correct: 1
+                    content: `
+                                <p><strong>Computers come in various shapes and sizes, each designed for specific purposes.</strong></p>
+                                <ul>
+                                    <li><strong>Supercomputers:</strong> The fastest and most powerful computers</li>
+                                    <li><strong>Mainframes:</strong> Large computers used by organizations</li>
+                                    <li><strong>Servers:</strong> Computers that provide services to other computers</li>
+                                    <li><strong>Workstations:</strong> High-performance computers for professionals</li>
+                                    <li><strong>Personal Computers (PCs):</strong> Desktops and laptops</li>
+                                    <li><strong>Mobile Devices:</strong> Smartphones, tablets, wearables</li>
+                                    <li><strong>Embedded Systems:</strong> Computers inside other devices</li>
+                                </ul>
+                            `,
+                    examples: `
+                                <p><strong>Example 1: Supercomputer</strong> - NASA uses supercomputers for weather forecasting</p>
+                                <p><strong>Example 2: Mainframe</strong> - Banks use mainframes for transaction processing</p>
+                                <p><strong>Example 3: Personal Computer</strong> - Used at home for work, study, and entertainment</p>
+                            `,
+                    summary: `
+                                <ul>
+                                    <li>Computers range from supercomputers to embedded systems</li>
+                                    <li>Each type serves a specific purpose</li>
+                                    <li>Most people use Personal Computers daily</li>
+                                    <li>Mobile devices are the most common type of computer</li>
+                                </ul>
+                            `,
+                    knowledgeCheck: {
+                        question: 'Which type of computer is used for scientific research?',
+                        options: [
+                            'Personal Computer',
+                            'Supercomputer',
+                            'Mainframe',
+                            'Server'
+                        ],
+                        correct: 1
+                    },
+                    practical: `
+                                <p><strong>Activity:</strong> Identify which types of computers you interact with daily:</p>
+                                <ul>
+                                    <li>Your main computer - Personal Computer</li>
+                                    <li>Your smartphone - Mobile Device</li>
+                                    <li>Any smart devices (TV, watch, appliances) - Embedded Systems</li>
+                                </ul>
+                            `,
+                    discussion: `
+                                <p><strong>Discussion:</strong> Which type of computer do you think has the most impact on society?</p>
+                            `,
+                    resources: [
+                        'Video: Types of Computers',
+                        'PDF: Computer Types Guide',
+                        'Link: Computer Evolution'
+                    ]
                 }
+                // ... Additional lessons would follow the same pattern
+            };
+
+            // Generate content for lessons that don't have specific content
+            if (!content[lessonId]) {
+                const lesson = findLesson(lessonId);
+                return {
+                    title: lesson ? lesson.title : 'Lesson',
+                    objectives: [
+                        'Understand the key concepts of this lesson',
+                        'Apply the knowledge in practical situations',
+                        'Complete the associated activities'
+                    ],
+                    content: `
+                                <p>This lesson covers <strong>${lesson ? lesson.title : 'this topic'}</strong>.</p>
+                                <p>Take notes, complete the activities, and test your understanding with the knowledge check.</p>
+                            `,
+                    examples: `
+                                <p>Examples will be provided during the lesson.</p>
+                            `,
+                    summary: `
+                                <ul>
+                                    <li>Review the key concepts</li>
+                                    <li>Practice what you've learned</li>
+                                    <li>Complete the knowledge check</li>
+                                </ul>
+                            `,
+                    knowledgeCheck: {
+                        question: `What is the main focus of ${lesson ? lesson.title : 'this lesson'}?`,
+                        options: [
+                            'Understanding basic concepts',
+                            'Advanced applications',
+                            'Practical exercises',
+                            'All of the above'
+                        ],
+                        correct: 3
+                    },
+                    practical: `
+                                <p>Practice the concepts from this lesson.</p>
+                            `,
+                    discussion: `
+                                <p>Share your thoughts on this topic.</p>
+                            `,
+                    resources: [
+                        'Video: Lesson Overview',
+                        'PDF: Additional Resources',
+                        'Link: Further Reading'
+                    ]
+                };
             }
-        };
+            return content[lessonId];
+        }
 
         // ============================================
         // APP STATE
@@ -2884,18 +1443,15 @@
             const userData = users.find(u => u.id === currentUser.id);
 
             if (userData) {
-                // Initialize empty data if not exists
                 if (!userData.completedLessons) userData.completedLessons = {};
                 if (!userData.payments) userData.payments = [];
                 if (!userData.achievements) userData.achievements = [];
                 if (!userData.learningHours) userData.learningHours = 0;
 
-                // Get completed lessons for this course
                 completedLessons = userData.completedLessons[COURSE_ID] || [];
                 payments = userData.payments || [];
                 achievements = userData.achievements || [];
 
-                // Ensure enrolled in this course
                 if (!userData.enrolledCourses) userData.enrolledCourses = [];
                 if (!userData.enrolledCourses.includes(COURSE_ID)) {
                     userData.enrolledCourses.push(COURSE_ID);
@@ -2903,7 +1459,6 @@
                 }
             }
 
-            // Update UI
             document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
             document.getElementById('userName').textContent = currentUser.name;
 
@@ -2924,9 +1479,11 @@
                 users[index].payments = payments;
                 users[index].achievements = achievements;
 
-                // Update learning hours (0.5h per lesson)
                 const totalCompleted = completedLessons.length;
-                users[index].learningHours = (users[index].learningHours || 0) + 0.5;
+                const newHours = Math.floor(totalCompleted / 2);
+                if (newHours > (users[index].learningHours || 0)) {
+                    users[index].learningHours = newHours;
+                }
 
                 saveUsers(users);
                 setCurrentUser(users[index]);
@@ -2949,25 +1506,35 @@
                 div.className = 'module';
                 div.innerHTML = `
                             <div class="module-header" onclick="toggleModule(${index})">
-                                <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
-                                    <span style="font-weight:700;color:var(--primary);">${module.title}</span>
-                                    <span class="badge">${completedCount}/${total}</span>
+                                <h3>
+                                    ${module.title}
+                                    <span class="module-badge">${module.id.toUpperCase()}</span>
                                     ${isComplete ? '<span style="color:var(--success);font-size:0.8rem;">✅ Complete</span>' : ''}
+                                </h3>
+                                <div style="display:flex;align-items:center;gap:0.8rem;">
+                                    <span class="progress-badge">${completedCount}/${total}</span>
+                                    <span>${isComplete ? '🎉' : '▼'}</span>
                                 </div>
-                                <span>${isComplete ? '🎉' : '▼'}</span>
                             </div>
-                            <div class="module-content open" id="module-${index}">
+                            <div class="module-content ${index === 0 ? 'open' : ''}" id="module-${index}">
                                 ${module.lessons.map(lesson => {
                                     const isCompleted = completedLessons.includes(lesson.id);
                                     const isLocked = !isCompleted && !canAccessLesson(module, lesson);
+                                    const typeIcon = {
+                                        'video': 'fa-play',
+                                        'quiz': 'fa-pencil-alt',
+                                        'assignment': 'fa-tasks',
+                                        'project': 'fa-project-diagram'
+                                    }[lesson.type] || 'fa-file';
                                     return `
                                         <div class="lesson-item ${isCompleted ? 'completed' : ''} ${isLocked ? 'locked' : ''}"
                                              onclick="${!isLocked ? `openLesson(${lesson.id})` : 'showToast(\'Complete previous lessons first!\',\'warning\')'}">
                                             <div class="lesson-title">
                                                 <div class="icon">
-                                                    <i class="fas ${isCompleted ? 'fa-check' : 'fa-play'}"></i>
+                                                    <i class="fas ${isCompleted ? 'fa-check' : typeIcon}"></i>
                                                 </div>
                                                 <span>${lesson.title}</span>
+                                                <span class="lesson-type">${lesson.type}</span>
                                             </div>
                                             <div class="lesson-status">
                                                 ${isCompleted ? '<span class="completed-text">✅ Completed</span>' : 
@@ -3032,21 +1599,15 @@
             const lesson = findLesson(lessonId);
             if (!lesson) return;
 
-            const container = document.getElementById('lessonContent');
+            const content = getLessonContent(lessonId);
             const isCompleted = completedLessons.includes(lessonId);
-            const content = LESSON_CONTENT[lessonId];
-
-            if (!content) {
-                showToast('Lesson content not found.', 'error');
-                return;
-            }
 
             let quizHTML = '';
-            if (content.quiz) {
-                const q = content.quiz;
+            if (content.knowledgeCheck) {
+                const q = content.knowledgeCheck;
                 quizHTML = `
-                            <div class="quiz">
-                                <h4>📝 Quick Quiz</h4>
+                            <div class="content-section content-knowledge">
+                                <h4>📝 Knowledge Check</h4>
                                 <p><strong>${q.question}</strong></p>
                                 ${q.options.map((opt, i) => `
                                     <div class="quiz-option" onclick="checkQuizAnswer(${lessonId}, ${i})" id="quiz-${lessonId}-${i}">
@@ -3058,13 +1619,66 @@
                         `;
             }
 
+            const container = document.getElementById('lessonContent');
             container.innerHTML = `
-                        <h2>${lesson.title}</h2>
-                        <div class="content">
-                            ${content.notes ? `<div class="notes">${content.notes}</div>` : ''}
-                            ${content.exercise ? `<div class="exercise">${content.exercise}</div>` : ''}
-                            ${quizHTML}
+                        <div class="lesson-header">
+                            <h2>${content.title}</h2>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-book"></i> ${lesson.type.charAt(0).toUpperCase() + lesson.type.slice(1)}</span>
+                                <span><i class="fas fa-clock"></i> 15-20 minutes</span>
+                                ${isCompleted ? '<span style="color:var(--success);"><i class="fas fa-check-circle"></i> Completed</span>' : ''}
+                            </div>
                         </div>
+
+                        <div class="content-section content-objectives">
+                            <h4>🎯 Learning Objectives</h4>
+                            <ul>
+                                ${content.objectives.map(obj => `<li>${obj}</li>`).join('')}
+                            </ul>
+                        </div>
+
+                        <div class="content-section content-content">
+                            <h4>📖 Lesson Content</h4>
+                            ${content.content}
+                        </div>
+
+                        ${content.examples ? `
+                            <div class="content-section content-examples">
+                                <h4>💡 Examples</h4>
+                                ${content.examples}
+                            </div>
+                        ` : ''}
+
+                        <div class="content-section content-summary">
+                            <h4>📌 Summary</h4>
+                            ${content.summary}
+                        </div>
+
+                        ${quizHTML}
+
+                        ${content.practical ? `
+                            <div class="content-section content-practical">
+                                <h4>✏️ Practical Activity</h4>
+                                ${content.practical}
+                            </div>
+                        ` : ''}
+
+                        ${content.discussion ? `
+                            <div class="content-section content-discussion">
+                                <h4>💬 Discussion</h4>
+                                ${content.discussion}
+                            </div>
+                        ` : ''}
+
+                        ${content.resources ? `
+                            <div class="content-section content-resources">
+                                <h4>📚 Downloadable Resources</h4>
+                                <ul>
+                                    ${content.resources.map(r => `<li><i class="fas fa-download"></i> ${r}</li>`).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+
                         <div class="action-buttons">
                             ${!isCompleted ? `
                                 <button class="btn btn-success" onclick="completeLesson(${lessonId})">
@@ -3074,7 +1688,7 @@
                                 <span style="color:var(--success);font-weight:600;">✅ Lesson Completed!</span>
                             `}
                             <button class="btn btn-secondary" onclick="closeLesson()">
-                                <i class="fas fa-arrow-left"></i> Back to Lessons
+                                <i class="fas fa-arrow-left"></i> Back to Modules
                             </button>
                             ${isCompleted && lessonId < getTotalLessons() ? `
                                 <button class="btn btn-primary" onclick="openLesson(${lessonId + 1})">
@@ -3087,7 +1701,6 @@
             document.getElementById('lessonDetail').classList.add('active');
             document.getElementById('lessonsContainer').style.display = 'none';
 
-            // Check if user can access this lesson
             const module = findModuleByLesson(lessonId);
             if (module && !canAccessLesson(module, lesson) && !isCompleted) {
                 const btn = document.querySelector('#lessonContent .btn-success');
@@ -3097,12 +1710,7 @@
                 }
             }
 
-            document.getElementById('lessonDetail').scrollIntoView({ behavior: 'smooth' });
-
-            // Scroll to top of lesson detail
-            setTimeout(() => {
-                document.getElementById('lessonDetail').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
+            document.getElementById('lessonDetail').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function closeLesson() {
@@ -3114,12 +1722,11 @@
         // QUIZ
         // ============================================
         function checkQuizAnswer(lessonId, selected) {
-            const content = LESSON_CONTENT[lessonId];
-            if (!content || !content.quiz) return;
+            const content = getLessonContent(lessonId);
+            if (!content || !content.knowledgeCheck) return;
 
-            const correct = content.quiz.correct;
+            const correct = content.knowledgeCheck.correct;
 
-            // Disable all options
             document.querySelectorAll(`[id^="quiz-${lessonId}-"]`).forEach(el => {
                 el.style.pointerEvents = 'none';
                 const idx = parseInt(el.id.split('-')[2]);
@@ -3152,7 +1759,6 @@
                 return;
             }
 
-            // Check if user can access this lesson (payment check)
             const totalPaid = getTotalPaid();
             const completedCount = completedLessons.length;
             const expectedPaidPercent = Math.min(100, Math.round(((completedCount + 1) / getTotalLessons()) * 100));
@@ -3164,26 +1770,12 @@
 
             completedLessons.push(lessonId);
             saveUserData();
-
-            // Check achievements
             checkAchievements();
 
             showToast(`✅ Lesson completed!`);
-
-            // Check if quiz was answered
-            const content = LESSON_CONTENT[lessonId];
-            if (content && content.quiz) {
-                // Check if quiz was answered correctly
-                const result = document.getElementById(`quizResult-${lessonId}`);
-                if (result && result.textContent.includes('Incorrect')) {
-                    showToast('💡 Review the lesson and try the quiz again for full understanding.', 'warning');
-                }
-            }
-
             renderModules();
             updateSidebar();
 
-            // Auto-open next lesson
             const allLessons = getAllLessons();
             const currentIndex = allLessons.findIndex(l => l.id === lessonId);
             if (currentIndex < allLessons.length - 1) {
@@ -3195,14 +1787,12 @@
                         setTimeout(() => openLesson(nextLesson.id), 400);
                     }, 1500);
                 } else {
-                    // Show completion message
                     setTimeout(() => {
                         closeLesson();
                         showToast('🎉 Great progress! Continue with the next module.', 'success');
                     }, 1500);
                 }
             } else {
-                // All lessons complete
                 setTimeout(() => {
                     closeLesson();
                     if (getTotalPaid() >= COURSE_PRICE) {
@@ -3282,73 +1872,8 @@
             achievements.push(certName);
             saveUserData();
 
-            showToast('🎓 Certificate Generated! Check your dashboard!');
-
-            // Update UI
-            updateSidebar();
-
-            // Show certificate card
-            document.getElementById('certificateCard').innerHTML = `
-                        <h3>🎓 Certificate Earned!</h3>
-                        <p style="color:var(--success);font-weight:600;">${certName}</p>
-                        <p style="color:var(--gray);font-size:0.8rem;">ID: NXA-${Date.now().toString().slice(-6)}</p>
-                        <button class="btn btn-primary btn-sm btn-block" onclick="downloadCertificate()">
-                            <i class="fas fa-download"></i> Download Certificate
-                        </button>
-                    `;
-
-            showToast('🎓 Certificate downloaded!', 'success');
-        }
-
-        function downloadCertificate() {
-            const certName = `Certificate - ${COURSE_TITLE}`;
-            const user = getCurrentUser();
-
-            const text = `
-                        ═══════════════════════════════════════════
-                               NEXORA ACADEMY
-                        ═══════════════════════════════════════════
-
-                        CERTIFICATE OF COURSE COMPLETION
-
-                        This is to certify that
-
-                                ${user.name.toUpperCase()}
-
-                        has successfully completed all the academic and
-                        graduation requirements for the course
-
-                                ${COURSE_TITLE}
-
-                        ═══════════════════════════════════════════
-
-                        Certificate ID: NXA-${Date.now().toString().slice(-6)}
-                        Student ID: ${user.studentId || 'NXA-2026-000123'}
-                        Issue Date: ${new Date().toLocaleDateString()}
-
-                        ═══════════════════════════════════════════
-
-                        Dr. Kelvin M. Ochieng
-                        ACADEMIC DIRECTOR
-
-                        [REGISTRAR]
-
-                        This certificate is issued electronically
-                        and is valid without a signature.
-
-                        ═══════════════════════════════════════════
-
-                        QR Code: Scan to Verify
-                        https://nexora.com/verify/NXA-${Date.now().toString().slice(-6)}
-                        ═══════════════════════════════════════════
-                    `;
-
-            const blob = new Blob([text], { type: 'text/plain' });
-            const link = document.createElement('a');
-            link.download = `certificate-${COURSE_TITLE.replace(/\s/g, '-')}-${Date.now().toString().slice(-6)}.txt`;
-            link.href = URL.createObjectURL(blob);
-            link.click();
-            showToast('📄 Certificate downloaded!');
+            // Redirect to certificate page
+            window.location.href = `certificate.html?course=${COURSE_ID}`;
         }
 
         // ============================================
@@ -3369,14 +1894,13 @@
 
             if (count >= 5) addAchievement('Quick Learner');
             if (count >= 10) addAchievement('Dedicated Student');
-            if (count >= 15) addAchievement('Knowledge Seeker');
-            if (count >= 20) addAchievement('Learning Enthusiast');
-            if (count >= 25) addAchievement('Expert in Training');
-            if (count >= 30) addAchievement('Computer Master');
-            if (count >= 35) addAchievement('Advanced Learner');
+            if (count >= 20) addAchievement('Knowledge Seeker');
+            if (count >= 30) addAchievement('Learning Enthusiast');
+            if (count >= 40) addAchievement('Expert in Training');
+            if (count >= 50) addAchievement('Computer Master');
+            if (count >= 60) addAchievement('Advanced Learner');
             if (count === total) addAchievement('Course Master');
 
-            // Check if all modules completed
             let allModulesComplete = true;
             MODULES.forEach(module => {
                 const moduleCompleted = module.lessons.every(l => completedLessons.includes(l.id));
@@ -3384,8 +1908,6 @@
             });
 
             if (allModulesComplete) addAchievement('Module Master');
-
-            // Check payment completion
             if (getTotalPaid() >= COURSE_PRICE) addAchievement('Financial Scholar');
         }
 
@@ -3401,9 +1923,8 @@
             document.getElementById('progressFill').style.width = percent + '%';
             document.getElementById('completedCount').textContent = `${completed} / ${total}`;
 
-            // Progress dots
-            const dotsContainer = document.getElementById('progressDots');
             const allLessons = getAllLessons();
+            const dotsContainer = document.getElementById('progressDots');
             dotsContainer.innerHTML = allLessons.map((lesson, index) => {
                 const isCompleted = completedLessons.includes(lesson.id);
                 const isCurrent = index === completed && !isCompleted;
@@ -3411,13 +1932,11 @@
                 return `<span class="dot ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''} ${isLocked ? 'locked' : ''}"></span>`;
             }).join('');
 
-            // Payment
             const totalPaid = getTotalPaid();
             const paidPercent = Math.min(100, Math.round((totalPaid / COURSE_PRICE) * 100));
             document.getElementById('totalPaid').textContent = `$${totalPaid.toFixed(2)} (${paidPercent}%)`;
             document.getElementById('balance').textContent = `$${Math.max(0, COURSE_PRICE - totalPaid).toFixed(2)}`;
 
-            // Achievements
             const container = document.getElementById('achievementsList');
             const allAchievements = [
                 { name: 'Quick Learner', icon: 'fa-star' },
@@ -3444,7 +1963,6 @@
                 `<span class="achievement-badge locked"><i class="fas ${a.icon}"></i> ${a.name}</span>`
             ).join('');
 
-            // Next steps
             const steps = document.getElementById('nextSteps');
             const certName = `Certificate - ${COURSE_TITLE}`;
 
@@ -3470,7 +1988,6 @@
                 }
             }
 
-            // Show certificate card if eligible
             const certCard = document.getElementById('certificateCard');
             if (completed === total && getTotalPaid() >= COURSE_PRICE) {
                 if (!achievements.includes(certName)) {
@@ -3487,8 +2004,8 @@
                     certCard.innerHTML = `
                                 <h3>🎓 Certificate Earned!</h3>
                                 <p style="color:var(--success);font-weight:600;">${certName}</p>
-                                <button class="btn btn-primary btn-sm btn-block" onclick="downloadCertificate()">
-                                    <i class="fas fa-download"></i> Download Certificate
+                                <button class="btn btn-primary btn-sm btn-block" onclick="window.location.href='certificate.html?course=${COURSE_ID}'">
+                                    <i class="fas fa-eye"></i> View Certificate
                                 </button>
                             `;
                 }
@@ -3512,14 +2029,12 @@
         document.addEventListener('DOMContentLoaded', function() {
             loadUserData();
 
-            // Close mobile nav on link click
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', () => {
                     document.body.classList.remove('nav-open');
                 });
             });
 
-            // Check for query param to auto-open a lesson
             const urlParams = new URLSearchParams(window.location.search);
             const lessonId = urlParams.get('lesson');
             if (lessonId) {
@@ -3530,9 +2045,9 @@
         });
 
         console.log('📚 Nexora Academy - Computer Packages Complete Course');
-        console.log(`📊 Total Lessons: ${getTotalLessons()}`);
+        console.log(`📊 Total Modules: ${MODULES.length}`);
+        console.log(`📖 Total Lessons: ${getTotalLessons()}`);
         console.log(`💰 Course Price: $${COURSE_PRICE}`);
-        console.log('✅ All 40 lessons with content, exercises, and quizzes');
     </script>
 
 </body>
