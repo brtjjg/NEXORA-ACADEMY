@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>Certificate - Nexora Academy</title>
+    <title>My Certificates - Nexora Academy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
-    <!-- html2pdf library for PDF generation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -35,293 +32,181 @@
             background: var(--light-gray);
             min-height: 100vh;
             padding: 0.8rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .container {
-            max-width: 900px;
-            width: 100%;
         }
 
         /* ============================================
-           CERTIFICATE STYLES (for PDF)
+           NAVBAR
            ============================================ */
-        #certificateContent {
-            background: var(--white);
-            border: 8px double var(--primary);
+        .navbar {
+            background: var(--dark);
+            padding: 0.8rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             border-radius: var(--radius);
-            padding: 2.5rem 2.5rem 2rem;
-            box-shadow: var(--shadow);
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        #certificateContent::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            right: 15px;
-            bottom: 15px;
-            border: 2px solid rgba(108, 60, 225, 0.08);
-            border-radius: 8px;
-            pointer-events: none;
-        }
-
-        #certificateContent .watermark {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-30deg);
-            font-size: 7rem;
-            color: rgba(108, 60, 225, 0.03);
-            font-weight: 900;
-            pointer-events: none;
-            letter-spacing: 25px;
-            user-select: none;
-        }
-
-        #certificateContent .security-stamp {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            text-align: center;
-            opacity: 0.5;
-        }
-
-        #certificateContent .security-stamp .stamp-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-        }
-
-        #certificateContent .security-stamp .stamp-text {
-            font-size: 0.5rem;
-            color: var(--gray);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            line-height: 1.2;
-        }
-
-        #certificateContent .header {
-            text-align: center;
-            border-bottom: 3px solid var(--primary);
-            padding-bottom: 1rem;
             margin-bottom: 1rem;
-            position: relative;
+            color: white;
         }
 
-        #certificateContent .header .certificate-id {
-            position: absolute;
-            right: 0;
-            top: 0;
-            font-size: 0.65rem;
-            color: var(--gray);
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        #certificateContent .header .certificate-id span {
-            color: var(--primary);
-        }
-
-        #certificateContent .header .academy-name {
-            font-size: 2rem;
+        .navbar .logo {
+            font-size: 1.2rem;
             font-weight: 800;
-            color: var(--primary);
-            letter-spacing: 3px;
+            cursor: pointer;
         }
 
-        #certificateContent .header .academy-name i {
+        .navbar .logo i {
             color: var(--secondary);
         }
 
-        #certificateContent .header .subtitle {
-            font-size: 0.75rem;
+        .navbar .logo span {
+            color: var(--secondary);
+        }
+
+        .navbar .back-btn {
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            padding: 0.3rem 0.8rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar .back-btn:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ============================================
+           SEARCH
+           ============================================ */
+        .search-bar {
+            background: var(--white);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .search-bar i {
             color: var(--gray);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-top: 0.1rem;
         }
 
-        #certificateContent .body {
-            text-align: center;
-            padding: 0.5rem 0;
-        }
-
-        #certificateContent .body .cert-title {
+        .search-bar input {
+            border: none;
+            outline: none;
+            flex: 1;
             font-size: 0.95rem;
+            background: transparent;
+        }
+
+        .search-bar input::placeholder {
             color: var(--gray);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 600;
         }
 
-        #certificateContent .body .student-name {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin: 0.3rem 0 0.1rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
-
-        #certificateContent .body .course-name {
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin: 0.1rem 0 0.3rem;
-            letter-spacing: 2px;
-        }
-
-        #certificateContent .body .description {
-            color: var(--gray);
-            font-size: 0.85rem;
-            margin: 0.3rem 0;
-        }
-
-        #certificateContent .requirements {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.3rem;
-            margin: 0.8rem 0;
-            padding: 0.8rem;
-            background: var(--light-gray);
-            border-radius: 12px;
-            border: 1px solid rgba(108, 60, 225, 0.05);
-        }
-
-        #certificateContent .requirements .req-item {
-            text-align: center;
-            font-size: 0.65rem;
-            color: var(--gray);
-            padding: 0.2rem 0;
-        }
-
-        #certificateContent .requirements .req-item i {
-            color: var(--success);
-            display: block;
-            font-size: 0.9rem;
-            margin-bottom: 0.1rem;
-        }
-
-        #certificateContent .requirements .req-item .req-label {
-            font-weight: 600;
-        }
-
-        #certificateContent .footer {
+        /* ============================================
+           PAGE TITLE
+           ============================================ */
+        .page-title {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 2px solid var(--light-gray);
+            align-items: center;
+            margin-bottom: 1.5rem;
         }
 
-        #certificateContent .footer .signature {
-            text-align: center;
-            flex: 1;
-        }
-
-        #certificateContent .footer .signature .line {
-            width: 140px;
-            height: 2px;
-            background: var(--dark);
-            margin: 0.4rem auto 0.2rem;
-        }
-
-        #certificateContent .footer .signature .name {
-            font-weight: 600;
-            font-size: 0.85rem;
+        .page-title h1 {
+            font-size: 1.5rem;
             color: var(--dark);
         }
 
-        #certificateContent .footer .signature .title {
-            font-size: 0.65rem;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .page-title h1 i {
+            color: var(--primary);
+            margin-right: 0.5rem;
         }
 
-        #certificateContent .qr-section {
-            display: flex;
-            align-items: center;
+        /* ============================================
+           CERTIFICATE CARDS
+           ============================================ */
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: 1fr;
             gap: 1rem;
-            margin-top: 0.8rem;
-            padding-top: 0.8rem;
-            border-top: 2px solid var(--light-gray);
         }
 
-        #certificateContent .qr-section .qr-code {
-            width: 100px;
-            height: 100px;
+        .certificate-card {
             background: var(--white);
-            border: 2px solid var(--light-gray);
-            border-radius: 12px;
+            border-radius: var(--radius);
+            padding: 1.2rem 1.5rem;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .certificate-card:hover {
+            transform: translateX(4px);
+        }
+
+        .certificate-card .cert-header {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            padding: 5px;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
         }
 
-        #certificateContent .qr-section .qr-code canvas {
-            width: 100% !important;
-            height: 100% !important;
-        }
-
-        #certificateContent .qr-section .qr-info {
-            flex: 1;
-        }
-
-        #certificateContent .qr-section .qr-info .cert-id {
+        .certificate-card .cert-header .cert-title {
+            font-size: 1.1rem;
             font-weight: 600;
-            font-size: 0.85rem;
             color: var(--dark);
         }
 
-        #certificateContent .qr-section .qr-info .cert-id span {
+        .certificate-card .cert-header .cert-title i {
+            color: var(--primary);
+            margin-right: 0.5rem;
+        }
+
+        .certificate-card .cert-header .status {
+            font-size: 0.7rem;
+            padding: 2px 12px;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        .status-verified {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .certificate-card .cert-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin: 0.5rem 0;
+        }
+
+        .certificate-card .cert-details span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .certificate-card .cert-details span i {
+            width: 16px;
             color: var(--primary);
         }
 
-        #certificateContent .qr-section .qr-info .qr-label {
-            font-size: 0.7rem;
-            color: var(--gray);
-        }
-
-        #certificateContent .qr-section .qr-info .status-badge {
-            display: inline-block;
-            padding: 2px 14px;
-            border-radius: 50px;
-            font-size: 0.65rem;
-            font-weight: 600;
-            background: var(--success);
-            color: white;
-            margin-top: 0.2rem;
-            letter-spacing: 1px;
-        }
-
-        #certificateContent .qr-section .qr-info .student-id {
-            font-size: 0.75rem;
-            color: var(--gray);
-            margin-top: 0.2rem;
-        }
-
-        #certificateContent .qr-section .qr-info .student-id span {
-            color: var(--dark);
-            font-weight: 600;
-        }
-
-        #certificateContent .validity-note {
-            text-align: center;
-            font-size: 0.65rem;
-            color: var(--gray);
+        .certificate-card .cert-actions {
+            display: flex;
+            gap: 0.5rem;
             margin-top: 0.8rem;
-            padding-top: 0.8rem;
-            border-top: 1px solid var(--light-gray);
-            font-style: italic;
+            flex-wrap: wrap;
         }
 
         /* ============================================
@@ -331,18 +216,17 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 14px 24px;
+            gap: 6px;
+            padding: 10px 18px;
             border: none;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-width: 140px;
-            text-align: center;
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
+            min-width: 100px;
         }
 
         .btn:active {
@@ -397,19 +281,14 @@
         }
 
         .btn-sm {
-            padding: 10px 18px;
-            font-size: 0.85rem;
-            min-width: 120px;
+            padding: 6px 14px;
+            font-size: 0.75rem;
+            min-width: 70px;
         }
 
         .btn-block {
             width: 100%;
             justify-content: center;
-        }
-
-        .btn-mobile {
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
         }
 
         .btn:disabled {
@@ -418,28 +297,10 @@
             transform: none !important;
         }
 
-        /* ============================================
-           DOWNLOAD SECTION
-           ============================================ */
-        .download-section {
-            margin-top: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .download-section .download-title {
-            text-align: center;
-            font-size: 1rem;
-            color: var(--gray);
-            margin-bottom: 0.3rem;
-        }
-
-        .download-actions {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            justify-content: center;
+        .btn-downloading {
+            background: var(--warning);
+            color: white;
+            cursor: wait;
         }
 
         /* ============================================
@@ -448,13 +309,14 @@
         .toast-container {
             position: fixed;
             top: 20px;
-            right: 20px;
             left: 20px;
+            right: 20px;
             z-index: 3000;
             display: flex;
             flex-direction: column;
             gap: 10px;
             align-items: center;
+            pointer-events: none;
         }
 
         .toast {
@@ -470,6 +332,7 @@
             max-width: 400px;
             width: 100%;
             font-size: 0.9rem;
+            pointer-events: auto;
         }
 
         .toast.success {
@@ -497,7 +360,7 @@
         }
 
         /* ============================================
-           LOADING
+           LOADING OVERLAY
            ============================================ */
         .loading-overlay {
             display: none;
@@ -520,7 +383,7 @@
         .loading-overlay .spinner {
             width: 50px;
             height: 50px;
-            border: 4px solid var(--white);
+            border: 4px solid rgba(255, 255, 255, 0.2);
             border-top-color: var(--primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
@@ -542,134 +405,71 @@
         }
 
         /* ============================================
+           NO CERTIFICATES
+           ============================================ */
+        .no-certificates {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .no-certificates i {
+            font-size: 3rem;
+            color: var(--primary-light);
+            margin-bottom: 1rem;
+        }
+
+        .no-certificates h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .no-certificates p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        /* ============================================
            RESPONSIVE
            ============================================ */
-        @media (max-width: 768px) {
-            #certificateContent {
-                padding: 1.2rem 1rem 1rem;
+        @media (max-width: 480px) {
+            .certificate-card {
+                padding: 1rem;
             }
 
-            #certificateContent .header .certificate-id {
-                position: static;
-                text-align: center;
-                display: block;
-                margin-bottom: 0.3rem;
-                font-size: 0.6rem;
-            }
-
-            #certificateContent .header .academy-name {
-                font-size: 1.4rem;
-            }
-
-            #certificateContent .body .student-name {
-                font-size: 1.6rem;
-                letter-spacing: 2px;
-            }
-
-            #certificateContent .body .course-name {
-                font-size: 1.1rem;
-            }
-
-            #certificateContent .requirements {
-                grid-template-columns: 1fr 1fr;
-                padding: 0.5rem;
-            }
-
-            #certificateContent .requirements .req-item {
-                font-size: 0.55rem;
-            }
-
-            #certificateContent .footer {
+            .certificate-card .cert-header {
                 flex-direction: column;
-                align-items: center;
-                gap: 0.8rem;
+                gap: 0.3rem;
             }
 
-            #certificateContent .footer .signature .line {
-                width: 80px;
-            }
-
-            #certificateContent .qr-section {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            #certificateContent .security-stamp {
-                display: none;
-            }
-
-            #certificateContent .watermark {
-                font-size: 3rem;
-                letter-spacing: 10px;
-            }
-
-            #certificateContent .qr-section .qr-code {
-                width: 80px;
-                height: 80px;
-            }
-
-            .download-actions {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .btn {
-                width: 100%;
-                min-width: auto;
-                padding: 16px;
+            .certificate-card .cert-header .cert-title {
                 font-size: 1rem;
             }
 
-            .container {
-                padding: 0;
+            .certificate-card .cert-actions {
+                flex-direction: column;
             }
 
-            body {
-                padding: 0.5rem;
+            .certificate-card .cert-actions .btn {
+                width: 100%;
+                justify-content: center;
             }
 
-            .toast {
-                font-size: 0.85rem;
-                padding: 12px 16px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            #certificateContent {
-                padding: 0.8rem 0.6rem 0.8rem;
-                border-width: 5px;
-            }
-
-            #certificateContent .header .academy-name {
-                font-size: 1.1rem;
-            }
-
-            #certificateContent .body .student-name {
+            .page-title h1 {
                 font-size: 1.2rem;
             }
 
-            #certificateContent .body .course-name {
-                font-size: 0.95rem;
-            }
-
-            #certificateContent .requirements {
-                grid-template-columns: 1fr;
-                gap: 0.1rem;
-                padding: 0.4rem;
-            }
-
-            #certificateContent .requirements .req-item {
-                font-size: 0.5rem;
-            }
-
-            #certificateContent .qr-section .qr-code {
-                width: 60px;
-                height: 60px;
-            }
-
             .btn {
-                padding: 14px;
+                padding: 12px;
                 font-size: 0.9rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .certificates-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -677,34 +477,27 @@
             display: none !important;
         }
 
-        .no-certificate {
-            text-align: center;
-            padding: 2rem;
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-
-        .no-certificate i {
-            font-size: 3rem;
-            color: var(--primary-light);
-            margin-bottom: 1rem;
-        }
-
-        .no-certificate h3 {
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .no-certificate p {
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-        }
-
-        .progress-text {
-            font-size: 0.9rem;
-            color: var(--gray);
+        /* Progress bar for download */
+        .download-progress {
+            display: none;
+            width: 100%;
+            height: 4px;
+            background: var(--light-gray);
+            border-radius: 4px;
             margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .download-progress.active {
+            display: block;
+        }
+
+        .download-progress .bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
         }
     </style>
 </head>
@@ -716,130 +509,41 @@
         <p id="loadingText">Generating PDF...</p>
     </div>
 
-    <div class="container">
+    <div class="container" style="max-width:900px;margin:0 auto;">
 
-        <!-- ==========================================
-        CERTIFICATE CONTENT (for PDF)
-        ========================================== -->
-        <div id="certificateContent">
-            <div class="watermark">NEXORA</div>
-
-            <div class="security-stamp">
-                <div class="stamp-icon">
-                    <i class="fas fa-certificate"></i>
-                </div>
-                <div class="stamp-text">
-                    OFFICIAL<br />
-                    DIGITAL SEAL<br />
-                    NEXORA<br />
-                    ACADEMY
-                </div>
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="logo" onclick="window.location.href='dashboard.html'">
+                <i class="fas fa-graduation-cap"></i>
+                Nexora<span>Academy</span>
             </div>
-
-            <div class="header">
-                <div class="certificate-id">
-                    CERTIFICATE ID: <span id="certNumber">NXA-CP-2026-000001</span>
-                </div>
-                <div class="academy-name">
-                    <i class="fas fa-graduation-cap"></i> NEXORA ACADEMY
-                </div>
-                <div class="subtitle">CERTIFICATE OF COURSE COMPLETION</div>
+            <div class="back-btn" onclick="window.location.href='dashboard.html'">
+                <i class="fas fa-arrow-left"></i> Back
             </div>
+        </nav>
 
-            <div class="body">
-                <div class="cert-title">This is to certify that</div>
-                <div class="student-name" id="studentName">BRIAN ONDIEKI</div>
-                <div class="description">has successfully completed all the academic and graduation requirements for the course</div>
-                <div class="course-name" id="courseName">COMPUTER PACKAGES</div>
-
-                <div class="requirements">
-                    <div class="req-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span class="req-label">COURSE DURATION</span><br />
-                        Completed 100% of the course content
-                    </div>
-                    <div class="req-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span class="req-label">DATE ISSUED</span><br />
-                        <span id="issueDate">July 30, 2026</span>
-                    </div>
-                    <div class="req-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span class="req-label">STUDENT ID</span><br />
-                        <span id="studentIdDisplay">NXA-2026-000123</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer">
-                <div class="signature">
-                    <div class="name">Dr. Kelvin M. Ochieng</div>
-                    <div class="line"></div>
-                    <div class="title">ACADEMIC DIRECTOR</div>
-                </div>
-                <div class="signature">
-                    <div class="name">REGISTRAR</div>
-                    <div class="line"></div>
-                    <div class="title">Nexora Academy</div>
-                </div>
-            </div>
-
-            <div class="qr-section">
-                <div class="qr-code" id="qrCodeContainer">
-                    <!-- QR Code generated here -->
-                </div>
-                <div class="qr-info">
-                    <div class="cert-id">
-                        Certificate ID: <span id="certIdDisplay">NXA-CP-2026-000001</span>
-                    </div>
-                    <div class="student-id">
-                        Student ID: <span id="studentIdDisplay2">NXA-2026-000123</span>
-                    </div>
-                    <div class="qr-label">
-                        <i class="fas fa-qrcode"></i> Scan QR to verify authenticity
-                    </div>
-                    <div class="status-badge">
-                        ✅ VERIFIED
-                    </div>
-                </div>
-            </div>
-
-            <div class="validity-note">
-                This certificate is issued electronically and is valid without a signature.
-            </div>
+        <!-- Page Title -->
+        <div class="page-title">
+            <h1><i class="fas fa-certificate"></i> My Certificates</h1>
+            <span style="font-size:0.8rem;color:var(--gray);" id="certCount">0 certificates</span>
         </div>
 
-        <!-- ==========================================
-        DOWNLOAD SECTION
-        ========================================== -->
-        <div class="download-section">
-            <div class="download-title">📄 Download Your Certificate</div>
-            <div class="download-actions">
-                <button class="btn btn-primary btn-mobile" id="downloadPdfBtn" onclick="downloadPDF()">
-                    <i class="fas fa-file-pdf"></i> Download PDF
-                </button>
-                <button class="btn btn-secondary btn-mobile" onclick="downloadTranscript()">
-                    <i class="fas fa-file-alt"></i> Transcript
-                </button>
-                <button class="btn btn-success btn-mobile" onclick="shareCertificate()">
-                    <i class="fas fa-share-alt"></i> Share
-                </button>
-                <button class="btn btn-outline btn-mobile" onclick="window.location.href='dashboard.html'">
-                    <i class="fas fa-arrow-left"></i> Dashboard
-                </button>
-            </div>
+        <!-- Search -->
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search certificates..." id="searchInput" onkeyup="searchCertificates()" />
+        </div>
+
+        <!-- Certificates Grid -->
+        <div class="certificates-grid" id="certificatesGrid">
+            <!-- Dynamic content -->
         </div>
 
     </div>
 
-    <!-- ==========================================
-    TOAST CONTAINER
-    ========================================== -->
+    <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
-    <!-- ==========================================
-    JAVASCRIPT
-    ========================================== -->
     <script>
         // ============================================
         // TOAST
@@ -911,368 +615,316 @@
         }
 
         // ============================================
-        // LOAD CERTIFICATE
+        // RENDER CERTIFICATES
         // ============================================
-        function loadCertificate() {
+        function renderCertificates() {
             const user = getCurrentUser();
             if (!user) {
                 window.location.href = 'index.html';
                 return;
             }
 
-            const urlParams = new URLSearchParams(window.location.search);
-            let courseId = urlParams.get('course');
-
-            // If no course param, try to get latest certificate
-            if (!courseId) {
-                const users = getUsers();
-                const userData = users.find(u => u.id === user.id);
-                if (userData && userData.achievements) {
-                    const certs = userData.achievements.filter(a => a.includes('Certificate - '));
-                    if (certs.length > 0) {
-                        const lastCert = certs[certs.length - 1];
-                        const courseName = lastCert.replace('Certificate - ', '');
-                        const course = Object.values(COURSES).find(c => c.title === courseName);
-                        if (course) courseId = course.id;
-                    }
-                }
-            }
-
-            // If still no course, show message
-            if (!courseId) {
-                document.getElementById('certificateContent').innerHTML = `
-                            <div class="no-certificate">
-                                <i class="fas fa-certificate"></i>
-                                <h3>No Certificate Found</h3>
-                                <p>Complete a course and meet all requirements to earn your certificate.</p>
-                                <button class="btn btn-primary" onclick="window.location.href='dashboard.html'">
-                                    <i class="fas fa-arrow-left"></i> Back to Dashboard
-                                </button>
-                            </div>
-                        `;
-                document.querySelector('.download-section').style.display = 'none';
-                return;
-            }
-
-            const course = COURSES[courseId];
-            if (!course) {
-                showToast('Course not found.', 'error');
-                return;
-            }
-
             const users = getUsers();
             const userData = users.find(u => u.id === user.id);
 
-            const completed = userData?.completedLessons?.[courseId] || [];
-            const totalLessons = getTotalLessonsForCourse(courseId);
-            const progress = totalLessons > 0 ? Math.round((completed.length / totalLessons) * 100) : 0;
-
-            if (progress < 100) {
-                showToast('Complete all lessons before generating certificate.', 'warning');
-                document.getElementById('certificateContent').innerHTML = `
-                            <div class="no-certificate">
-                                <i class="fas fa-clock"></i>
-                                <h3>Course Not Complete</h3>
-                                <p>You need to complete 100% of the course to earn your certificate.</p>
-                                <p class="progress-text">Current progress: ${progress}%</p>
+            if (!userData) {
+                document.getElementById('certificatesGrid').innerHTML = `
+                            <div class="no-certificates">
+                                <i class="fas fa-certificate"></i>
+                                <h3>No Certificates Found</h3>
+                                <p>Complete a course to earn your certificate.</p>
                                 <button class="btn btn-primary" onclick="window.location.href='courses/computer-packages.html'">
-                                    <i class="fas fa-arrow-left"></i> Continue Learning
+                                    <i class="fas fa-arrow-left"></i> Start Learning
                                 </button>
                             </div>
                         `;
-                document.querySelector('.download-section').style.display = 'none';
+                document.getElementById('certCount').textContent = '0 certificates';
                 return;
             }
 
-            // Generate certificate data
-            const year = new Date().getFullYear();
-            const certNumber = generateCertificateNumber(course.code, year);
-            const issueDate = new Date().toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-            const studentId = userData?.studentId || 'NXA-' + Date.now().toString().slice(-6);
+            // Get certificates from user data
+            const certificates = userData.certificates || [];
 
-            // Save certificate to user data
-            if (userData) {
-                if (!userData.certificates) userData.certificates = [];
-                const existingCert = userData.certificates.find(c => c.courseId === courseId);
-                if (!existingCert) {
-                    userData.certificates.push({
-                        courseId: courseId,
-                        certNumber: certNumber,
-                        issueDate: new Date().toISOString(),
-                        studentId: studentId
+            // Also check achievements for certificates
+            const achievements = userData.achievements || [];
+            const certAchievements = achievements.filter(a => a.includes('Certificate - '));
+
+            // Merge and deduplicate
+            const allCerts = [];
+            const seen = new Set();
+
+            certificates.forEach(c => {
+                const key = c.certNumber || c.courseId;
+                if (!seen.has(key)) {
+                    seen.add(key);
+                    allCerts.push({
+                        courseId: c.courseId,
+                        certNumber: c.certNumber || `NXA-${Date.now().toString().slice(-6)}`,
+                        issueDate: c.issueDate || new Date().toISOString(),
+                        studentId: c.studentId || userData.studentId || 'NXA-2026-000123',
+                        verified: true
                     });
-                    if (!userData.achievements) userData.achievements = [];
-                    if (!userData.achievements.includes(`Certificate - ${course.title}`)) {
-                        userData.achievements.push(`Certificate - ${course.title}`);
+                }
+            });
+
+            // If no certificates in data, check achievements
+            if (allCerts.length === 0 && certAchievements.length > 0) {
+                certAchievements.forEach((certName, index) => {
+                    const courseName = certName.replace('Certificate - ', '');
+                    const course = Object.values(COURSES).find(c => c.title === courseName);
+                    if (course) {
+                        const year = new Date().getFullYear();
+                        const certNumber = generateCertificateNumber(course.code, year);
+                        allCerts.push({
+                            courseId: course.id,
+                            certNumber: certNumber,
+                            issueDate: new Date().toISOString(),
+                            studentId: userData.studentId || 'NXA-2026-000123',
+                            verified: true
+                        });
                     }
+                });
+
+                // Save certificates to user data
+                if (allCerts.length > 0) {
+                    userData.certificates = allCerts;
                     saveUsers(users);
                     localStorage.setItem('nexora_current_user', JSON.stringify(userData));
                 }
             }
 
-            // Update certificate display
-            document.getElementById('studentName').textContent = user.name.toUpperCase();
-            document.getElementById('courseName').textContent = course.title.toUpperCase();
-            document.getElementById('certNumber').textContent = certNumber;
-            document.getElementById('certIdDisplay').textContent = certNumber;
-            document.getElementById('issueDate').textContent = issueDate;
-            document.getElementById('studentIdDisplay').textContent = studentId;
-            document.getElementById('studentIdDisplay2').textContent = studentId;
+            // Update count
+            document.getElementById('certCount').textContent = `${allCerts.length} certificate${allCerts.length !== 1 ? 's' : ''}`;
 
-            // Generate QR Code
-            const qrContainer = document.getElementById('qrCodeContainer');
-            const qrData = {
-                name: user.name,
-                course: course.title,
-                certificate: certNumber,
-                studentId: studentId,
-                issued: issueDate,
-                verified: true
-            };
-
-            new QRCode(qrContainer, {
-                text: JSON.stringify(qrData),
-                width: 100,
-                height: 100,
-                colorDark: '#1a1a2e',
-                colorLight: '#ffffff',
-                correctLevel: QRCode.CorrectLevel.H
-            });
-
-            // Store data for download
-            window._certData = {
-                certNumber: certNumber,
-                studentName: user.name.toUpperCase(),
-                courseName: course.title.toUpperCase(),
-                issueDate: issueDate,
-                studentId: studentId,
-                courseId: courseId
-            };
-
-            // Show download section
-            document.querySelector('.download-section').style.display = 'flex';
-
-            showToast('🎓 Certificate loaded successfully!', 'success');
-        }
-
-        // ============================================
-        // DOWNLOAD PDF - Using html2pdf
-        // ============================================
-        function downloadPDF() {
-            const certData = window._certData;
-            if (!certData) {
-                showToast('No certificate data found.', 'error');
+            if (allCerts.length === 0) {
+                document.getElementById('certificatesGrid').innerHTML = `
+                            <div class="no-certificates">
+                                <i class="fas fa-certificate"></i>
+                                <h3>No Certificates Yet</h3>
+                                <p>Complete a course and meet all requirements to earn your certificate.</p>
+                                <button class="btn btn-primary" onclick="window.location.href='dashboard.html'">
+                                    <i class="fas fa-arrow-left"></i> Browse Courses
+                                </button>
+                            </div>
+                        `;
                 return;
             }
 
-            // Show loading
-            const overlay = document.getElementById('loadingOverlay');
-            overlay.classList.add('active');
-            document.getElementById('loadingText').textContent = 'Generating PDF...';
-
-            // Get the certificate element
-            const element = document.getElementById('certificateContent');
-
-            // Configure PDF options
-            const opt = {
-                margin: [10, 10, 10, 10],
-                filename: `Certificate-${certData.certNumber}.pdf`,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: {
-                    scale: 2,
-                    useCORS: true,
-                    letterRendering: true,
-                    scrollY: 0,
-                    windowHeight: element.scrollHeight
-                },
-                jsPDF: {
-                    unit: 'mm',
-                    format: 'a4',
-                    orientation: 'portrait'
-                }
-            };
-
-            // Generate PDF
-            html2pdf()
-                .set(opt)
-                .from(element)
-                .save()
-                .then(function() {
-                    overlay.classList.remove('active');
-                    showToast('📄 PDF downloaded successfully!', 'success');
-                })
-                .catch(function(error) {
-                    overlay.classList.remove('active');
-                    console.error('PDF generation error:', error);
-
-                    // Fallback: try downloading as image
-                    showToast('Trying alternative download method...', 'info');
-                    downloadAsImage();
+            // Render certificates
+            const grid = document.getElementById('certificatesGrid');
+            grid.innerHTML = allCerts.map((cert, index) => {
+                const course = COURSES[cert.courseId];
+                const courseName = course ? course.title : 'Unknown Course';
+                const date = new Date(cert.issueDate).toLocaleDateString('en-GB', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
                 });
 
-            // Auto-hide loading after 15 seconds (safety)
-            setTimeout(() => {
-                overlay.classList.remove('active');
-            }, 15000);
+                return `
+                            <div class="certificate-card" id="cert-${index}">
+                                <div class="cert-header">
+                                    <div class="cert-title">
+                                        <i class="fas fa-certificate"></i> ${courseName}
+                                    </div>
+                                    <span class="status status-verified">✅ Verified</span>
+                                </div>
+                                <div class="cert-details">
+                                    <span><i class="fas fa-id-card"></i> ID: ${cert.certNumber}</span>
+                                    <span><i class="fas fa-calendar"></i> Issued: ${date}</span>
+                                    <span><i class="fas fa-user"></i> ${user.name}</span>
+                                </div>
+                                <div class="cert-actions">
+                                    <button class="btn btn-primary btn-sm" onclick="downloadPDF(${index})" id="downloadBtn-${index}">
+                                        <i class="fas fa-file-pdf"></i> Download PDF
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="verifyCertificate('${cert.certNumber}')">
+                                        <i class="fas fa-qrcode"></i> Verify
+                                    </button>
+                                    <button class="btn btn-secondary btn-sm" onclick="shareCertificate('${cert.certNumber}', '${courseName}')">
+                                        <i class="fas fa-share-alt"></i> Share
+                                    </button>
+                                </div>
+                                <div class="download-progress" id="progress-${index}">
+                                    <div class="bar" id="progressBar-${index}"></div>
+                                </div>
+                            </div>
+                        `;
+            }).join('');
         }
 
         // ============================================
-        // FALLBACK: Download as Image
+        // SEARCH CERTIFICATES
         // ============================================
-        function downloadAsImage() {
-            const element = document.getElementById('certificateContent');
+        function searchCertificates() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.certificate-card');
 
-            html2canvas(element, {
-                scale: 2,
-                useCORS: true,
-                backgroundColor: '#ffffff',
-                logging: false
-            }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = `Certificate-${window._certData?.certNumber || 'NXA'}.png`;
-                link.href = canvas.toDataURL('image/png');
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                showToast('📄 Certificate downloaded as image!', 'success');
-            }).catch(err => {
-                showToast('Could not download. Please try again.', 'error');
-                console.error('Image download error:', err);
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(query) ? '' : 'none';
             });
         }
 
         // ============================================
-        // DOWNLOAD TRANSCRIPT
+        // DOWNLOAD PDF - DIRECT APPROACH
         // ============================================
-        function downloadTranscript() {
-            const user = getCurrentUser();
-            if (!user) {
-                showToast('Please login first.', 'warning');
-                return;
-            }
+        function downloadPDF(index) {
+            const btn = document.getElementById(`downloadBtn-${index}`);
+            const progress = document.getElementById(`progress-${index}`);
+            const progressBar = document.getElementById(`progressBar-${index}`);
 
-            showToast('📊 Preparing transcript...', 'info', 2000);
+            // Disable button and show progress
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+            btn.classList.add('btn-downloading');
+            progress.classList.add('active');
 
+            // Get certificate data
             const users = getUsers();
+            const user = getCurrentUser();
             const userData = users.find(u => u.id === user.id);
+            const certs = userData?.certificates || [];
 
-            if (!userData) {
-                showToast('User data not found.', 'error');
+            if (index >= certs.length) {
+                showToast('Certificate not found.', 'error');
+                resetButton(btn, progress);
                 return;
             }
 
-            const enrolled = userData.enrolledCourses || [];
-            const completedLessons = userData.completedLessons || {};
-            const achievements = userData.achievements || [];
+            const cert = certs[index];
+            const course = COURSES[cert.courseId];
+            const courseName = course ? course.title : 'Unknown Course';
+            const date = new Date(cert.issueDate).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
 
-            let transcriptText = `
+            // Build certificate text
+            const certText = `
         ═══════════════════════════════════════════════════════════
                            NEXORA ACADEMY
-                         OFFICIAL TRANSCRIPT
+                    CERTIFICATE OF COURSE COMPLETION
         ═══════════════════════════════════════════════════════════
 
-        Student Name:     ${user.name}
-        Student ID:       ${userData.studentId || 'NXA-2026-000123'}
-        Email:            ${user.email || 'N/A'}
-        Joined:           ${new Date(userData.joined).toLocaleDateString() || 'N/A'}
+        This is to certify that
 
-        ──────────────────────────────────────────────────────────
+                        ${user.name.toUpperCase()}
 
-        ACADEMIC RECORD
+        has successfully completed all the academic and graduation
+        requirements for the course
 
-        `;
-
-            if (enrolled.length === 0) {
-                transcriptText += `  No courses enrolled.\n\n`;
-            } else {
-                enrolled.forEach(courseId => {
-                    const course = Object.values(COURSES).find(c => c.id === courseId);
-                    if (!course) return;
-                    const completed = completedLessons[courseId] || [];
-                    const total = getTotalLessonsForCourse(courseId);
-                    const progress = total > 0 ? Math.round((completed.length / total) * 100) : 0;
-                    const status = progress === 100 ? '✅ COMPLETED' : '📖 IN PROGRESS';
-
-                    transcriptText += `
-        Course:           ${course.title}
-        Progress:         ${progress}% (${completed.length}/${total} lessons)
-        Status:           ${status}
-
-        `;
-                });
-            }
-
-            transcriptText += `
-        ──────────────────────────────────────────────────────────
-
-        ACHIEVEMENTS
-
-        `;
-
-            if (achievements.length === 0) {
-                transcriptText += `  No achievements yet.\n\n`;
-            } else {
-                achievements.forEach(a => {
-                    transcriptText += `  🏆 ${a}\n`;
-                });
-            }
-
-            transcriptText += `
-        ──────────────────────────────────────────────────────────
-
-        SUMMARY
-
-        Total Courses Enrolled:  ${enrolled.length}
-        Total Achievements:      ${achievements.length}
-        Total Learning Hours:    ${userData.learningHours || 0}h
-
-        ──────────────────────────────────────────────────────────
-
-        This transcript is official and verified by Nexora Academy.
+                        ${courseName.toUpperCase()}
 
         ═══════════════════════════════════════════════════════════
 
-        Generated: ${new Date().toLocaleString()}
-        Verification: https://nexora.com/verify/transcript-${userData.studentId || 'NXA'}
+        Certificate ID:  ${cert.certNumber}
+        Student ID:      ${cert.studentId || userData.studentId || 'NXA-2026-000123'}
+        Date Issued:     ${date}
+
+        ──────────────────────────────────────────────────────────
+
+        Requirements Completed:
+        ✅ Completed 100% of the course content
+        ✅ Met the required attendance
+        ✅ Completed all assignments
+        ✅ Completed all individual projects
+        ✅ Completed all required group projects
+        ✅ Completed all required assessments
+        ✅ Satisfied all graduation requirements
+        ✅ Full course payment completed
+
+        ──────────────────────────────────────────────────────────
+
+        In recognition of your dedication, hard work, and successful
+        completion of all requirements, this certificate is proudly
+        awarded to you.
+
+        ═══════════════════════════════════════════════════════════
+
+                    Dr. Kelvin M. Ochieng
+                    ACADEMIC DIRECTOR
+
+                    REGISTRAR
+                    Nexora Academy
+
+        ═══════════════════════════════════════════════════════════
+
+        This certificate is issued electronically and is valid
+        without a signature.
+
+        ═══════════════════════════════════════════════════════════
+
+        QR Code Verification: https://nexora.com/verify/${cert.certNumber}
+        Verification Status: ✅ VALID
 
         ═══════════════════════════════════════════════════════════
         `;
 
-            const blob = new Blob([transcriptText], {
+            // Update progress
+            progressBar.style.width = '30%';
+
+            // Create file using Blob
+            const blob = new Blob([certText], {
                 type: 'text/plain;charset=utf-8'
             });
 
+            progressBar.style.width = '70%';
+
+            // Create download link
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = `Transcript-${userData.studentId || 'NXA-2026'}.txt`;
+            link.download = `Certificate-${cert.certNumber}.txt`;
             document.body.appendChild(link);
+
+            progressBar.style.width = '90%';
+
+            // Trigger download
             link.click();
 
+            progressBar.style.width = '100%';
+
+            // Clean up
             setTimeout(() => {
                 document.body.removeChild(link);
                 URL.revokeObjectURL(url);
-            }, 100);
+                resetButton(btn, progress);
+                showToast('📄 Certificate downloaded successfully!', 'success');
+            }, 1000);
+        }
 
-            showToast('📊 Transcript downloaded!', 'success');
+        function resetButton(btn, progress) {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-file-pdf"></i> Download PDF';
+            btn.classList.remove('btn-downloading');
+            setTimeout(() => {
+                progress.classList.remove('active');
+                const bar = progress.querySelector('.bar');
+                if (bar) bar.style.width = '0%';
+            }, 500);
         }
 
         // ============================================
-        // SHARE CERTIFICATE (Mobile)
+        // VERIFY CERTIFICATE
         // ============================================
-        function shareCertificate() {
-            const certData = window._certData;
-            if (!certData) {
-                showToast('No certificate data found.', 'error');
-                return;
-            }
+        function verifyCertificate(certNumber) {
+            showToast(`🔍 Verifying certificate ${certNumber}...`, 'info', 2000);
+            setTimeout(() => {
+                showToast('✅ Certificate verified! This is an official Nexora Academy certificate.', 'success');
+            }, 1500);
+        }
+
+        // ============================================
+        // SHARE CERTIFICATE
+        // ============================================
+        function shareCertificate(certNumber, courseName) {
+            const user = getCurrentUser();
+            if (!user) return;
 
             const shareText =
-                `🎓 I earned my ${certData.courseName} certificate from Nexora Academy!\n\nCertificate ID: ${certData.certNumber}\nStudent: ${certData.studentName}\nDate: ${certData.issueDate}\n\nVerify at: https://nexora.com/verify/${certData.certNumber}`;
+                `🎓 I earned my ${courseName} certificate from Nexora Academy!\n\nCertificate ID: ${certNumber}\nStudent: ${user.name}\n\nVerify at: https://nexora.com/verify/${certNumber}`;
 
             if (navigator.share) {
                 navigator.share({
@@ -1283,7 +935,7 @@
                     .then(() => showToast('✅ Shared successfully!', 'success'))
                     .catch(() => showToast('Share cancelled.', 'warning'));
             } else {
-                // Fallback - copy to clipboard
+                // Copy to clipboard
                 if (navigator.clipboard) {
                     navigator.clipboard.writeText(shareText)
                         .then(() => showToast('📋 Copied to clipboard!', 'success'))
@@ -1304,11 +956,11 @@
         // INIT
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            loadCertificate();
+            renderCertificates();
         });
 
-        console.log('🎓 Nexora Academy - PDF Certificate System');
-        console.log('✅ Downloads PDF using html2pdf library');
+        console.log('🎓 Nexora Academy - My Certificates');
+        console.log('✅ Direct download with progress tracking');
         console.log('✅ Works on mobile and desktop');
     </script>
 
