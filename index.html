@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Nexora Academy - Login & Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>Nexora Academy - Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
     <style>
         * {
@@ -16,7 +16,6 @@
         :root {
             --primary: #6C3CE1;
             --primary-dark: #5228b5;
-            --primary-light: #8b6cf3;
             --secondary: #00d4aa;
             --dark: #1a1a2e;
             --dark-light: #2d2d44;
@@ -35,21 +34,24 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            padding: 1rem;
         }
 
-        .auth-container {
+        .container {
             width: 100%;
             max-width: 440px;
         }
 
+        /* ============================================
+           LOGO
+           ============================================ */
         .logo {
             text-align: center;
             margin-bottom: 2rem;
         }
 
         .logo h1 {
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             font-weight: 800;
             color: var(--white);
         }
@@ -62,13 +64,17 @@
             color: var(--secondary);
         }
 
-        .logo p {
+        .logo .tagline {
             color: rgba(255, 255, 255, 0.5);
-            font-size: 1rem;
-            margin-top: 0.3rem;
+            font-size: 0.85rem;
+            margin-top: 0.2rem;
+            letter-spacing: 2px;
         }
 
-        .auth-card {
+        /* ============================================
+           LOGIN CARD
+           ============================================ */
+        .login-card {
             background: var(--white);
             border-radius: var(--radius);
             padding: 2.5rem;
@@ -78,7 +84,7 @@
         .auth-tabs {
             display: flex;
             gap: 0.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             background: var(--light-gray);
             border-radius: 12px;
             padding: 0.3rem;
@@ -86,12 +92,12 @@
 
         .auth-tab {
             flex: 1;
-            padding: 0.8rem;
+            padding: 0.7rem;
             border: none;
             border-radius: 10px;
             background: transparent;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.3s ease;
             color: var(--gray);
@@ -103,8 +109,8 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
-        .auth-tab:hover:not(.active) {
-            color: var(--dark);
+        .auth-tab i {
+            margin-right: 0.3rem;
         }
 
         .auth-form {
@@ -123,7 +129,7 @@
             display: block;
             font-weight: 600;
             margin-bottom: 0.3rem;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--dark);
         }
 
@@ -180,6 +186,20 @@
             color: var(--dark);
         }
 
+        .error-message {
+            color: var(--danger);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: none;
+            background: #fde8e8;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
         .btn {
             width: 100%;
             padding: 14px;
@@ -193,6 +213,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            margin-top: 0.5rem;
         }
 
         .btn-primary {
@@ -204,16 +225,6 @@
             background: var(--primary-dark);
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(108, 60, 225, 0.35);
-        }
-
-        .btn-secondary {
-            background: var(--secondary);
-            color: var(--dark);
-        }
-
-        .btn-secondary:hover {
-            background: #00b894;
-            transform: translateY(-2px);
         }
 
         .btn-google {
@@ -229,7 +240,7 @@
 
         .divider {
             text-align: center;
-            margin: 1.5rem 0;
+            margin: 1.2rem 0;
             position: relative;
         }
 
@@ -248,36 +259,14 @@
             padding: 0 1rem;
             position: relative;
             color: var(--gray);
-            font-size: 0.85rem;
-        }
-
-        .error-message {
-            color: var(--danger);
-            font-size: 0.85rem;
-            margin-top: 0.3rem;
-            display: none;
-        }
-
-        .error-message.show {
-            display: block;
-        }
-
-        .success-message {
-            color: var(--success);
-            font-size: 0.85rem;
-            margin-top: 0.3rem;
-            display: none;
-        }
-
-        .success-message.show {
-            display: block;
+            font-size: 0.8rem;
         }
 
         .terms {
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--gray);
-            margin-top: 1.5rem;
+            margin-top: 1.2rem;
         }
 
         .terms a {
@@ -289,74 +278,31 @@
             text-decoration: underline;
         }
 
-        .welcome-banner {
-            display: none;
-            text-align: center;
-            padding: 2rem;
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
         }
 
-        .welcome-banner h2 {
-            color: var(--white);
-            font-size: 1.8rem;
-        }
-
-        .welcome-banner p {
-            color: rgba(255, 255, 255, 0.7);
-            margin: 0.5rem 0 1.5rem;
-        }
-
-        .toast-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 3000;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .toast {
-            background: var(--dark);
-            color: var(--white);
-            padding: 14px 24px;
-            border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-            animation: slideIn 0.4s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            min-width: 280px;
-        }
-
-        .toast.success {
-            border-left: 4px solid var(--success);
-        }
-
-        .toast.error {
-            border-left: 4px solid var(--danger);
-        }
-
-        .toast.warning {
-            border-left: 4px solid #f39c12;
-        }
-
-        @keyframes slideIn {
+        @keyframes spin {
             from {
-                transform: translateX(100%);
-                opacity: 0;
+                transform: rotate(0deg);
             }
             to {
-                transform: translateX(0);
-                opacity: 1;
+                transform: rotate(360deg);
             }
         }
 
         @media (max-width: 480px) {
-            .auth-card {
+            .login-card {
                 padding: 1.5rem;
             }
             .logo h1 {
-                font-size: 2rem;
+                font-size: 1.6rem;
             }
         }
 
@@ -367,13 +313,13 @@
 </head>
 <body>
 
-    <div class="auth-container" id="authContainer">
+    <div class="container">
         <div class="logo">
             <h1><i class="fas fa-graduation-cap"></i> Nexora<span>Academy</span></h1>
-            <p>Learn. Build. Get Certified. Get Hired.</p>
+            <div class="tagline">Learn. Build. Get Certified. Get Hired.</div>
         </div>
 
-        <div class="auth-card">
+        <div class="login-card">
             <!-- Tabs -->
             <div class="auth-tabs">
                 <button class="auth-tab active" onclick="switchTab('login')" id="loginTab">
@@ -404,7 +350,7 @@
                     </div>
                 </div>
                 <div class="error-message" id="loginError"></div>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary" id="loginBtn">
                     <i class="fas fa-sign-in-alt"></i> Login
                 </button>
                 <div class="divider"><span>or continue with</span></div>
@@ -480,7 +426,7 @@
                         <select id="regInterest">
                             <option value="">Select your interest</option>
                             <option value="computer-packages">Computer Packages</option>
-                            <option value="web-design">Web Design</option>
+                            <option value="web-development">Web Development</option>
                             <option value="python">Python Programming</option>
                             <option value="graphic-design">Graphic Design</option>
                             <option value="digital-marketing">Digital Marketing</option>
@@ -492,7 +438,7 @@
                     </div>
                 </div>
                 <div class="error-message" id="registerError"></div>
-                <button type="submit" class="btn btn-secondary">
+                <button type="submit" class="btn btn-primary" style="background:var(--secondary);color:var(--dark);">
                     <i class="fas fa-user-plus"></i> Create Account
                 </button>
                 <div class="divider"><span>or continue with</span></div>
@@ -506,25 +452,30 @@
         </div>
     </div>
 
-    <div class="toast-container" id="toastContainer"></div>
-
     <script>
         // ============================================
-        // TOAST NOTIFICATIONS
+        // CHECK IF ALREADY LOGGED IN
         // ============================================
-        function showToast(message, type = 'success') {
-            const container = document.getElementById('toastContainer');
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            const icons = { success: '✅', error: '❌', warning: '⚠️' };
-            toast.innerHTML = `<span>${icons[type] || '📢'}</span> ${message}`;
-            container.appendChild(toast);
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateX(100%)';
-                setTimeout(() => toast.remove(), 400);
-            }, 4000);
+        function getCurrentUser() {
+            const user = localStorage.getItem('nexora_current_user');
+            return user ? JSON.parse(user) : null;
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = getCurrentUser();
+            if (user) {
+                // Check for redirect URL (from course pages)
+                const redirectUrl = sessionStorage.getItem('nexora_redirect_url');
+                if (redirectUrl) {
+                    sessionStorage.removeItem('nexora_redirect_url');
+                    window.location.href = redirectUrl;
+                } else {
+                    window.location.href = 'dashboard.html';
+                }
+                return;
+            }
+            document.getElementById('loginEmail').focus();
+        });
 
         // ============================================
         // TAB SWITCHING
@@ -541,7 +492,6 @@
                 document.getElementById('registerForm').classList.add('active');
             }
 
-            // Clear errors
             document.getElementById('loginError').classList.remove('show');
             document.getElementById('registerError').classList.remove('show');
         }
@@ -562,7 +512,7 @@
         }
 
         // ============================================
-        // USERS DATABASE (localStorage)
+        // USERS DATABASE
         // ============================================
         function getUsers() {
             const users = localStorage.getItem('nexora_users');
@@ -573,21 +523,18 @@
             localStorage.setItem('nexora_users', JSON.stringify(users));
         }
 
-        function getCurrentUser() {
-            const user = localStorage.getItem('nexora_current_user');
-            return user ? JSON.parse(user) : null;
-        }
-
         function setCurrentUser(user) {
             localStorage.setItem('nexora_current_user', JSON.stringify(user));
         }
 
-        function clearCurrentUser() {
-            localStorage.removeItem('nexora_current_user');
-        }
-
         function generateStudentId() {
-            return 'NXA-' + Date.now().toString().slice(-6);
+            const year = new Date().getFullYear();
+            const lastId = localStorage.getItem('nexora_last_student_id');
+            let num = parseInt(lastId) || 0;
+            num++;
+            localStorage.setItem('nexora_last_student_id', num.toString());
+            const serial = String(num).padStart(6, '0');
+            return `NXA-${year}-${serial}`;
         }
 
         // ============================================
@@ -629,20 +576,24 @@
                 joined: new Date().toISOString(),
                 enrolledCourses: [],
                 completedLessons: {},
+                payments: [],
                 achievements: [],
-                learningHours: 0
+                learningHours: 0,
+                examResults: {},
+                examAttempts: {}
             };
 
             users.push(user);
             saveUsers(users);
             setCurrentUser(user);
 
-            showToast(`🎉 Welcome ${name}! Account created successfully!`);
-
-            // Redirect to dashboard
-            setTimeout(() => {
+            const redirectUrl = sessionStorage.getItem('nexora_redirect_url');
+            if (redirectUrl) {
+                sessionStorage.removeItem('nexora_redirect_url');
+                window.location.href = redirectUrl;
+            } else {
                 window.location.href = 'dashboard.html';
-            }, 1000);
+            }
         }
 
         // ============================================
@@ -671,11 +622,14 @@
             }
 
             setCurrentUser(user);
-            showToast(`👋 Welcome back, ${user.name}!`);
 
-            setTimeout(() => {
+            const redirectUrl = sessionStorage.getItem('nexora_redirect_url');
+            if (redirectUrl) {
+                sessionStorage.removeItem('nexora_redirect_url');
+                window.location.href = redirectUrl;
+            } else {
                 window.location.href = 'dashboard.html';
-            }, 800);
+            }
         }
 
         // ============================================
@@ -687,10 +641,13 @@
 
             if (demoUser) {
                 setCurrentUser(demoUser);
-                showToast('👋 Welcome back, Demo User!');
-                setTimeout(() => {
+                const redirectUrl = sessionStorage.getItem('nexora_redirect_url');
+                if (redirectUrl) {
+                    sessionStorage.removeItem('nexora_redirect_url');
+                    window.location.href = redirectUrl;
+                } else {
                     window.location.href = 'dashboard.html';
-                }, 800);
+                }
                 return;
             }
 
@@ -706,9 +663,18 @@
                 studentId: generateStudentId(),
                 joined: new Date().toISOString(),
                 enrolledCourses: [1, 2],
-                completedLessons: { '1': [1, 2, 3] },
+                completedLessons: {
+                    1: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                    2: [1, 2, 3, 4, 5]
+                },
+                payments: [
+                    { id: 1, courseId: 1, amount: 4, date: new Date().toISOString() },
+                    { id: 2, courseId: 1, amount: 4, date: new Date().toISOString() }
+                ],
                 achievements: ['Quick Learner', 'Consistent'],
-                learningHours: 12
+                learningHours: 12,
+                examResults: {},
+                examAttempts: {}
             };
 
             const allUsers = getUsers();
@@ -716,40 +682,33 @@
             saveUsers(allUsers);
             setCurrentUser(user);
 
-            showToast('🎉 Demo account created! Welcome to Nexora Academy!');
-            setTimeout(() => {
+            const redirectUrl = sessionStorage.getItem('nexora_redirect_url');
+            if (redirectUrl) {
+                sessionStorage.removeItem('nexora_redirect_url');
+                window.location.href = redirectUrl;
+            } else {
                 window.location.href = 'dashboard.html';
-            }, 1000);
+            }
         }
 
         function demoRegister() {
-            // Same as demoLogin but with different message
             demoLogin();
         }
 
-        // ============================================
-        // CHECK IF ALREADY LOGGED IN
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            const user = getCurrentUser();
-            if (user) {
-                // Redirect to dashboard
-                window.location.href = 'dashboard.html';
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const activeForm = document.querySelector('.auth-form.active');
+                if (activeForm) {
+                    activeForm.dispatchEvent(new Event('submit'));
+                }
             }
-
-            // Add enter key support
-            document.getElementById('loginPassword').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    document.getElementById('loginForm').dispatchEvent(new Event('submit'));
-                }
-            });
-
-            document.getElementById('regPassword').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    document.getElementById('registerForm').dispatchEvent(new Event('submit'));
-                }
-            });
         });
+
+        console.log('🔐 Nexora Academy - Login System');
+        console.log('✅ Student registration with auto-generated Student ID');
+        console.log('✅ Redirect to course pages after login');
+        console.log('✅ Demo login available');
+        console.log('📚 Connected to: Dashboard, Courses, Certificate, Exam, Live Classes, Admin');
     </script>
 
 </body>
