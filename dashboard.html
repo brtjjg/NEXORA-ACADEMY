@@ -6,9 +6,6 @@
     <title>Dashboard - Nexora Academy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
     <style>
-        /* ============================================
-           ROOT & RESET
-           ============================================ */
         * {
             margin: 0;
             padding: 0;
@@ -39,6 +36,7 @@
             background: var(--light-gray);
             color: var(--dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         a {
@@ -191,10 +189,6 @@
             font-weight: 600;
         }
 
-        .sidebar .nav-item .badge.notification {
-            background: var(--danger);
-        }
-
         .sidebar-toggle {
             position: fixed;
             top: 12px;
@@ -224,23 +218,6 @@
             display: flex;
             flex-direction: column;
             gap: 4px;
-        }
-
-        .sidebar-toggle .hamburger-icon span {
-            display: block;
-            width: 20px;
-            height: 2.5px;
-            background: var(--white);
-            border-radius: 4px;
-            transition: var(--transition);
-        }
-
-        .sidebar-toggle .hamburger-icon span:nth-child(2) {
-            width: 14px;
-        }
-
-        .sidebar-toggle .hamburger-icon span:nth-child(3) {
-            width: 10px;
         }
 
         .sidebar-overlay {
@@ -286,10 +263,6 @@
             font-size: 1.2rem;
             font-weight: 600;
             color: var(--dark);
-        }
-
-        .top-navbar .page-title span {
-            color: var(--primary);
         }
 
         .top-navbar .top-actions {
@@ -338,16 +311,6 @@
         .top-navbar .top-actions .icon-btn:hover {
             background: var(--primary);
             color: var(--white);
-        }
-
-        .top-navbar .top-actions .icon-btn .dot {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--danger);
         }
 
         /* ============================================
@@ -593,7 +556,6 @@
             background: var(--primary);
             color: var(--white);
         }
-
         .btn-primary:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
@@ -604,7 +566,6 @@
             background: var(--secondary);
             color: var(--dark);
         }
-
         .btn-secondary:hover {
             background: #00b894;
             transform: translateY(-2px);
@@ -614,7 +575,6 @@
             background: var(--success);
             color: var(--white);
         }
-
         .btn-success:hover {
             background: #27ae60;
         }
@@ -623,7 +583,6 @@
             background: var(--danger);
             color: var(--white);
         }
-
         .btn-danger:hover {
             background: #c0392b;
         }
@@ -643,10 +602,203 @@
             color: var(--primary);
             border: 2px solid var(--primary);
         }
-
         .btn-outline:hover {
             background: var(--primary);
             color: var(--white);
+        }
+
+        /* ============================================
+           CARDS
+           ============================================ */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--dark);
+        }
+
+        .card h3 i {
+            color: var(--primary);
+        }
+
+        .card .view-all {
+            font-size: 0.8rem;
+            color: var(--primary);
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        .card .view-all:hover {
+            text-decoration: underline;
+        }
+
+        /* Continue Learning */
+        .continue-learning {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 12px;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .continue-learning .course-info h4 {
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+
+        .continue-learning .course-info .fee {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .continue-learning .course-info .paid {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .continue-learning .course-progress {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.3rem;
+        }
+
+        .continue-learning .course-progress .progress-text {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .continue-learning .course-progress .progress-bar {
+            width: 100px;
+            height: 6px;
+            background: var(--light-gray);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .continue-learning .course-progress .progress-bar .fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        /* Payment Status */
+        .payment-status .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--light-gray);
+            font-size: 0.95rem;
+        }
+
+        .payment-status .row:last-child {
+            border-bottom: none;
+        }
+
+        .payment-status .row .amount {
+            font-weight: 600;
+        }
+
+        .payment-status .row .balance {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .payment-status .row .paid {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        /* Progress Details */
+        .progress-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .progress-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid var(--light-gray);
+            font-size: 0.9rem;
+        }
+
+        .progress-item .label {
+            color: var(--gray);
+        }
+
+        .progress-item .value {
+            font-weight: 600;
+        }
+
+        .progress-item .value.good {
+            color: var(--success);
+        }
+
+        .progress-item .value.warning {
+            color: var(--warning);
+        }
+
+        .progress-item .value.danger {
+            color: var(--danger);
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+
+        .quick-actions .action-btn {
+            padding: 1rem 0.5rem;
+            background: var(--light-gray);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--dark);
+        }
+
+        .quick-actions .action-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .quick-actions .action-btn i {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
         }
 
         /* ============================================
@@ -726,6 +878,9 @@
             .courses-grid {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -792,6 +947,24 @@
                 align-items: flex-start;
                 gap: 0.5rem;
             }
+
+            .quick-actions {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .continue-learning {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .continue-learning .course-progress {
+                align-items: center;
+            }
+
+            .continue-learning .course-progress .progress-bar {
+                width: 100%;
+            }
         }
 
         @media (max-width: 480px) {
@@ -810,6 +983,10 @@
 
             .stat-card .label {
                 font-size: 0.7rem;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -849,201 +1026,12 @@
             }
         }
 
-        .card {
-            background: var(--white);
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
-            margin-bottom: 1.5rem;
-        }
-
-        .card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--dark);
-        }
-
-        .card h3 i {
-            color: var(--primary);
-        }
-
-        .card .view-all {
-            font-size: 0.8rem;
-            color: var(--primary);
-            cursor: pointer;
-            margin-left: auto;
-        }
-
-        .card .view-all:hover {
-            text-decoration: underline;
-        }
-
-        .continue-learning {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background: var(--light-gray);
-            border-radius: 12px;
-        }
-
-        .continue-learning .course-info h4 {
-            font-size: 1.1rem;
-            color: var(--dark);
-        }
-
-        .continue-learning .course-info .fee {
-            color: var(--gray);
-            font-size: 0.85rem;
-        }
-
-        .continue-learning .course-info .paid {
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-
-        .continue-learning .course-progress {
-            text-align: right;
-        }
-
-        .continue-learning .course-progress .progress-text {
-            font-weight: 700;
-            color: var(--primary);
-            font-size: 1.2rem;
-        }
-
-        .continue-learning .course-progress .progress-bar {
-            width: 100px;
-            height: 6px;
-            background: var(--light-gray);
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 0.3rem;
-        }
-
-        .continue-learning .course-progress .progress-bar .fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 10px;
-            transition: width 1s ease;
-        }
-
-        .payment-status .row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--light-gray);
-            font-size: 0.95rem;
-        }
-
-        .payment-status .row:last-child {
-            border-bottom: none;
-        }
-
-        .payment-status .row .amount {
-            font-weight: 600;
-        }
-
-        .payment-status .row .balance {
-            color: var(--danger);
-            font-weight: 700;
-        }
-
-        .payment-status .row .paid {
-            color: var(--success);
-            font-weight: 700;
-        }
-
-        .progress-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.5rem 1.5rem;
+        .mt-1 {
             margin-top: 0.5rem;
         }
 
-        .progress-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.3rem 0;
-            border-bottom: 1px solid var(--light-gray);
-            font-size: 0.9rem;
-        }
-
-        .progress-item .label {
-            color: var(--gray);
-        }
-
-        .progress-item .value {
-            font-weight: 600;
-        }
-
-        .progress-item .value.good {
-            color: var(--success);
-        }
-
-        .progress-item .value.warning {
-            color: var(--warning);
-        }
-
-        .progress-item .value.danger {
-            color: var(--danger);
-        }
-
-        .quick-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.8rem;
-        }
-
-        .quick-actions .action-btn {
-            padding: 1rem 0.5rem;
-            background: var(--light-gray);
-            border-radius: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: var(--dark);
-        }
-
-        .quick-actions .action-btn:hover {
-            background: var(--primary);
-            color: var(--white);
-            transform: translateY(-2px);
-        }
-
-        .quick-actions .action-btn i {
-            display: block;
-            font-size: 1.5rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-            .quick-actions {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .quick-actions {
-                grid-template-columns: 1fr;
-            }
+        .mb-1 {
+            margin-bottom: 0.5rem;
         }
     </style>
 </head>
@@ -1055,7 +1043,7 @@
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
     <!-- ==========================================
-    SIDEBAR - ALL FEATURES
+    SIDEBAR
     ========================================== -->
     <nav class="sidebar" id="sidebar">
         <div class="logo" onclick="navigateTo('dashboard')">
@@ -1090,6 +1078,7 @@
             <div class="nav-item" data-page="assignments" onclick="navigateTo('assignments')">
                 <i class="fas fa-tasks"></i>
                 <span>Assignments</span>
+                <span class="badge notification" id="assignmentBadge">0</span>
             </div>
             <div class="nav-item" data-page="my-projects" onclick="navigateTo('my-projects')">
                 <i class="fas fa-project-diagram"></i>
@@ -1131,10 +1120,12 @@
             <div class="nav-item" data-page="messages" onclick="navigateTo('messages')">
                 <i class="fas fa-envelope"></i>
                 <span>Messages</span>
+                <span class="badge notification">3</span>
             </div>
             <div class="nav-item" data-page="notifications" onclick="navigateTo('notifications')">
                 <i class="fas fa-bell"></i>
                 <span>Notifications</span>
+                <span class="badge notification">5</span>
             </div>
             <div class="nav-item" data-page="community" onclick="navigateTo('community')">
                 <i class="fas fa-users"></i>
@@ -1235,7 +1226,7 @@
                 <div id="continueLearningContent">
                     <div class="no-courses" style="padding:1rem;">
                         <i class="fas fa-book-open"></i>
-                        <p>Enroll in a course to start learning!</p>
+                        <p>You haven't enrolled in any courses yet.</p>
                         <button class="btn btn-primary btn-sm" onclick="navigateTo('all-courses')">
                             Browse Courses
                         </button>
@@ -1328,7 +1319,7 @@
         ========================================== -->
         <div class="dashboard page-content hidden" id="page-my-courses">
             <h2 style="margin-bottom:1.5rem;"><i class="fas fa-book" style="color:var(--primary);"></i> My Courses</h2>
-            <div id="myCoursesFullContainer">
+            <div id="myCoursesContainer">
                 <div class="loading-spinner"><i class="fas fa-spinner"></i> Loading...</div>
             </div>
         </div>
@@ -1338,7 +1329,7 @@
         ========================================== -->
         <div class="dashboard page-content hidden" id="page-all-courses">
             <h2 style="margin-bottom:1.5rem;"><i class="fas fa-search" style="color:var(--primary);"></i> Browse All Courses</h2>
-            <div id="allCoursesFullContainer">
+            <div id="allCoursesContainer">
                 <div class="loading-spinner"><i class="fas fa-spinner"></i> Loading...</div>
             </div>
         </div>
@@ -1348,7 +1339,7 @@
         ========================================== -->
         <div class="dashboard page-content hidden" id="page-my-progress">
             <h2 style="margin-bottom:1.5rem;"><i class="fas fa-chart-line" style="color:var(--primary);"></i> My Progress</h2>
-            <div id="progressPageContent">
+            <div id="progressContainer">
                 <div class="loading-spinner"><i class="fas fa-spinner"></i> Loading...</div>
             </div>
         </div>
@@ -1358,7 +1349,7 @@
         ========================================== -->
         <div class="dashboard page-content hidden" id="page-assignments">
             <h2 style="margin-bottom:1.5rem;"><i class="fas fa-tasks" style="color:var(--primary);"></i> Assignments</h2>
-            <div id="assignmentsContent">
+            <div id="assignmentsContainer">
                 <div class="loading-spinner"><i class="fas fa-spinner"></i> Loading...</div>
             </div>
         </div>
@@ -1368,7 +1359,7 @@
         ========================================== -->
         <div class="dashboard page-content hidden" id="page-my-projects">
             <h2 style="margin-bottom:1.5rem;"><i class="fas fa-project-diagram" style="color:var(--primary);"></i> Projects</h2>
-            <div id="projectsContent">
+            <div id="projectsContainer">
                 <div class="loading-spinner"><i class="fas fa-spinner"></i> Loading...</div>
             </div>
         </div>
@@ -1378,7 +1369,7 @@
         ========================================== -->
         <div class="dashboard page-content hidden" id="page-live-classes">
             <h2 style="margin-bottom:1.5rem;"><i class="fas fa-video" style="color:var(--primary);"></i> Live Classes</h2>
-            <div id="liveClassesContent">
+            <div id="liveClassesContainer">
                 <div class="loading-spinner"><i class="fas fa-spinner"></i> Loading...</div>
             </div>
         </div>
@@ -1388,7 +1379,7 @@
         ========================================== -->
         <div class="dashboard page-content hidden" id="page-exams">
             <h2 style="margin-bottom:1.5rem;"><i class="fas fa-pencil-alt" style="color:var(--primary);"></i> Exams</h2>
-            <div id="examsContent">
+            <div id="examsContainer">
                 <div class="loading-spinner"><i class="fas fa-spinner"></i> Loading...</div>
             </div>
         </div>
@@ -1408,7 +1399,7 @@
         ========================================== -->
         <div class="dashboard page-content hidden" id="page-my-transcript">
             <h2 style="margin-bottom:1.5rem;"><i class="fas fa-file-alt" style="color:var(--primary);"></i> Transcript</h2>
-            <div id="transcriptContent">
+            <div id="transcriptContainer">
                 <div class="loading-spinner"><i class="fas fa-spinner"></i> Loading...</div>
             </div>
         </div>
@@ -1418,7 +1409,7 @@
         ========================================== -->
         <div class="dashboard page-content hidden" id="page-wallet">
             <h2 style="margin-bottom:1.5rem;"><i class="fas fa-wallet" style="color:var(--primary);"></i> Wallet & Payments</h2>
-            <div id="walletContent">
+            <div id="walletContainer">
                 <div class="loading-spinner"><i class="fas fa-spinner"></i> Loading...</div>
             </div>
         </div>
@@ -1428,7 +1419,7 @@
         ========================================== -->
         <div class="dashboard page-content hidden" id="page-messages">
             <h2 style="margin-bottom:1.5rem;"><i class="fas fa-envelope" style="color:var(--primary);"></i> Messages</h2>
-            <div id="messagesContent">
+            <div id="messagesContainer">
                 <div class="loading-spinner"><i class="fas fa-spinner"></i> Loading...</div>
             </div>
         </div>
@@ -1438,7 +1429,7 @@
         ========================================== -->
         <div class="dashboard page-content hidden" id="page-notifications">
             <h2 style="margin-bottom:1.5rem;"><i class="fas fa-bell" style="color:var(--primary);"></i> Notifications</h2>
-            <div id="notificationsContent">
+            <div id="notificationsContainer">
                 <div class="loading-spinner"><i class="fas fa-spinner"></i> Loading...</div>
             </div>
         </div>
@@ -1448,7 +1439,7 @@
         ========================================== -->
         <div class="dashboard page-content hidden" id="page-community">
             <h2 style="margin-bottom:1.5rem;"><i class="fas fa-users" style="color:var(--primary);"></i> Community</h2>
-            <div id="communityContent">
+            <div id="communityContainer">
                 <div class="loading-spinner"><i class="fas fa-spinner"></i> Loading...</div>
             </div>
         </div>
@@ -1458,7 +1449,7 @@
         ========================================== -->
         <div class="dashboard page-content hidden" id="page-support">
             <h2 style="margin-bottom:1.5rem;"><i class="fas fa-life-ring" style="color:var(--primary);"></i> Support</h2>
-            <div id="supportContent">
+            <div id="supportContainer">
                 <div class="loading-spinner"><i class="fas fa-spinner"></i> Loading...</div>
             </div>
         </div>
@@ -1468,7 +1459,7 @@
         ========================================== -->
         <div class="dashboard page-content hidden" id="page-settings">
             <h2 style="margin-bottom:1.5rem;"><i class="fas fa-cog" style="color:var(--primary);"></i> Settings</h2>
-            <div id="settingsContent">
+            <div id="settingsContainer">
                 <div class="loading-spinner"><i class="fas fa-spinner"></i> Loading...</div>
             </div>
         </div>
@@ -1478,7 +1469,7 @@
         ========================================== -->
         <div class="dashboard page-content hidden" id="page-profile">
             <h2 style="margin-bottom:1.5rem;"><i class="fas fa-user" style="color:var(--primary);"></i> My Profile</h2>
-            <div id="profileContent">
+            <div id="profileContainer">
                 <div class="loading-spinner"><i class="fas fa-spinner"></i> Loading...</div>
             </div>
         </div>
@@ -1493,7 +1484,7 @@
     </footer>
 
     <!-- ==========================================
-    JAVASCRIPT
+    JAVASCRIPT - COMPLETE FUNCTIONALITY
     ========================================== -->
     <script>
         // ============================================
@@ -1507,7 +1498,7 @@
             rating: 4.8,
             reviews: 120,
             level: 'Beginner',
-            description: 'Master essential computer skills from basics to advanced.',
+            description: 'Master essential computer skills from basics to advanced. Learn hardware, software, operating systems, and more.',
             totalLessons: 85,
             file: 'courses/computer-packages.html',
             badge: 'Most Popular',
@@ -1520,7 +1511,7 @@
             rating: 4.9,
             reviews: 180,
             level: 'Beginner to Professional',
-            description: 'Build modern, responsive websites from scratch. HTML, CSS, JavaScript, Flask, databases.',
+            description: 'Build modern, responsive websites from scratch. HTML, CSS, JavaScript, Flask, databases, and deployment.',
             totalLessons: 118,
             file: 'courses/web-development.html',
             badge: '🔥 Most Popular',
@@ -1533,7 +1524,7 @@
             rating: 4.7,
             reviews: 314,
             level: 'Beginner',
-            description: 'Python from zero to hero. Learn programming fundamentals.',
+            description: 'Python from zero to hero. Learn programming fundamentals, data structures, and real-world applications.',
             totalLessons: 30,
             file: 'courses/python.html',
             badge: 'Trending',
@@ -1546,7 +1537,7 @@
             rating: 4.7,
             reviews: 314,
             level: 'Beginner',
-            description: 'Become a professional graphic designer.',
+            description: 'Become a professional graphic designer. Learn design principles, Adobe tools, and creative techniques.',
             totalLessons: 28,
             file: 'courses/graphic-design.html',
             badge: 'Popular',
@@ -1559,7 +1550,7 @@
             rating: 4.7,
             reviews: 314,
             level: 'Beginner',
-            description: 'Complete digital marketing strategy including SEO, social media, email marketing.',
+            description: 'Complete digital marketing strategy including SEO, social media, email marketing, and analytics.',
             totalLessons: 32,
             file: 'courses/digital-marketing.html',
             badge: 'Best Seller',
@@ -1572,7 +1563,7 @@
             rating: 4.7,
             reviews: 314,
             level: 'Beginner',
-            description: 'Introduction to artificial intelligence and machine learning.',
+            description: 'Introduction to artificial intelligence and machine learning concepts with practical applications.',
             totalLessons: 25,
             file: 'courses/ai-ml.html',
             badge: 'New',
@@ -1585,7 +1576,7 @@
             rating: 4.8,
             reviews: 200,
             level: 'Intermediate',
-            description: 'Professional data analysis with Excel, Python, and visualization tools.',
+            description: 'Professional data analysis with Excel, Python, and visualization tools. Learn to make data-driven decisions.',
             totalLessons: 30,
             file: 'courses/data-analysis.html',
             badge: 'Advanced',
@@ -1598,7 +1589,7 @@
             rating: 4.9,
             reviews: 180,
             level: 'Intermediate',
-            description: 'Essential cybersecurity skills and best practices.',
+            description: 'Essential cybersecurity skills and best practices. Learn to protect systems and data from threats.',
             totalLessons: 28,
             file: 'courses/cybersecurity.html',
             badge: 'In Demand',
@@ -1611,7 +1602,7 @@
             rating: 4.8,
             reviews: 150,
             level: 'Intermediate',
-            description: 'Build mobile apps for iOS and Android using React Native, Flutter.',
+            description: 'Build mobile apps for iOS and Android using React Native, Flutter, and modern development tools.',
             totalLessons: 32,
             file: 'courses/mobile-app.html',
             badge: 'Popular',
@@ -1619,9 +1610,36 @@
         }];
 
         // ============================================
-        // LIVE CLASSES DATA (Empty)
+        // LIVE CLASSES DATA
         // ============================================
-        const LIVE_CLASSES = [];
+        const LIVE_CLASSES = [{
+            id: 1,
+            course: 'Computer Packages',
+            topic: 'Advanced Formatting',
+            tutor: 'John Mwangi',
+            date: '2026-08-02',
+            time: '09:00',
+            duration: '90',
+            students: 32
+        }, {
+            id: 2,
+            course: 'Web Development',
+            topic: 'CSS Flexbox & Grid',
+            tutor: 'Faith Wanjiku',
+            date: '2026-08-03',
+            time: '11:00',
+            duration: '90',
+            students: 28
+        }, {
+            id: 3,
+            course: 'Python Programming',
+            topic: 'Functions & Loops',
+            tutor: 'Daniel Otieno',
+            date: '2026-08-04',
+            time: '14:00',
+            duration: '90',
+            students: 25
+        }];
 
         // ============================================
         // AUTH HELPERS
@@ -1861,19 +1879,34 @@
             document.getElementById('courseBadge').textContent = enrolledCount;
             document.getElementById('certBadge').textContent = achievements.filter(a => a.includes('Certificate')).length || 0;
 
+            // Assignment badge
+            let pendingAssignments = 0;
+            enrolled.forEach(courseId => {
+                const course = COURSES.find(c => c.id === courseId);
+                if (course) {
+                    const completed = completedLessons[courseId] || [];
+                    const totalAssignments = Math.ceil(course.totalLessons / 10);
+                    const done = Math.min(totalAssignments, Math.round(completed.length / 8));
+                    pendingAssignments += Math.max(0, totalAssignments - done);
+                }
+            });
+            document.getElementById('assignmentBadge').textContent = pendingAssignments > 0 ? pendingAssignments : 0;
+
             saveUsers(users);
 
-            // Render dashboard sections
+            // Render all sections
             renderContinueLearning(userData);
             renderPaymentStatus(userData);
             renderCourseProgressDetails(userData);
             renderUpcomingLiveClasses();
+
+            // Render course pages
             renderMyCourses(userData);
             renderAllCourses(userData);
         }
 
         // ============================================
-        // CONTINUE LEARNING - FIXED
+        // CONTINUE LEARNING
         // ============================================
         function renderContinueLearning(userData) {
             const container = document.getElementById('continueLearningContent');
@@ -1894,7 +1927,6 @@
                 return;
             }
 
-            // Show first enrolled course
             const firstCourseId = enrolled[0];
             const course = COURSES.find(c => c.id === firstCourseId);
             if (!course) return;
@@ -2057,20 +2089,40 @@
             }
 
             container.innerHTML = LIVE_CLASSES.slice(0, 2).map(cls => {
+                const date = new Date(cls.date + 'T' + cls.time);
+                const now = new Date();
+                const diff = date - now;
+                let timeDisplay = '';
+
+                if (diff < 0 && diff > -7200000) {
+                    timeDisplay = '🔴 Live Now';
+                } else if (diff < 0) {
+                    timeDisplay = '✅ Ended';
+                } else if (diff < 3600000) {
+                    timeDisplay = `⏰ Starts in ${Math.floor(diff/60000)} minutes`;
+                } else if (diff < 86400000) {
+                    timeDisplay = `📅 Today at ${cls.time}`;
+                } else {
+                    timeDisplay = `📅 ${cls.date} at ${cls.time}`;
+                }
+
                 return `
                             <div class="live-class-item" style="display:flex;justify-content:space-between;align-items:center;padding:0.8rem 0;border-bottom:1px solid var(--light-gray);">
                                 <div class="class-info">
                                     <div class="title" style="font-weight:600;">${cls.course} - ${cls.topic}</div>
                                     <div class="tutor" style="font-size:0.8rem;color:var(--gray);">👨‍🏫 ${cls.tutor}</div>
-                                    <div class="time" style="font-size:0.8rem;color:var(--gray);">📅 ${cls.date} at ${cls.time}</div>
+                                    <div class="time" style="font-size:0.8rem;color:var(--gray);">${timeDisplay}</div>
+                                    <div style="font-size:0.75rem;color:var(--gray);">👥 ${cls.students} students</div>
                                 </div>
-                                <div class="actions" style="display:flex;gap:0.5rem;">
-                                    <button class="btn btn-success btn-sm" onclick="showToast('🎥 Joining live class...', 'success')">
-                                        <i class="fas fa-play"></i> Join
-                                    </button>
-                                    <button class="btn btn-outline btn-sm" onclick="showToast('⏰ Reminder set!', 'success')">
-                                        <i class="fas fa-bell"></i>
-                                    </button>
+                                <div class="actions" style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                                    ${diff < 0 && diff > -7200000 ? 
+                                        `<button class="btn btn-success btn-sm" onclick="showToast('🎥 Joining live class...', 'success')">
+                                            <i class="fas fa-play"></i> Join
+                                        </button>` : 
+                                        `<button class="btn btn-primary btn-sm" onclick="showToast('⏰ Reminder set for this class', 'success')">
+                                            <i class="fas fa-bell"></i> Reminder
+                                        </button>`
+                                    }
                                 </div>
                             </div>
                         `;
@@ -2081,7 +2133,7 @@
         // RENDER MY COURSES
         // ============================================
         function renderMyCourses(userData) {
-            const container = document.getElementById('myCoursesFullContainer');
+            const container = document.getElementById('myCoursesContainer');
 
             const enrolled = userData.enrolledCourses || [];
             const completedLessons = userData.completedLessons || {};
@@ -2147,7 +2199,7 @@
         // RENDER ALL COURSES (Browse)
         // ============================================
         function renderAllCourses(userData) {
-            const container = document.getElementById('allCoursesFullContainer');
+            const container = document.getElementById('allCoursesContainer');
 
             const enrolled = userData.enrolledCourses || [];
             const completedLessons = userData.completedLessons || {};
@@ -2316,7 +2368,7 @@
         // MY PROGRESS PAGE
         // ============================================
         function renderMyProgress(userData) {
-            const container = document.getElementById('progressPageContent');
+            const container = document.getElementById('progressContainer');
             const enrolled = userData.enrolledCourses || [];
             const completedLessons = userData.completedLessons || {};
             const achievements = userData.achievements || [];
@@ -2411,7 +2463,7 @@
         // ASSIGNMENTS PAGE
         // ============================================
         function renderAssignments(userData) {
-            const container = document.getElementById('assignmentsContent');
+            const container = document.getElementById('assignmentsContainer');
             const enrolled = userData.enrolledCourses || [];
             const completedLessons = userData.completedLessons || {};
 
@@ -2469,7 +2521,7 @@
         // PROJECTS PAGE
         // ============================================
         function renderProjects(userData) {
-            const container = document.getElementById('projectsContent');
+            const container = document.getElementById('projectsContainer');
             const enrolled = userData.enrolledCourses || [];
             const completedLessons = userData.completedLessons || {};
 
@@ -2526,7 +2578,7 @@
         // LIVE CLASSES PAGE
         // ============================================
         function renderLiveClassesPage() {
-            const container = document.getElementById('liveClassesContent');
+            const container = document.getElementById('liveClassesContainer');
 
             if (LIVE_CLASSES.length === 0) {
                 container.innerHTML = `
@@ -2540,9 +2592,29 @@
 
             let html = `<div class="courses-grid">`;
             LIVE_CLASSES.forEach(cls => {
+                const date = new Date(cls.date + 'T' + cls.time);
+                const now = new Date();
+                const diff = date - now;
+                let status = '';
+                let statusClass = '';
+
+                if (diff < 0 && diff > -7200000) {
+                    status = '🔴 LIVE NOW';
+                    statusClass = 'badge-completed';
+                } else if (diff < 0) {
+                    status = '✅ Ended';
+                    statusClass = 'badge-available';
+                } else if (diff < 3600000) {
+                    status = '⏰ Starting Soon';
+                    statusClass = 'badge-popular';
+                } else {
+                    status = '📅 Upcoming';
+                    statusClass = 'badge-enrolled';
+                }
+
                 html += `
                             <div class="course-card">
-                                <div class="icon"><i class="fas fa-video" style="color:var(--primary);"></i></div>
+                                <div class="icon"><i class="fas fa-video" style="color:${diff < 0 && diff > -7200000 ? 'var(--danger)' : 'var(--primary)'};"></i></div>
                                 <h3>${cls.course} - ${cls.topic}</h3>
                                 <div class="meta">
                                     <span>👨‍🏫 ${cls.tutor}</span>
@@ -2553,9 +2625,15 @@
                                     <br /><i class="fas fa-clock"></i> ${cls.duration} minutes
                                 </div>
                                 <div class="bottom-row">
-                                    <button class="btn btn-primary btn-sm" onclick="showToast('⏰ Reminder set for this class', 'success')">
-                                        <i class="fas fa-bell"></i> Set Reminder
-                                    </button>
+                                    <span class="badge ${statusClass}">${status}</span>
+                                    ${diff < 0 && diff > -7200000 ? 
+                                        `<button class="btn btn-success btn-sm" onclick="showToast('🎥 Joining live class...', 'success')">
+                                            <i class="fas fa-play"></i> Join Now
+                                        </button>` :
+                                        `<button class="btn btn-primary btn-sm" onclick="showToast('⏰ Reminder set for this class', 'success')">
+                                            <i class="fas fa-bell"></i> Set Reminder
+                                        </button>`
+                                    }
                                 </div>
                             </div>
                         `;
@@ -2568,7 +2646,7 @@
         // EXAMS PAGE
         // ============================================
         function renderExams(userData) {
-            const container = document.getElementById('examsContent');
+            const container = document.getElementById('examsContainer');
             const enrolled = userData.enrolledCourses || [];
             const completedLessons = userData.completedLessons || {};
 
@@ -2623,7 +2701,7 @@
         // MESSAGES PAGE
         // ============================================
         function renderMessages() {
-            const container = document.getElementById('messagesContent');
+            const container = document.getElementById('messagesContainer');
             container.innerHTML = `
                         <div class="courses-grid">
                             <div class="course-card" style="grid-column:1/-1;">
@@ -2645,7 +2723,7 @@
         // NOTIFICATIONS PAGE
         // ============================================
         function renderNotifications() {
-            const container = document.getElementById('notificationsContent');
+            const container = document.getElementById('notificationsContainer');
             container.innerHTML = `
                         <div class="courses-grid">
                             <div class="course-card" style="grid-column:1/-1;">
@@ -2664,7 +2742,7 @@
         // TRANSCRIPT PAGE
         // ============================================
         function renderTranscript(userData) {
-            const container = document.getElementById('transcriptContent');
+            const container = document.getElementById('transcriptContainer');
             const enrolled = userData.enrolledCourses || [];
             const completedLessons = userData.completedLessons || {};
             const user = getCurrentUser();
@@ -2757,7 +2835,7 @@
         // WALLET PAGE
         // ============================================
         function renderWallet(userData) {
-            const container = document.getElementById('walletContent');
+            const container = document.getElementById('walletContainer');
             const payments = userData.payments || [];
             const totalSpent = payments.reduce((sum, p) => sum + p.amount, 0);
 
@@ -2821,7 +2899,7 @@
         // COMMUNITY PAGE
         // ============================================
         function renderCommunity() {
-            const container = document.getElementById('communityContent');
+            const container = document.getElementById('communityContainer');
             container.innerHTML = `
                         <div class="courses-grid">
                             <div class="course-card" style="grid-column:1/-1;">
@@ -2866,7 +2944,7 @@
         // SUPPORT PAGE
         // ============================================
         function renderSupport() {
-            const container = document.getElementById('supportContent');
+            const container = document.getElementById('supportContainer');
             container.innerHTML = `
                         <div class="courses-grid">
                             <div class="course-card" style="grid-column:1/-1;">
@@ -2911,7 +2989,7 @@
         // SETTINGS PAGE
         // ============================================
         function renderSettings(userData) {
-            const container = document.getElementById('settingsContent');
+            const container = document.getElementById('settingsContainer');
             const user = getCurrentUser();
 
             container.innerHTML = `
@@ -2951,7 +3029,7 @@
         // PROFILE PAGE
         // ============================================
         function renderProfile(userData) {
-            const container = document.getElementById('profileContent');
+            const container = document.getElementById('profileContainer');
             const user = getCurrentUser();
 
             const enrolled = userData.enrolledCourses || [];
@@ -3084,15 +3162,18 @@
                 return;
             }
 
+            // Platform service fee
             const platformFee = 1;
             const totalInitial = course.price + platformFee;
 
             showToast(`💰 Course Fee: $${course.price} + Platform Fee: $${platformFee} = Total: $${totalInitial}`, 'info', 3000);
 
+            // Add enrollment
             userData.enrolledCourses.push(courseId);
             if (!userData.completedLessons) userData.completedLessons = {};
             userData.completedLessons[courseId] = [];
 
+            // Add platform fee payment
             if (!userData.payments) userData.payments = [];
             userData.payments.push({
                 id: Date.now(),
@@ -3102,6 +3183,7 @@
                 type: 'platform_fee'
             });
 
+            // Add initial payment (10% of course)
             const initialPayment = Math.round((course.price * 0.1) * 100) / 100;
             userData.payments.push({
                 id: Date.now() + 1,
@@ -3116,6 +3198,7 @@
 
             showToast(`🎉 Enrolled in ${course.title}! Platform fee paid. Starting learning...`, 'success');
 
+            // Open the course after enrollment
             setTimeout(() => {
                 openCourse(courseId);
             }, 1500);
@@ -3174,7 +3257,7 @@
         }
 
         // ============================================
-        // OPEN COURSE - FIXED
+        // OPEN COURSE
         // ============================================
         function openCourse(courseId) {
             const course = COURSES.find(c => c.id === courseId);
@@ -3183,18 +3266,9 @@
                 return;
             }
 
-            // Check if the course file exists - if not, show a message
-            // For Computer Packages (id: 1), we need to make sure the file exists
             if (course.file) {
-                // Store the current URL to redirect back if needed
                 sessionStorage.setItem('nexora_redirect_url', window.location.href);
-
-                // Try to navigate to the course
-                try {
-                    window.location.href = course.file;
-                } catch (error) {
-                    showToast('Course file not found. Please contact support.', 'error');
-                }
+                window.location.href = course.file;
             } else {
                 showToast('Course content coming soon!', 'warning');
             }
@@ -3222,10 +3296,12 @@
         });
 
         console.log('🎓 Nexora Academy - Complete Dashboard');
-        console.log('✅ All sidebar features working');
-        console.log('✅ Continue Learning fixed - opens course properly');
-        console.log('✅ Browse Courses working');
-        console.log('✅ No demo data - all from user activity');
+        console.log('✅ ALL sidebar features working');
+        console.log('✅ Browse Courses - shows all courses with Enroll button');
+        console.log('✅ Enroll Course - adds course with platform fee');
+        console.log('✅ Continue Learning - opens course properly');
+        console.log('✅ All navigation working');
+        console.log('✅ My Courses, My Progress, Assignments, Projects, Live Classes, Exams, Certificates, Transcript, Wallet, Messages, Notifications, Community, Support, Settings, Profile');
     </script>
 
 </body>
