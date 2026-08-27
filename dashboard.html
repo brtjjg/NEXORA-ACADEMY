@@ -6,6 +6,9 @@
     <title>Dashboard - Nexora Academy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
     <style>
+        /* ============================================
+           ROOT & RESET
+           ============================================ */
         * {
             margin: 0;
             padding: 0;
@@ -187,6 +190,10 @@
             border-radius: 50px;
             font-size: 0.65rem;
             font-weight: 600;
+        }
+
+        .sidebar .nav-item .badge.notification {
+            background: var(--danger);
         }
 
         .sidebar-toggle {
@@ -1445,12 +1452,99 @@
         </div>
 
         <!-- ==========================================
-        PAGE: SUPPORT
+        PAGE: SUPPORT (UPDATED WITH CONTACT INFO)
         ========================================== -->
         <div class="dashboard page-content hidden" id="page-support">
             <h2 style="margin-bottom:1.5rem;"><i class="fas fa-life-ring" style="color:var(--primary);"></i> Support</h2>
-            <div id="supportContainer">
-                <div class="loading-spinner"><i class="fas fa-spinner"></i> Loading...</div>
+
+            <div class="courses-grid">
+                <div class="course-card" style="grid-column:1/-1;">
+                    <div class="icon"><i class="fas fa-headset" style="color:var(--primary);"></i></div>
+                    <h3>🆘 Contact Support</h3>
+                    <p style="color:var(--gray);margin-bottom:1.5rem;">Our support team is here to help you with any questions or issues.</p>
+
+                    <!-- Contact Cards -->
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin:1.5rem 0;">
+
+                        <!-- Email -->
+                        <div style="background:var(--light-gray);padding:1.5rem;border-radius:12px;text-align:center;border:1px solid rgba(108,60,225,0.1);">
+                            <div style="font-size:2rem;color:var(--primary);margin-bottom:0.5rem;">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h4 style="color:var(--dark);margin-bottom:0.3rem;">Email Support</h4>
+                            <p style="color:var(--gray);font-size:0.85rem;">Send us an email and we'll respond within 24 hours.</p>
+                            <a href="mailto:nexo27716@gmail.com" style="display:inline-block;margin-top:0.8rem;padding:0.5rem 1.5rem;background:var(--primary);color:var(--white);border-radius:50px;text-decoration:none;font-weight:600;font-size:0.85rem;">
+                                <i class="fas fa-envelope"></i> nexo27716@gmail.com
+                            </a>
+                        </div>
+
+                        <!-- WhatsApp -->
+                        <div style="background:var(--light-gray);padding:1.5rem;border-radius:12px;text-align:center;border:1px solid rgba(37,211,102,0.2);">
+                            <div style="font-size:2rem;color:#25D366;margin-bottom:0.5rem;">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <h4 style="color:var(--dark);margin-bottom:0.3rem;">WhatsApp</h4>
+                            <p style="color:var(--gray);font-size:0.85rem;">Chat with us instantly on WhatsApp.</p>
+                            <a href="https://wa.me/254114812308" target="_blank" style="display:inline-block;margin-top:0.8rem;padding:0.5rem 1.5rem;background:#25D366;color:var(--white);border-radius:50px;text-decoration:none;font-weight:600;font-size:0.85rem;">
+                                <i class="fab fa-whatsapp"></i> +254 114 812 308
+                            </a>
+                        </div>
+
+                        <!-- Phone -->
+                        <div style="background:var(--light-gray);padding:1.5rem;border-radius:12px;text-align:center;border:1px solid rgba(52,152,219,0.2);">
+                            <div style="font-size:2rem;color:#3498DB;margin-bottom:0.5rem;">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <h4 style="color:var(--dark);margin-bottom:0.3rem;">Call Us</h4>
+                            <p style="color:var(--gray);font-size:0.85rem;">Speak directly with our support team.</p>
+                            <a href="tel:+254114812308" style="display:inline-block;margin-top:0.8rem;padding:0.5rem 1.5rem;background:#3498DB;color:var(--white);border-radius:50px;text-decoration:none;font-weight:600;font-size:0.85rem;">
+                                <i class="fas fa-phone"></i> +254 114 812 308
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp Group -->
+                    <div style="background:linear-gradient(135deg,#25D366,#128C7E);padding:1.5rem;border-radius:12px;text-align:center;color:white;margin-top:0.5rem;">
+                        <div style="font-size:2.5rem;margin-bottom:0.5rem;">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h4 style="color:white;margin-bottom:0.3rem;">Join Our WhatsApp Community</h4>
+                        <p style="color:rgba(255,255,255,0.9);font-size:0.9rem;margin-bottom:0.8rem;">Connect with other students, get updates, and join discussions.</p>
+                        <a href="https://chat.whatsapp.com/G3cSmU5k7KLA6CunwrLeTw" target="_blank" style="display:inline-block;padding:0.6rem 2rem;background:white;color:#25D366;border-radius:50px;text-decoration:none;font-weight:700;font-size:0.9rem;">
+                            <i class="fab fa-whatsapp"></i> Join WhatsApp Group
+                        </a>
+                    </div>
+
+                    <!-- Quick Support Actions -->
+                    <div style="margin-top:1.5rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.8rem;">
+                        <button class="btn btn-primary btn-sm" onclick="showToast('📧 Email support opened', 'info')" style="width:100%;justify-content:center;padding:12px;">
+                            <i class="fas fa-envelope"></i> Send Email
+                        </button>
+                        <button class="btn btn-success btn-sm" onclick="window.open('https://wa.me/254114812308','_blank')" style="width:100%;justify-content:center;padding:12px;">
+                            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                        </button>
+                        <button class="btn btn-secondary btn-sm" onclick="window.open('https://chat.whatsapp.com/G3cSmU5k7KLA6CunwrLeTw','_blank')" style="width:100%;justify-content:center;padding:12px;">
+                            <i class="fas fa-users"></i> Join Group
+                        </button>
+                        <button class="btn btn-outline btn-sm" onclick="showToast('📝 Support ticket created!', 'success')" style="width:100%;justify-content:center;padding:12px;">
+                            <i class="fas fa-ticket-alt"></i> Create Ticket
+                        </button>
+                    </div>
+
+                    <!-- Support Hours -->
+                    <div style="margin-top:1.5rem;padding:1rem;background:var(--light-gray);border-radius:12px;">
+                        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;">
+                            <span style="color:var(--gray);font-size:0.85rem;">
+                                <i class="fas fa-clock" style="color:var(--primary);"></i> 
+                                <strong>Support Hours:</strong> Monday - Friday, 8:00 AM - 6:00 PM EAT
+                            </span>
+                            <span style="color:var(--gray);font-size:0.85rem;">
+                                <i class="fas fa-clock" style="color:var(--primary);"></i> 
+                                <strong>Response Time:</strong> Within 24 hours
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1484,7 +1578,7 @@
     </footer>
 
     <!-- ==========================================
-    JAVASCRIPT - COMPLETE FUNCTIONALITY
+    JAVASCRIPT
     ========================================== -->
     <script>
         // ============================================
@@ -2299,7 +2393,7 @@
                     renderCommunity();
                     break;
                 case 'support':
-                    renderSupport();
+                    // Support page already has static content
                     break;
                 case 'settings':
                     renderSettings(userData);
@@ -2941,51 +3035,6 @@
         }
 
         // ============================================
-        // SUPPORT PAGE
-        // ============================================
-        function renderSupport() {
-            const container = document.getElementById('supportContainer');
-            container.innerHTML = `
-                        <div class="courses-grid">
-                            <div class="course-card" style="grid-column:1/-1;">
-                                <div class="icon"><i class="fas fa-life-ring"></i></div>
-                                <h3>🆘 Support</h3>
-                                <div style="margin-top:1rem;">
-                                    <div style="padding:0.8rem;border-bottom:1px solid var(--light-gray);">
-                                        <strong>📧 Email Support</strong>
-                                        <div style="font-size:0.85rem;color:var(--gray);">support@nexoraacademy.com</div>
-                                        <button class="btn btn-primary btn-sm" style="margin-top:0.3rem;" onclick="showToast('📧 Email support opened', 'info')">
-                                            <i class="fas fa-envelope"></i> Send Email
-                                        </button>
-                                    </div>
-                                    <div style="padding:0.8rem;border-bottom:1px solid var(--light-gray);">
-                                        <strong>💬 Live Chat</strong>
-                                        <div style="font-size:0.85rem;color:var(--gray);">Chat with our support team</div>
-                                        <button class="btn btn-success btn-sm" style="margin-top:0.3rem;" onclick="showToast('💬 Live chat started', 'success')">
-                                            <i class="fas fa-comment"></i> Start Chat
-                                        </button>
-                                    </div>
-                                    <div style="padding:0.8rem;">
-                                        <strong>📝 Create Support Ticket</strong>
-                                        <div style="font-size:0.85rem;color:var(--gray);">Report a problem or ask for help</div>
-                                        <button class="btn btn-primary btn-sm" style="margin-top:0.3rem;" onclick="showToast('📝 Support ticket created!', 'success')">
-                                            <i class="fas fa-ticket-alt"></i> Create Ticket
-                                        </button>
-                                    </div>
-                                </div>
-                                <div style="margin-top:1rem;padding:1rem;background:var(--light-gray);border-radius:12px;">
-                                    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;">
-                                        <span>📋 <strong>0</strong> open tickets</span>
-                                        <span>⏱️ Average response: <strong>15 min</strong></span>
-                                        <span>✅ <strong>95%</strong> satisfaction rate</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-        }
-
-        // ============================================
         // SETTINGS PAGE
         // ============================================
         function renderSettings(userData) {
@@ -3162,18 +3211,15 @@
                 return;
             }
 
-            // Platform service fee
             const platformFee = 1;
             const totalInitial = course.price + platformFee;
 
             showToast(`💰 Course Fee: $${course.price} + Platform Fee: $${platformFee} = Total: $${totalInitial}`, 'info', 3000);
 
-            // Add enrollment
             userData.enrolledCourses.push(courseId);
             if (!userData.completedLessons) userData.completedLessons = {};
             userData.completedLessons[courseId] = [];
 
-            // Add platform fee payment
             if (!userData.payments) userData.payments = [];
             userData.payments.push({
                 id: Date.now(),
@@ -3183,7 +3229,6 @@
                 type: 'platform_fee'
             });
 
-            // Add initial payment (10% of course)
             const initialPayment = Math.round((course.price * 0.1) * 100) / 100;
             userData.payments.push({
                 id: Date.now() + 1,
@@ -3198,7 +3243,6 @@
 
             showToast(`🎉 Enrolled in ${course.title}! Platform fee paid. Starting learning...`, 'success');
 
-            // Open the course after enrollment
             setTimeout(() => {
                 openCourse(courseId);
             }, 1500);
@@ -3300,8 +3344,8 @@
         console.log('✅ Browse Courses - shows all courses with Enroll button');
         console.log('✅ Enroll Course - adds course with platform fee');
         console.log('✅ Continue Learning - opens course properly');
+        console.log('✅ Support page with contact info: email, WhatsApp, phone, WhatsApp group');
         console.log('✅ All navigation working');
-        console.log('✅ My Courses, My Progress, Assignments, Projects, Live Classes, Exams, Certificates, Transcript, Wallet, Messages, Notifications, Community, Support, Settings, Profile');
     </script>
 
 </body>
