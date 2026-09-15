@@ -270,43 +270,6 @@ table tbody tr:hover{background:#f8fafc}
 .certificate-status-card.not-eligible{background:#f8fafc;border-color:#cbd5e1}
 .hidden{display:none!important}
 .text-center{text-align:center}
-
-/* INSTRUCTOR MANAGEMENT */
-.instructor-actions-cell{display:flex;gap:6px;align-items:center;justify-content:flex-end}
-.view-instructor-btn{background:var(--blue);color:#fff;border:none;padding:6px 14px;border-radius:50px;font-size:0.75rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all 0.15s}
-.view-instructor-btn:hover{background:var(--blue-dark);transform:translateY(-1px);box-shadow:0 4px 10px rgba(41,169,232,0.3)}
-.menu-dots-btn{width:32px;height:32px;border-radius:50%;background:var(--bg);border:1px solid #e2e8f0;color:var(--text-secondary);cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;justify-content:center}
-.menu-dots-btn:hover{background:#eff6ff;color:var(--blue);border-color:var(--blue)}
-.action-menu-dropdown{position:absolute;top:100%;right:0;background:#fff;border-radius:12px;box-shadow:0 12px 40px rgba(11,31,58,0.25);padding:8px 0;min-width:240px;z-index:50;border:1px solid #e2e8f0;display:none}
-.action-menu-dropdown.open{display:block}
-.action-menu-item{display:flex;align-items:center;gap:10px;padding:10px 16px;font-size:0.85rem;color:var(--text-primary);cursor:pointer;white-space:nowrap;transition:background 0.15s}
-.action-menu-item:hover{background:#f8fafc;color:var(--blue)}
-.action-menu-item i{width:16px;color:var(--text-secondary)}
-.action-menu-item.danger{color:var(--danger)}
-.action-menu-item.danger i{color:var(--danger)}
-.action-menu-divider{height:1px;background:#f0f0f0;margin:6px 0}
-.instructor-tabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:1.5rem;padding-bottom:0.5rem;-webkit-overflow-scrolling:touch}
-.instructor-tab{padding:8px 16px;border-radius:50px;font-size:0.85rem;font-weight:600;background:var(--bg);color:var(--text-secondary);border:none;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;transition:all 0.15s}
-.instructor-tab.active{background:var(--navy);color:#fff}
-.instructor-tab:hover:not(.active){background:#e2e8f0}
-.instructor-section{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem;margin-bottom:1rem}
-.instructor-section h3{color:var(--navy);font-size:1rem;margin-bottom:1rem;display:flex;align-items:center;gap:8px;border-bottom:1px solid #f0f0f0;padding-bottom:0.75rem}
-.instructor-section h3 i{color:var(--gold)}
-.inst-course-row{display:flex;justify-content:space-between;align-items:center;padding:0.75rem;background:var(--bg);border-radius:10px;margin-bottom:0.5rem;flex-wrap:wrap;gap:0.5rem}
-.inst-course-row .inst-course-info{flex:1;min-width:200px}
-.inst-course-row .inst-course-title{font-weight:700;color:var(--navy);font-size:0.9rem}
-.inst-course-row .inst-course-meta{font-size:0.75rem;color:var(--text-secondary);margin-top:2px}
-.inst-stat-mini{background:var(--bg);padding:0.6rem 1rem;border-radius:10px;text-align:center;min-width:110px}
-.inst-stat-mini .num{font-size:1.3rem;font-weight:800;color:var(--navy)}
-.inst-stat-mini .lbl{font-size:0.65rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.5px}
-.perm-row{display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid #f0f0f0}
-.perm-row:last-child{border-bottom:none}
-.perm-row label{font-size:0.9rem;color:var(--text-primary);font-weight:500;cursor:pointer}
-.perm-toggle{position:relative;width:44px;height:24px;background:#cbd5e1;border-radius:50px;cursor:pointer;transition:background 0.2s}
-.perm-toggle.on{background:var(--success)}
-.perm-toggle::after{content:'';position:absolute;top:2px;left:2px;width:20px;height:20px;background:#fff;border-radius:50%;transition:transform 0.2s}
-.perm-toggle.on::after{transform:translateX(20px)}
-
 @media(max-width:1024px){.stats-grid{grid-template-columns:repeat(2,1fr)}.footer .container{grid-template-columns:1fr 1fr}.app-filters{grid-template-columns:1fr 1fr}}
 @media(max-width:768px){.sidebar{width:280px;padding-top:60px}.main-content{margin-left:0!important}.form-row{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr}.page-content{padding:16px}.footer .container{grid-template-columns:1fr}.top-nav .brand .tagline{display:none}.top-nav .nav-links{gap:0.8rem}.top-nav .nav-links a{font-size:0.85rem}.landing-hero h1{font-size:2.2rem}.app-filters{grid-template-columns:1fr}}
 @media(max-width:480px){.page-content{padding:12px}.stat-card .stat-number{font-size:1.8rem}.landing-hero h1{font-size:1.8rem}.top-nav .brand .brand-text{font-size:1.1rem}}
@@ -353,7 +316,6 @@ table tbody tr:hover{background:#f8fafc}
 <div class="menu-label">Management</div>
 <div class="menu-item" onclick="navigateTo('admin-students')"><i class="fas fa-users"></i><span>Students</span><span class="badge-count" id="studentCount">0</span></div>
 <div class="menu-item" onclick="navigateTo('admin-applications')"><i class="fas fa-user-clock"></i><span>Applications</span><span class="badge-count" id="appCount">0</span></div>
-<div class="menu-item" onclick="navigateTo('admin-instructors')"><i class="fas fa-chalkboard-teacher"></i><span>Instructors</span><span class="badge-count" id="instructorCount">0</span></div>
 <div class="menu-label">Courses</div>
 <div class="menu-item" onclick="navigateTo('admin-courses')"><i class="fas fa-book"></i><span>All Courses</span><span class="badge-count" id="courseCount">0</span></div>
 <div class="menu-item" onclick="navigateTo('admin-builder')"><i class="fas fa-plus-circle"></i><span>Add New Course</span></div>
@@ -573,16 +535,6 @@ table tbody tr:hover{background:#f8fafc}
 <div id="page-admin-students" class="page"><h2 style="color:var(--navy);margin-bottom:1.5rem"><i class="fas fa-users" style="color:var(--gold)"></i> Students</h2><div id="adminStudentsList"></div></div>
 <div id="page-admin-student-detail" class="page"><div id="adminStudentDetailContent"></div></div>
 
-<div id="page-admin-instructors" class="page">
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem">
-<h2 style="color:var(--navy)"><i class="fas fa-chalkboard-teacher" style="color:var(--gold)"></i> Instructors</h2>
-<button class="btn btn-success" onclick="openAddInstructorModal()"><i class="fas fa-plus"></i> Add Instructor</button>
-</div>
-<div id="adminInstructorsList"></div>
-</div>
-
-<div id="page-admin-instructor-detail" class="page"><div id="adminInstructorDetailContent"></div></div>
-
 <div id="page-admin-courses" class="page"><h2 style="color:var(--navy);margin-bottom:1.5rem"><i class="fas fa-book" style="color:var(--gold)"></i> All Courses</h2><div id="adminCoursesList" class="courses-grid"></div></div>
 
 <div id="page-admin-builder" class="page">
@@ -604,7 +556,7 @@ table tbody tr:hover{background:#f8fafc}
 <div class="form-row"><div class="form-group"><label>Category</label><select id="courseCategory"><option>IT & Technology</option><option>Business</option><option>Finance</option><option>Education</option><option>Design</option><option>Marketing</option><option>Personal Development</option><option>Other</option></select></div><div class="form-group"><label>Level</label><select id="courseLevel"><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>Professional</option></select></div></div>
 <div class="form-group"><label>Course Cover Image</label><div class="file-upload-container" onclick="document.getElementById('courseImageInput').click()"><div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div><div class="upload-text">Click to upload</div><input type="file" id="courseImageInput" accept="image/*" onchange="handleImageUpload(event)"></div><div id="imagePreviewContainer" style="margin-top:0.8rem;display:none"><img id="imagePreview" style="max-width:200px;border-radius:10px"></div></div>
 <div class="form-group"><label>Description <span class="required">*</span></label><textarea id="courseDescription" rows="4"></textarea></div>
-<div class="form-row"><div class="form-group"><label>Instructor</label><select id="courseInstructor"><option>Dr. Kelvin M. Obieing</option><option>Jana A. Wambui</option></select></div><div class="form-group"><label>Duration</label><input type="text" id="courseDuration" placeholder="e.g., 6 Weeks"></div></div>
+<div class="form-row"><div class="form-group"><label>Instructor</label><input type="text" id="courseInstructor" placeholder="e.g., Dr. Kelvin M. Obieing"></div><div class="form-group"><label>Duration</label><input type="text" id="courseDuration" placeholder="e.g., 6 Weeks"></div></div>
 <div style="display:flex;justify-content:flex-end"><button class="btn btn-primary" onclick="saveBasicInfo()"><i class="fas fa-arrow-right"></i> Save & Continue</button></div>
 </div>
 <div id="step-1" class="step-content hidden">
@@ -679,20 +631,6 @@ table tbody tr:hover{background:#f8fafc}
 </div>
 </div>
 
-<div class="modal-backdrop" id="addInstructorModal">
-<div class="modal-box" style="max-width:520px">
-<h2><i class="fas fa-chalkboard-teacher"></i> Add Instructor</h2>
-<form onsubmit="saveInstructor(event)">
-<div class="form-group"><label>Full Name *</label><input type="text" id="instName" required></div>
-<div class="form-group"><label>Email *</label><input type="email" id="instEmail" required></div>
-<div class="form-group"><label>Phone</label><input type="tel" id="instPhone"></div>
-<div class="form-group"><label>Specialization</label><input type="text" id="instSpec"></div>
-<div class="form-group"><label>Password *</label><input type="text" id="instPassword" required value="instructor123"></div>
-<div style="display:flex;gap:0.5rem;justify-content:flex-end"><button type="button" class="btn btn-outline" onclick="closeAddInstructorModal()">Cancel</button><button type="submit" class="btn btn-success">Save</button></div>
-</form>
-</div>
-</div>
-
 <div class="modal-backdrop" id="appDetailsModal">
 <div class="modal-box">
 <h2><i class="fas fa-file-alt"></i> Details</h2>
@@ -738,7 +676,7 @@ table tbody tr:hover{background:#f8fafc}
 
 <script>
 /* ============================================================
-   NEXORA ACADEMY — v8.0 FINAL (Instructor Management Complete)
+   NEXORA ACADEMY — v8.1 (Instructor Management Removed)
 ============================================================ */
 const ACTIVATION_FEE = 0.50;
 const IDB_NAME = 'nexora_media_db';
@@ -758,7 +696,6 @@ const DB={get:(k)=>JSON.parse(localStorage.getItem(k)||'[]'),set:(k,d)=>localSto
       {id:1,username:'admin',email:'admin@nexora.com',password:'admin123',fullName:'Administrator',role:'admin',createdAt:new Date().toISOString(),activationFeePaid:true,status:'active',approvals:{status:'approved'},documents:[],sponsorship:{type:'none',amount:0,percentage:0,coveredCourses:[]}},
       {id:2,username:'brian',email:'brian@nexora.com',password:'student123',fullName:'Brian Ondieki',role:'student',createdAt:new Date().toISOString(),studentId:'NXA-2026-000123',admissionNumber:'NXA-ADM-2026-000123',activationFeePaid:true,status:'active',approvals:{status:'approved'},documents:[],sponsorship:{type:'none',amount:0,percentage:0,coveredCourses:[]}}
     ]);
-    this.set('instructors',[{id:1,fullName:'Dr. Kelvin M. Obieing',email:'kelvin@nexora.com',phone:'+254711111111',specialization:'Academic Director',bio:'Senior instructor with 15 years of experience.',status:'active',password:'instructor123',documents:[],permissions:{canCreateCourses:true,canGradeExams:true,canManageStudents:true,canPostDiscussions:true,canScheduleLive:true},earnings:{rate:0,paid:0,due:0,history:[]},createdAt:new Date().toISOString()}]);
     this.set('courses',[{id:1,title:'Computer Packages',code:'NXA-CP-101',category:'IT & Technology',level:'Beginner',description:'Complete training in MS Office.',instructor:'Dr. Kelvin M. Obieing',duration:'3 Months',price:20.00,image:'',status:'published',discount:{enabled:false,originalPrice:0,discountPrice:0,endsAt:null,label:''},examQuestions:[{id:'eq_1',question:'What is MS Word?',options:['Word processor','Browser','OS','Database'],correct:0,marks:2}],catQuestions:[{id:'cq_1',question:'What is a computer?',options:['Electronic device','Animal','Plant','Mineral'],correct:0,marks:5}],examPassMark:50,catPassMark:50,catUnlockHours:24,examUnlockHours:72,modules:[{id:'mod_1',title:'Introduction',lessons:[{id:'les_1',title:'What is a Computer?',description:'Welcome.',order:1,video:null,notes:'A computer is an electronic device.',pdfs:[],images:[],assignment:'List 3 computers.',quiz:[],published:'published'}]}],createdAt:new Date().toISOString()}]);
     this.set('enrollments',[]);
     this.set('certificates',[]);
@@ -774,7 +711,6 @@ const DB={get:(k)=>JSON.parse(localStorage.getItem(k)||'[]'),set:(k,d)=>localSto
     this.set('discussions',[]);
     this.set('attendance',[]);
     this.set('liveClasses',[]);
-    this.set('instructorPayouts',[]);
   }
 }};
 DB.init();
@@ -801,7 +737,6 @@ let currentAppView=null,rejectTargetId=null;
 let currentCourseView=null,currentLessonView=null;
 let lessonDraft={videoFile:null,videoMediaId:null,pdfs:[],images:[],quiz:[]};
 let courseData={id:null,title:'',code:'',category:'IT & Technology',level:'Beginner',description:'',image:'',instructor:'Dr. Kelvin M. Obieing',duration:'',price:0,initialPaymentPercent:25,discount:{enabled:false,originalPrice:0,discountPrice:0,endsAt:null,label:''},modules:[],examQuestions:[],catQuestions:[],examPassMark:50,catPassMark:50,catUnlockHours:24,examUnlockHours:72,status:'draft'};
-let currentInstructor=null,currentInstructorTab='overview';
 
 (function(){const s=localStorage.getItem('pendingRegUser');if(s){try{pendingRegUser=JSON.parse(s);}catch(e){}}})();
 
@@ -869,14 +804,13 @@ function navigateTo(page){
   if(!currentUser){showLogin();return;}
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const t=document.getElementById(`page-${page}`);if(t)t.classList.add('active');
-  const names={'admin-dashboard':'Admin Dashboard','admin-students':'Students','admin-applications':'Applications','admin-instructors':'Instructors','admin-instructor-detail':'Instructor Details','admin-courses':'Courses','admin-builder':'Add Course','admin-exams':'Exams','admin-certificates':'Certificates','admin-revenue':'Revenue','admin-payments':'Payments','student-dashboard':'Dashboard','student-wallet':'Wallet','student-courses':'My Courses','student-course-viewer':'Course','student-results':'Results','student-exams':'Exams','student-certificates':'Certificates','student-profile':'Profile'};
+  const names={'admin-dashboard':'Admin Dashboard','admin-students':'Students','admin-applications':'Applications','admin-courses':'Courses','admin-builder':'Add Course','admin-exams':'Exams','admin-certificates':'Certificates','admin-revenue':'Revenue','admin-payments':'Payments','student-dashboard':'Dashboard','student-wallet':'Wallet','student-courses':'My Courses','student-course-viewer':'Course','student-results':'Results','student-exams':'Exams','student-certificates':'Certificates','student-profile':'Profile'};
   document.getElementById('pageIndicator').textContent=names[page]||page;
   updateSidebarActive(page);
   if(window.innerWidth<=768)closeSidebar();
   if(page==='admin-dashboard')updateAdminDashboard();
   if(page==='admin-students')renderAdminStudents();
   if(page==='admin-applications')renderAdminApplications();
-  if(page==='admin-instructors')renderAdminInstructors();
   if(page==='admin-courses')renderAdminCourses();
   if(page==='admin-builder')initBuilder();
   if(page==='admin-exams')renderAdminExams();
@@ -896,11 +830,9 @@ function updateCounts(){
   const students=DB.get('users').filter(u=>u.role==='student');
   const courses=DB.get('courses');
   const apps=DB.get('applications').filter(a=>a.status==='payment_due'||a.status==='paid');
-  const insts=DB.get('instructors');
   const sEl=document.getElementById('studentCount');if(sEl)sEl.textContent=students.length;
   const cEl=document.getElementById('courseCount');if(cEl)cEl.textContent=courses.length;
   const aEl=document.getElementById('appCount');if(aEl)aEl.textContent=apps.length;
-  const iEl=document.getElementById('instructorCount');if(iEl)iEl.textContent=insts.length;
   const eEl=document.getElementById('studentEnrollCount');if(eEl&&currentUser)eEl.textContent=DB.get('enrollments').filter(e=>e.userId===currentUser.id).length;
 }
 function filterCountries(q){const dd=document.getElementById('countryDropdown');if(!dd)return;const term=(q||'').toLowerCase().trim();const matches=term?COUNTRIES.filter(c=>c.toLowerCase().includes(term)):COUNTRIES;if(!matches.length){dd.innerHTML='<div class="country-item" style="color:var(--text-secondary)">No matches</div>';dd.style.display='block';return;}dd.innerHTML=matches.slice(0,30).map(c=>`<div class="country-item" onmousedown="selectCountry('${c.replace(/'/g,"\\'")}')">${c}</div>`).join('');dd.style.display='block';}
@@ -1020,8 +952,7 @@ function updateAdminDashboard(){
   const rejected=apps.filter(a=>a.status==='rejected').length;
   const paidApps=apps.filter(a=>a.paymentStatus==='paid').length;
   const unpaidApps=apps.filter(a=>a.paymentStatus==='unpaid').length;
-  const instrs=DB.get('instructors');
-  document.getElementById('adminStats').innerHTML=`<div class="summary-cards"><div class="summary-card"><div class="num">${apps.length}</div><div class="lbl">Total Apps</div></div><div class="summary-card gold"><div class="num">${pending}</div><div class="lbl">Pending</div></div><div class="summary-card green"><div class="num">${approved}</div><div class="lbl">Approved</div></div><div class="summary-card red"><div class="num">${rejected}</div><div class="lbl">Rejected</div></div><div class="summary-card green"><div class="num">${paidApps}</div><div class="lbl">Paid</div></div><div class="summary-card grey"><div class="num">${unpaidApps}</div><div class="lbl">Unpaid</div></div></div><div class="stats-grid"><div class="stat-card"><div class="stat-number">${courses.length}</div><div class="stat-label">Courses</div></div><div class="stat-card green"><div class="stat-number">${students.length}</div><div class="stat-label">Students</div></div><div class="stat-card purple"><div class="stat-number">${enrolls.length}</div><div class="stat-label">Enrollments</div></div><div class="stat-card"><div class="stat-number">${instrs.length}</div><div class="stat-label">Instructors</div></div><div class="stat-card gold"><div class="stat-number">${fmtMoney(courseRev)}</div><div class="stat-label">Course Revenue</div></div><div class="stat-card green"><div class="stat-number">${fmtMoney(courseRev+actRev)}</div><div class="stat-label">Total Collected</div></div></div>`;
+  document.getElementById('adminStats').innerHTML=`<div class="summary-cards"><div class="summary-card"><div class="num">${apps.length}</div><div class="lbl">Total Apps</div></div><div class="summary-card gold"><div class="num">${pending}</div><div class="lbl">Pending</div></div><div class="summary-card green"><div class="num">${approved}</div><div class="lbl">Approved</div></div><div class="summary-card red"><div class="num">${rejected}</div><div class="lbl">Rejected</div></div><div class="summary-card green"><div class="num">${paidApps}</div><div class="lbl">Paid</div></div><div class="summary-card grey"><div class="num">${unpaidApps}</div><div class="lbl">Unpaid</div></div></div><div class="stats-grid"><div class="stat-card"><div class="stat-number">${courses.length}</div><div class="stat-label">Courses</div></div><div class="stat-card green"><div class="stat-number">${students.length}</div><div class="stat-label">Students</div></div><div class="stat-card purple"><div class="stat-number">${enrolls.length}</div><div class="stat-label">Enrollments</div></div><div class="stat-card gold"><div class="stat-number">${fmtMoney(courseRev)}</div><div class="stat-label">Course Revenue</div></div><div class="stat-card green"><div class="stat-number">${fmtMoney(courseRev+actRev)}</div><div class="stat-label">Total Collected</div></div></div>`;
   const ra=document.getElementById('recentApplications');const rApps=apps.slice().sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,5);ra.innerHTML=!rApps.length?'<p style="color:var(--text-secondary)">None</p>':rApps.map(a=>`<div style="padding:0.5rem 0;border-bottom:1px solid #f0f0f0;font-size:0.9rem"><strong>${esc(a.fullName)}</strong> <span class="badge status-${a.status}">${a.status.replace('_',' ').toUpperCase()}</span></div>`).join('');
   const rp=document.getElementById('recentPayments');const rTxs=txs.slice().sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,5);rp.innerHTML=!rTxs.length?'<p style="color:var(--text-secondary)">None</p>':rTxs.map(t=>{const u=DB.get('users').find(x=>x.id===t.studentId);return `<div style="padding:0.5rem 0;border-bottom:1px solid #f0f0f0;font-size:0.9rem"><strong>${fmtMoney(t.amount)}</strong> — ${esc(u?.fullName||'?')}</div>`;}).join('');
   const af=document.getElementById('adminActivityFeed');const acts=DB.get('activities').slice().sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,10);af.innerHTML=!acts.length?'<p style="color:var(--text-secondary)">No activity</p>':acts.map(a=>`<div class="activity-item"><div class="a-icon"><i class="fas fa-circle"></i></div><div class="a-content"><div class="a-title">${esc(a.title)}</div><div style="font-size:0.85rem;color:var(--text-secondary)">${esc(a.description)}</div></div></div>`).join('');
@@ -1065,409 +996,14 @@ function viewStudentCertificateStatus(studentId){const u=DB.get('users').find(x=
 function issueCertificate(studentId){const u=DB.get('users').find(x=>x.id===studentId);if(!u)return;const enr=DB.get('enrollments').filter(e=>e.userId===studentId);const courses=DB.get('courses');let target=null;for(const e of enr){const c=courses.find(x=>x.id===e.courseId);if(!c)continue;const all=(c.modules||[]).flatMap(m=>(m.lessons||[]).filter(l=>l.published!=='draft'));const done=all.filter(l=>DB.get('lessonProgress').some(p=>p.userId===studentId&&p.courseId===c.id&&p.lessonId===l.id)).length;if(all.length&&done===all.length&&getPaymentStatus(studentId,c.id)==='paid'){target=c;break;}}if(!target){alert('No eligible course.');return;}const certs=DB.get('certificates');const certId=genCertId(target.code||'CRS');certs.push({id:Date.now(),certificateId:certId,verificationToken:'VERIFY-'+Date.now(),studentName:u.fullName,studentId:u.studentId||u.admissionNumber,courseName:target.title,courseDuration:target.duration||'N/A',grade:'Competent',issuedDate:new Date().toISOString()});DB.set('certificates',certs);closeAppDetailsModal();renderAdminStudents();alert('✅ Issued: '+certId);}
 function viewStudentDetail(userId){const u=DB.get('users').find(x=>x.id===userId);if(!u)return;const enr=DB.get('enrollments').filter(e=>e.userId===userId);const txs=DB.get('transactions').filter(t=>t.studentId===userId);document.getElementById('adminStudentDetailContent').innerHTML=`<button class="btn btn-outline btn-sm" onclick="navigateTo('admin-students')"><i class="fas fa-arrow-left"></i> Back</button><div style="background:var(--white);padding:2rem;border-radius:var(--radius);box-shadow:var(--shadow);margin-top:1rem"><div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem"><div style="width:70px;height:70px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700">${esc(u.fullName.charAt(0))}</div><div><h2>${esc(u.fullName)}</h2><p>${esc(u.email)}</p><p style="font-size:0.9rem">ID: ${esc(u.studentId||u.admissionNumber||'N/A')}</p></div></div><div class="stats-grid"><div class="stat-card"><div class="stat-number">${enr.length}</div><div class="stat-label">Enrolled</div></div><div class="stat-card green"><div class="stat-number">${txs.filter(t=>t.status==='completed').length}</div><div class="stat-label">Transactions</div></div></div></div>`;navigateTo('admin-student-detail');}
 
-/* ============================================================
-   ADMIN INSTRUCTORS — COMPLETE MANAGEMENT
-============================================================ */
-function renderAdminInstructors(){
-  const insts=DB.get('instructors');
-  const c=document.getElementById('adminInstructorsList');
-  if(!insts.length){c.innerHTML='<div class="empty-state"><i class="fas fa-chalkboard-teacher" style="font-size:2rem;color:var(--gold);display:block;margin-bottom:0.5rem"></i>No instructors yet.</div>';return;}
-  const courses=DB.get('courses');
-  const enrollments=DB.get('enrollments');
-  c.innerHTML=`
-    <div style="margin-bottom:1rem;font-size:0.85rem;color:var(--text-secondary)"><i class="fas fa-info-circle"></i> Click <strong>View</strong> for full management. Use <strong>⋮</strong> for quick actions.</div>
-    <div class="table-wrapper">
-      <table>
-        <thead><tr><th>Name</th><th>Email</th><th>Specialization</th><th>Courses</th><th>Students</th><th>Status</th><th style="text-align:right">Actions</th></tr></thead>
-        <tbody>
-          ${insts.map(i=>{
-            const instCourses=courses.filter(c=>c.instructor===i.fullName);
-            const courseIds=instCourses.map(c=>c.id);
-            const uniqueStudents=new Set(enrollments.filter(e=>courseIds.includes(e.courseId)).map(e=>e.userId)).size;
-            const statusColor=i.status==='active'?'badge-success':i.status==='suspended'?'badge-danger':'badge-warning';
-            const statusIcon=i.status==='active'?'🟢':i.status==='suspended'?'🔴':'🟡';
-            return `<tr>
-              <td><strong style="color:var(--navy)">${esc(i.fullName)}</strong></td>
-              <td>${esc(i.email)}</td>
-              <td>${esc(i.specialization||'—')}</td>
-              <td><span class="clickable-count" onclick="viewInstructorDetail(${i.id},'courses')">${instCourses.length} Course${instCourses.length!==1?'s':''}</span></td>
-              <td><span class="clickable-count" onclick="viewInstructorDetail(${i.id},'students')">${uniqueStudents} Student${uniqueStudents!==1?'s':''}</span></td>
-              <td><span class="badge ${statusColor}">${statusIcon} ${i.status.toUpperCase()}</span></td>
-              <td style="text-align:right">
-                <div class="instructor-actions-cell" style="position:relative">
-                  <button class="view-instructor-btn" onclick="viewInstructorDetail(${i.id},'overview')"><i class="fas fa-eye"></i> View</button>
-                  <button class="menu-dots-btn" onclick="toggleInstructorMenu(event,${i.id})"><i class="fas fa-ellipsis-v"></i></button>
-                  <div class="action-menu-dropdown" id="instMenu_${i.id}">
-                    <div class="action-menu-item" onclick="viewInstructorDetail(${i.id},'overview')"><i class="fas fa-user"></i> View Profile</div>
-                    <div class="action-menu-item" onclick="viewInstructorDetail(${i.id},'courses')"><i class="fas fa-book"></i> View Courses</div>
-                    <div class="action-menu-item" onclick="viewInstructorDetail(${i.id},'students')"><i class="fas fa-users"></i> View Students</div>
-                    <div class="action-menu-item" onclick="viewInstructorDetail(${i.id},'progress')"><i class="fas fa-chart-line"></i> Student Progress</div>
-                    <div class="action-menu-item" onclick="viewInstructorDetail(${i.id},'assignments')"><i class="fas fa-tasks"></i> Assignments</div>
-                    <div class="action-menu-item" onclick="viewInstructorDetail(${i.id},'discussions')"><i class="fas fa-comments"></i> Discussions</div>
-                    <div class="action-menu-item" onclick="viewInstructorDetail(${i.id},'attendance')"><i class="fas fa-calendar-check"></i> Attendance</div>
-                    <div class="action-menu-item" onclick="viewInstructorDetail(${i.id},'live')"><i class="fas fa-video"></i> Live Classes</div>
-                    <div class="action-menu-item" onclick="viewInstructorDetail(${i.id},'performance')"><i class="fas fa-chart-bar"></i> Performance</div>
-                    <div class="action-menu-item" onclick="viewInstructorDetail(${i.id},'earnings')"><i class="fas fa-dollar-sign"></i> Earnings</div>
-                    <div class="action-menu-item" onclick="viewInstructorDetail(${i.id},'documents')"><i class="fas fa-file-alt"></i> Documents</div>
-                    <div class="action-menu-divider"></div>
-                    <div class="action-menu-item" onclick="editInstructorPrompt(${i.id})"><i class="fas fa-edit"></i> Edit Instructor</div>
-                    <div class="action-menu-item" onclick="manageInstructorPermissions(${i.id})"><i class="fas fa-shield-alt"></i> Manage Permissions</div>
-                    <div class="action-menu-item" onclick="resetInstructorPassword(${i.id})"><i class="fas fa-key"></i> Reset Password</div>
-                    <div class="action-menu-divider"></div>
-                    ${i.status==='active'
-                      ? `<div class="action-menu-item" onclick="toggleInstructorStatus(${i.id},'suspended')"><i class="fas fa-user-slash"></i> Deactivate</div>`
-                      : `<div class="action-menu-item" onclick="toggleInstructorStatus(${i.id},'active')"><i class="fas fa-user-check"></i> Activate</div>`}
-                    <div class="action-menu-item danger" onclick="suspendInstructorPrompt(${i.id})"><i class="fas fa-ban"></i> Suspend</div>
-                    <div class="action-menu-item danger" onclick="archiveInstructor(${i.id})"><i class="fas fa-archive"></i> Archive</div>
-                  </div>
-                </div>
-              </td>
-            </tr>`;
-          }).join('')}
-        </tbody>
-      </table>
-    </div>`;
-}
-
-function toggleInstructorMenu(ev,id){
-  ev.stopPropagation();
-  const menu=document.getElementById('instMenu_'+id);
-  document.querySelectorAll('.action-menu-dropdown').forEach(m=>{if(m!==menu)m.classList.remove('open');});
-  menu.classList.toggle('open');
-}
-document.addEventListener('click',()=>{document.querySelectorAll('.action-menu-dropdown').forEach(m=>m.classList.remove('open'));});
-
-function viewInstructorDetail(instructorId,tab){
-  currentInstructor=DB.get('instructors').find(x=>x.id===instructorId);
-  if(!currentInstructor){alert('Instructor not found');return;}
-  currentInstructorTab=tab||'overview';
-  document.querySelectorAll('.action-menu-dropdown').forEach(m=>m.classList.remove('open'));
-  document.getElementById('adminInstructorDetailContent').innerHTML=renderInstructorDetailHTML(currentInstructor);
-  navigateTo('admin-instructor-detail');
-  setTimeout(()=>switchInstructorTab(currentInstructorTab),100);
-}
-
-function renderInstructorDetailHTML(i){
-  const courses=DB.get('courses');
-  const enrollments=DB.get('enrollments');
-  const users=DB.get('users');
-  const lessonProgress=DB.get('lessonProgress');
-  const instCourses=courses.filter(c=>c.instructor===i.fullName);
-  const courseIds=instCourses.map(c=>c.id);
-  const instEnrollments=enrollments.filter(e=>courseIds.includes(e.courseId));
-  const studentIds=[...new Set(instEnrollments.map(e=>e.userId))];
-  const students=users.filter(u=>studentIds.includes(u.id));
-  const totalStudents=students.length;
-  const activeCourses=instCourses.filter(c=>c.status==='published').length;
-  let totalLessonsAll=0,completedAll=0;
-  instCourses.forEach(c=>{
-    const allLessons=(c.modules||[]).flatMap(m=>(m.lessons||[]).filter(l=>l.published!=='draft'));
-    instEnrollments.filter(e=>e.courseId===c.id).forEach(e=>{
-      const done=allLessons.filter(l=>lessonProgress.some(p=>p.userId===e.userId&&p.courseId===c.id&&p.lessonId===l.id)).length;
-      totalLessonsAll+=allLessons.length;completedAll+=done;
-    });
-  });
-  const completionRate=totalLessonsAll?Math.round((completedAll/totalLessonsAll)*100):0;
-  return `
-    <button class="btn btn-outline btn-sm" onclick="navigateTo('admin-instructors')" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back</button>
-    <div style="background:linear-gradient(135deg,var(--navy),#1a3a5c);color:#fff;padding:2rem;border-radius:var(--radius);box-shadow:var(--shadow-hover);margin-bottom:1.5rem">
-      <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
-        <div style="width:80px;height:80px;border-radius:50%;background:var(--gold);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700">${esc(i.fullName.charAt(0))}</div>
-        <div style="flex:1;min-width:200px">
-          <h2 style="font-size:1.5rem;margin-bottom:0.3rem">${esc(i.fullName)}</h2>
-          <p style="opacity:0.85;font-size:0.9rem">${esc(i.email)}</p>
-          <p style="opacity:0.75;font-size:0.85rem">${esc(i.specialization||'No specialization')} • Joined ${new Date(i.createdAt).toLocaleDateString()}</p>
-          <span class="badge ${i.status==='active'?'badge-success':'badge-danger'}" style="margin-top:0.5rem">${i.status.toUpperCase()}</span>
-        </div>
-        <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
-          <button class="btn btn-gold btn-sm" onclick="editInstructorPrompt(${i.id})"><i class="fas fa-edit"></i> Edit</button>
-          <button class="btn btn-outline btn-sm" style="border-color:rgba(255,255,255,0.3);color:#fff" onclick="resetInstructorPassword(${i.id})"><i class="fas fa-key"></i> Reset</button>
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1rem;margin-top:1.5rem">
-        <div class="inst-stat-mini" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15)"><div class="num" style="color:var(--gold)">${instCourses.length}</div><div class="lbl" style="color:#fff">Courses</div></div>
-        <div class="inst-stat-mini" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15)"><div class="num" style="color:var(--gold)">${totalStudents}</div><div class="lbl" style="color:#fff">Students</div></div>
-        <div class="inst-stat-mini" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15)"><div class="num" style="color:var(--gold)">${completionRate}%</div><div class="lbl" style="color:#fff">Completion</div></div>
-        <div class="inst-stat-mini" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15)"><div class="num" style="color:var(--gold)">${activeCourses}</div><div class="lbl" style="color:#fff">Active</div></div>
-      </div>
-    </div>
-    <div class="instructor-tabs">
-      <button class="instructor-tab" data-tab="overview" onclick="switchInstructorTab('overview')"><i class="fas fa-info-circle"></i> Overview</button>
-      <button class="instructor-tab" data-tab="courses" onclick="switchInstructorTab('courses')"><i class="fas fa-book"></i> Courses</button>
-      <button class="instructor-tab" data-tab="students" onclick="switchInstructorTab('students')"><i class="fas fa-users"></i> Students</button>
-      <button class="instructor-tab" data-tab="progress" onclick="switchInstructorTab('progress')"><i class="fas fa-chart-line"></i> Progress</button>
-      <button class="instructor-tab" data-tab="assignments" onclick="switchInstructorTab('assignments')"><i class="fas fa-tasks"></i> Assignments</button>
-      <button class="instructor-tab" data-tab="discussions" onclick="switchInstructorTab('discussions')"><i class="fas fa-comments"></i> Discussions</button>
-      <button class="instructor-tab" data-tab="attendance" onclick="switchInstructorTab('attendance')"><i class="fas fa-calendar-check"></i> Attendance</button>
-      <button class="instructor-tab" data-tab="live" onclick="switchInstructorTab('live')"><i class="fas fa-video"></i> Live</button>
-      <button class="instructor-tab" data-tab="earnings" onclick="switchInstructorTab('earnings')"><i class="fas fa-dollar-sign"></i> Earnings</button>
-      <button class="instructor-tab" data-tab="documents" onclick="switchInstructorTab('documents')"><i class="fas fa-file-alt"></i> Documents</button>
-      <button class="instructor-tab" data-tab="performance" onclick="switchInstructorTab('performance')"><i class="fas fa-chart-bar"></i> Performance</button>
-    </div>
-    <div id="instructorTabContent"></div>
-  `;
-}
-
-function switchInstructorTab(tab){
-  currentInstructorTab=tab;
-  document.querySelectorAll('.instructor-tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===tab));
-  const content=document.getElementById('instructorTabContent');
-  if(!content||!currentInstructor)return;
-  content.innerHTML=renderInstructorTab(currentInstructor,tab);
-}
-
-function renderInstructorTab(i,tab){
-  const courses=DB.get('courses');
-  const enrollments=DB.get('enrollments');
-  const users=DB.get('users');
-  const lessonProgress=DB.get('lessonProgress');
-  const instCourses=courses.filter(c=>c.instructor===i.fullName);
-  const courseIds=instCourses.map(c=>c.id);
-  const instEnrollments=enrollments.filter(e=>courseIds.includes(e.courseId));
-  const studentIds=[...new Set(instEnrollments.map(e=>e.userId))];
-  const students=users.filter(u=>studentIds.includes(u.id));
-  switch(tab){
-    case 'overview':{
-      return `
-        <div class="instructor-section">
-          <h3><i class="fas fa-user"></i> Contact Information</h3>
-          <div class="form-row"><div class="form-group"><label>Full Name</label><input type="text" value="${esc(i.fullName)}" disabled></div><div class="form-group"><label>Email</label><input type="text" value="${esc(i.email)}" disabled></div></div>
-          <div class="form-row"><div class="form-group"><label>Phone</label><input type="text" value="${esc(i.phone||'—')}" disabled></div><div class="form-group"><label>Specialization</label><input type="text" value="${esc(i.specialization||'—')}" disabled></div></div>
-          <div class="form-row"><div class="form-group"><label>Status</label><input type="text" value="${esc(i.status)}" disabled></div><div class="form-group"><label>Joined</label><input type="text" value="${new Date(i.createdAt).toLocaleDateString()}" disabled></div></div>
-        </div>
-        <div class="instructor-section">
-          <h3><i class="fas fa-chart-pie"></i> Quick Stats</h3>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem">
-            <div class="inst-stat-mini"><div class="num">${instCourses.length}</div><div class="lbl">Total Courses</div></div>
-            <div class="inst-stat-mini"><div class="num">${instCourses.filter(c=>c.status==='published').length}</div><div class="lbl">Published</div></div>
-            <div class="inst-stat-mini"><div class="num">${instCourses.filter(c=>c.status==='draft').length}</div><div class="lbl">Drafts</div></div>
-            <div class="inst-stat-mini"><div class="num">${students.length}</div><div class="lbl">Unique Students</div></div>
-            <div class="inst-stat-mini"><div class="num">${instEnrollments.length}</div><div class="lbl">Total Enrollments</div></div>
-          </div>
-        </div>`;
-    }
-    case 'courses':{
-      return `<div class="instructor-section"><h3><i class="fas fa-book"></i> Assigned Courses (${instCourses.length})</h3>
-        ${!instCourses.length?'<div class="empty-state">No courses assigned.</div>':instCourses.map(c=>{
-          const cStudents=enrollments.filter(e=>e.courseId===c.id).length;
-          return `<div class="inst-course-row">
-            <div class="inst-course-info"><div class="inst-course-title">${esc(c.title)}</div><div class="inst-course-meta">${esc(c.code||'N/A')} • ${esc(c.category)} • ${esc(c.duration||'N/A')} • ${cStudents} students</div></div>
-            <div style="display:flex;gap:0.4rem;align-items:center"><span class="badge badge-${c.status}">${c.status}</span><button class="btn btn-primary btn-sm" onclick="editCourse(${c.id})"><i class="fas fa-edit"></i></button></div>
-          </div>`;
-        }).join('')}</div>`;
-    }
-    case 'students':{
-      return `<div class="instructor-section"><h3><i class="fas fa-users"></i> Students (${students.length})</h3>
-        ${!students.length?'<div class="empty-state">No students enrolled.</div>':`<div class="table-wrapper"><table><thead><tr><th>Student</th><th>Email</th><th>Course</th><th>Progress</th></tr></thead><tbody>
-        ${instEnrollments.map(e=>{
-          const s=users.find(u=>u.id===e.userId);if(!s)return '';
-          const c=courses.find(x=>x.id===e.courseId);if(!c)return '';
-          const all=(c.modules||[]).flatMap(m=>(m.lessons||[]).filter(l=>l.published!=='draft'));
-          const done=all.filter(l=>lessonProgress.some(p=>p.userId===s.id&&p.courseId===c.id&&p.lessonId===l.id)).length;
-          const pct=all.length?Math.round((done/all.length)*100):0;
-          return `<tr><td><strong>${esc(s.fullName)}</strong></td><td>${esc(s.email)}</td><td>${esc(c.title)}</td><td><strong>${pct}%</strong> (${done}/${all.length})</td></tr>`;
-        }).join('')}
-        </tbody></table></div>`}</div>`;
-    }
-    case 'progress':{
-      let totalLessons=0,completedLessons=0;
-      instCourses.forEach(c=>{
-        const all=(c.modules||[]).flatMap(m=>(m.lessons||[]).filter(l=>l.published!=='draft'));
-        instEnrollments.filter(e=>e.courseId===c.id).forEach(e=>{
-          const done=all.filter(l=>lessonProgress.some(p=>p.userId===e.userId&&p.courseId===c.id&&p.lessonId===l.id)).length;
-          totalLessons+=all.length;completedLessons+=done;
-        });
-      });
-      const pct=totalLessons?Math.round((completedLessons/totalLessons)*100):0;
-      return `<div class="instructor-section"><h3><i class="fas fa-chart-line"></i> Overall Student Progress</h3>
-        <div class="overall-progress"><div class="big-pct">${pct}%</div><div class="big-lbl">Average Completion</div></div>
-        <div class="progress-grid">
-          <div class="progress-item"><div class="pct">${totalLessons}</div><div class="lbl">Total Lessons</div></div>
-          <div class="progress-item"><div class="pct">${completedLessons}</div><div class="lbl">Completed</div></div>
-          <div class="progress-item"><div class="pct">${instEnrollments.length}</div><div class="lbl">Enrollments</div></div>
-        </div></div>`;
-    }
-    case 'assignments':{
-      const assignments=DB.get('assignments').filter(a=>courseIds.includes(a.courseId));
-      return `<div class="instructor-section"><h3><i class="fas fa-tasks"></i> Assignments (${assignments.length})</h3>
-        ${!assignments.length?'<div class="empty-state">No assignments recorded yet.</div>':`<div class="table-wrapper"><table><thead><tr><th>Student</th><th>Course</th><th>Assignment</th><th>Status</th></tr></thead><tbody>${assignments.map(a=>`<tr><td>${esc(a.studentName||'—')}</td><td>${esc(a.courseName||'—')}</td><td>${esc(a.title||'—')}</td><td><span class="badge badge-${a.status==='submitted'?'success':'warning'}">${a.status||'pending'}</span></td></tr>`).join('')}</tbody></table></div>`}</div>`;
-    }
-    case 'discussions':{
-      const discussions=DB.get('discussions').filter(d=>courseIds.includes(d.courseId));
-      return `<div class="instructor-section"><h3><i class="fas fa-comments"></i> Discussions (${discussions.length})</h3>
-        ${!discussions.length?'<div class="empty-state">No discussions recorded yet.</div>':`<div class="table-wrapper"><table><thead><tr><th>Course</th><th>Student</th><th>Message</th><th>Date</th></tr></thead><tbody>${discussions.map(d=>`<tr><td>${esc(d.courseName||'—')}</td><td>${esc(d.studentName||'—')}</td><td>${esc((d.message||'').substring(0,80))}</td><td>${new Date(d.createdAt).toLocaleDateString()}</td></tr>`).join('')}</tbody></table></div>`}</div>`;
-    }
-    case 'attendance':{
-      const attendance=DB.get('attendance').filter(a=>courseIds.includes(a.courseId));
-      return `<div class="instructor-section"><h3><i class="fas fa-calendar-check"></i> Attendance Records (${attendance.length})</h3>
-        ${!attendance.length?'<div class="empty-state">No attendance records yet.</div>':`<div class="table-wrapper"><table><thead><tr><th>Course</th><th>Student</th><th>Date</th><th>Status</th></tr></thead><tbody>${attendance.map(a=>`<tr><td>${esc(a.courseName||'—')}</td><td>${esc(a.studentName||'—')}</td><td>${new Date(a.date).toLocaleDateString()}</td><td><span class="badge badge-${a.status==='present'?'success':'danger'}">${a.status||'—'}</span></td></tr>`).join('')}</tbody></table></div>`}</div>`;
-    }
-    case 'live':{
-      const liveClasses=DB.get('liveClasses').filter(l=>courseIds.includes(l.courseId));
-      return `<div class="instructor-section"><h3><i class="fas fa-video"></i> Live Classes</h3>
-        <button class="btn btn-success btn-sm" onclick="alert('Schedule live class feature coming soon')"><i class="fas fa-plus"></i> Schedule Live Class</button>
-        ${!liveClasses.length?'<div class="empty-state" style="margin-top:1rem">No live classes scheduled yet.</div>':`<div class="table-wrapper" style="margin-top:1rem"><table><thead><tr><th>Course</th><th>Title</th><th>Scheduled</th><th>Status</th></tr></thead><tbody>${liveClasses.map(l=>`<tr><td>${esc(l.courseName||'—')}</td><td>${esc(l.title||'—')}</td><td>${new Date(l.scheduledAt).toLocaleString()}</td><td><span class="badge badge-${l.status==='live'?'danger':l.status==='completed'?'success':'warning'}">${l.status||'scheduled'}</span></td></tr>`).join('')}</tbody></table></div>`}</div>`;
-    }
-    case 'earnings':{
-      const earnings=i.earnings||{rate:0,paid:0,due:0,history:[]};
-      return `<div class="instructor-section"><h3><i class="fas fa-dollar-sign"></i> Earnings</h3>
-        <div class="progress-grid">
-          <div class="progress-item"><div class="pct">${fmtMoney(earnings.rate)}</div><div class="lbl">Rate per Student</div></div>
-          <div class="progress-item"><div class="pct" style="color:var(--success)">${fmtMoney(earnings.paid)}</div><div class="lbl">Total Paid</div></div>
-          <div class="progress-item"><div class="pct" style="color:var(--danger)">${fmtMoney(earnings.due)}</div><div class="lbl">Amount Due</div></div>
-          <div class="progress-item"><div class="pct">${instEnrollments.length}</div><div class="lbl">Students</div></div>
-        </div>
-        <h4 style="margin-top:1.5rem;color:var(--navy)">Payment History</h4>
-        ${!earnings.history||!earnings.history.length?'<p style="color:var(--text-secondary);font-size:0.9rem">No payments yet.</p>':`<div class="table-wrapper"><table><thead><tr><th>Date</th><th>Amount</th><th>Note</th></tr></thead><tbody>${earnings.history.map(h=>`<tr><td>${new Date(h.date).toLocaleDateString()}</td><td><strong>${fmtMoney(h.amount)}</strong></td><td>${esc(h.note||'—')}</td></tr>`).join('')}</tbody></table></div>`}
-        <button class="btn btn-primary btn-sm" style="margin-top:1rem" onclick="alert('Record payment feature coming soon')"><i class="fas fa-plus"></i> Record Payment</button>
-      </div>`;
-    }
-    case 'documents':{
-      const docs=i.documents||[];
-      return `<div class="instructor-section"><h3><i class="fas fa-file-alt"></i> Instructor Documents (${docs.length})</h3>
-        ${!docs.length?'<div class="empty-state">No documents uploaded by this instructor.</div>':docs.map(d=>`<div class="doc-card">${d.data?`<img src="${d.data}" class="doc-thumb" onclick="window.open('${d.data}','_blank')">`:''}<div class="doc-info"><div class="doc-name">${esc(d.name||'Document')}</div><div class="doc-meta">Uploaded: ${new Date(d.uploadedAt).toLocaleDateString()}</div></div></div>`).join('')}
-        <button class="btn btn-primary btn-sm" style="margin-top:1rem" onclick="alert('Upload document feature coming soon')"><i class="fas fa-upload"></i> Upload Document</button>
-      </div>`;
-    }
-    case 'performance':{
-      let totalLessons=0,completedLessons=0;
-      instCourses.forEach(c=>{
-        const all=(c.modules||[]).flatMap(m=>(m.lessons||[]).filter(l=>l.published!=='draft'));
-        instEnrollments.filter(e=>e.courseId===c.id).forEach(e=>{
-          const done=all.filter(l=>lessonProgress.some(p=>p.userId===e.userId&&p.courseId===c.id&&p.lessonId===l.id)).length;
-          totalLessons+=all.length;completedLessons+=done;
-        });
-      });
-      const completionRate=totalLessons?Math.round((completedLessons/totalLessons)*100):0;
-      const assignments=DB.get('assignments').filter(a=>courseIds.includes(a.courseId));
-      const discussions=DB.get('discussions').filter(d=>courseIds.includes(d.courseId));
-      const attendance=DB.get('attendance').filter(a=>courseIds.includes(a.courseId));
-      return `<div class="instructor-section"><h3><i class="fas fa-chart-bar"></i> Performance Overview</h3>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem">
-          <div class="inst-stat-mini"><div class="num">${instCourses.length}</div><div class="lbl">Courses</div></div>
-          <div class="inst-stat-mini"><div class="num">${students.length}</div><div class="lbl">Students</div></div>
-          <div class="inst-stat-mini"><div class="num">${completionRate}%</div><div class="lbl">Completion</div></div>
-          <div class="inst-stat-mini"><div class="num">${assignments.length}</div><div class="lbl">Assignments</div></div>
-          <div class="inst-stat-mini"><div class="num">${discussions.length}</div><div class="lbl">Discussions</div></div>
-          <div class="inst-stat-mini"><div class="num">${attendance.length}</div><div class="lbl">Attendance Records</div></div>
-        </div>
-      </div>`;
-    }
-    default:return '<div class="empty-state">Unknown tab</div>';
-  }
-}
-
-function editInstructorPrompt(id){
-  const i=DB.get('instructors').find(x=>x.id===id);if(!i)return;
-  const name=prompt('Full Name:',i.fullName);if(name===null)return;
-  const email=prompt('Email:',i.email);if(email===null)return;
-  const phone=prompt('Phone:',i.phone||'');if(phone===null)return;
-  const spec=prompt('Specialization:',i.specialization||'');if(spec===null)return;
-  const bio=prompt('Bio:',i.bio||'');if(bio===null)return;
-  const insts=DB.get('instructors');const idx=insts.findIndex(x=>x.id===id);
-  if(idx>-1){insts[idx]={...insts[idx],fullName:name,email,phone,specialization:spec,bio};DB.set('instructors',insts);}
-  renderAdminInstructors();
-  if(currentInstructor&&currentInstructor.id===id){
-    currentInstructor=insts[idx];
-    document.getElementById('adminInstructorDetailContent').innerHTML=renderInstructorDetailHTML(currentInstructor);
-    switchInstructorTab(currentInstructorTab);
-  }
-  alert('✅ Instructor updated');
-}
-
-function manageInstructorPermissions(id){
-  const i=DB.get('instructors').find(x=>x.id===id);if(!i)return;
-  const perms=i.permissions||{canCreateCourses:true,canGradeExams:true,canManageStudents:true,canPostDiscussions:true,canScheduleLive:true};
-  document.getElementById('appDetailsContent').innerHTML=`
-    <h2><i class="fas fa-shield-alt" style="color:var(--gold)"></i> Permissions — ${esc(i.fullName)}</h2>
-    <div class="instructor-section" style="box-shadow:none;border:1px solid #e2e8f0">
-      <div class="perm-row"><label>Create & Edit Courses</label><div class="perm-toggle ${perms.canCreateCourses?'on':''}" onclick="togglePerm('${id}','canCreateCourses',this)"></div></div>
-      <div class="perm-row"><label>Grade Exams & CATs</label><div class="perm-toggle ${perms.canGradeExams?'on':''}" onclick="togglePerm('${id}','canGradeExams',this)"></div></div>
-      <div class="perm-row"><label>Manage Students</label><div class="perm-toggle ${perms.canManageStudents?'on':''}" onclick="togglePerm('${id}','canManageStudents',this)"></div></div>
-      <div class="perm-row"><label>Post Discussions</label><div class="perm-toggle ${perms.canPostDiscussions?'on':''}" onclick="togglePerm('${id}','canPostDiscussions',this)"></div></div>
-      <div class="perm-row"><label>Schedule Live Classes</label><div class="perm-toggle ${perms.canScheduleLive?'on':''}" onclick="togglePerm('${id}','canScheduleLive',this)"></div></div>
-    </div>`;
-  document.getElementById('appDetailsFooter').innerHTML=`<button class="btn btn-outline" onclick="closeAppDetailsModal()">Close</button>`;
-  document.getElementById('appDetailsModal').classList.add('active');
-}
-
-function togglePerm(id,perm,el){
-  const insts=DB.get('instructors');const i=insts.find(x=>x.id===id);if(!i)return;
-  i.permissions=i.permissions||{};
-  i.permissions[perm]=!i.permissions[perm];
-  DB.set('instructors',insts);
-  el.classList.toggle('on',i.permissions[perm]);
-}
-
-function resetInstructorPassword(id){
-  const i=DB.get('instructors').find(x=>x.id===id);if(!i)return;
-  const newPass=prompt('Enter new password for '+i.fullName+':','instructor123');
-  if(!newPass)return;
-  const insts=DB.get('instructors');const idx=insts.findIndex(x=>x.id===id);
-  insts[idx].password=newPass;DB.set('instructors',insts);
-  const users=DB.get('users');const uIdx=users.findIndex(u=>u.email===i.email);
-  if(uIdx>-1){users[uIdx].password=newPass;DB.set('users',users);}
-  alert('✅ Password reset to: '+newPass);
-}
-
-function toggleInstructorStatus(id,newStatus){
-  const insts=DB.get('instructors');const i=insts.find(x=>x.id===id);if(!i)return;
-  i.status=newStatus;DB.set('instructors',insts);
-  const users=DB.get('users');const u=users.find(x=>x.email===i.email);
-  if(u){u.status=newStatus;DB.set('users',users);}
-  renderAdminInstructors();
-  if(currentInstructor&&currentInstructor.id===id){
-    currentInstructor=insts.find(x=>x.id===id);
-    document.getElementById('adminInstructorDetailContent').innerHTML=renderInstructorDetailHTML(currentInstructor);
-    switchInstructorTab(currentInstructorTab);
-  }
-  alert('✅ Status: '+newStatus);
-}
-
-function suspendInstructorPrompt(id){
-  const i=DB.get('instructors').find(x=>x.id===id);if(!i)return;
-  const reason=prompt('Reason for suspension?');if(!reason)return;
-  const insts=DB.get('instructors');const idx=insts.findIndex(x=>x.id===id);
-  insts[idx].status='suspended';insts[idx].suspensionReason=reason;DB.set('instructors',insts);
-  const users=DB.get('users');const u=users.find(x=>x.email===i.email);
-  if(u){u.status='suspended';DB.set('users',users);}
-  renderAdminInstructors();
-  alert('🚫 Instructor suspended');
-}
-
-function archiveInstructor(id){
-  const i=DB.get('instructors').find(x=>x.id===id);if(!i)return;
-  if(!confirm('Archive '+i.fullName+'? They will be hidden from the active list but their data is preserved.'))return;
-  const insts=DB.get('instructors');const idx=insts.findIndex(x=>x.id===id);
-  insts[idx].status='archived';DB.set('instructors',insts);
-  const users=DB.get('users');const u=users.find(x=>x.email===i.email);
-  if(u){u.status='archived';DB.set('users',users);}
-  renderAdminInstructors();
-  alert('📦 Instructor archived');
-}
-
-function openAddInstructorModal(){document.getElementById('addInstructorModal').classList.add('active');}
-function closeAddInstructorModal(){document.getElementById('addInstructorModal').classList.remove('active');}
-function saveInstructor(e){
-  e.preventDefault();
-  const insts=DB.get('instructors');const email=document.getElementById('instEmail').value;
-  if(insts.find(i=>i.email===email)){alert('Email already exists');return;}
-  const n={id:Date.now(),fullName:document.getElementById('instName').value,email,phone:document.getElementById('instPhone').value,specialization:document.getElementById('instSpec').value,status:'active',password:document.getElementById('instPassword').value,documents:[],permissions:{canCreateCourses:true,canGradeExams:true,canManageStudents:true,canPostDiscussions:true,canScheduleLive:true},earnings:{rate:0,paid:0,due:0,history:[]},createdAt:new Date().toISOString()};
-  insts.push(n);DB.set('instructors',insts);
-  const users=DB.get('users');
-  if(!users.find(u=>u.email===email)){users.push({id:n.id,username:email.split('@')[0],email,password:n.password,fullName:n.fullName,role:'instructor',status:'active',specialization:n.specialization,createdAt:new Date().toISOString()});DB.set('users',users);}
-  closeAddInstructorModal();renderAdminInstructors();updateCounts();
-  alert('✅ Instructor added');
-}
-
 /* ADMIN COURSES */
 function renderAdminCourses(){const cs=DB.get('courses');const c=document.getElementById('adminCoursesList');if(!cs.length){c.innerHTML='<p style="color:var(--text-secondary);grid-column:1/-1">No courses.</p>';return;}c.innerHTML=cs.map(course=>renderCourseCardHTML(course,'admin')).join('');startCourseCountdowns();}
 function editCourse(courseId){const course=DB.get('courses').find(c=>c.id===courseId);if(!course)return;courseData=JSON.parse(JSON.stringify(course));courseData.modules=courseData.modules||[];courseData.discount=course.discount||{enabled:false,originalPrice:0,discountPrice:0,endsAt:null,label:''};examQuestions=course.examQuestions?JSON.parse(JSON.stringify(course.examQuestions)):[];catQuestions=course.catQuestions?JSON.parse(JSON.stringify(course.catQuestions)):[];editingCourseId=courseId;document.getElementById('courseTitle').value=course.title||'';document.getElementById('courseCode').value=course.code||'';document.getElementById('courseCategory').value=course.category||'IT & Technology';document.getElementById('courseLevel').value=course.level||'Beginner';document.getElementById('courseDescription').value=course.description||'';document.getElementById('courseInstructor').value=course.instructor||'Dr. Kelvin M. Obieing';document.getElementById('courseDuration').value=course.duration||'';document.getElementById('coursePrice').value=course.price||0;document.getElementById('examUnlockHours').value=course.examUnlockHours||72;document.getElementById('catUnlockHours').value=course.catUnlockHours||24;document.getElementById('examPassMark').value=course.examPassMark||50;document.getElementById('catPassMark').value=course.catPassMark||50;document.getElementById('courseStatusBadge').textContent=course.status;document.getElementById('courseStatusBadge').className='badge badge-'+course.status;document.getElementById('builderTitle').textContent='Edit Course';if(course.image){document.getElementById('imagePreview').src=course.image;document.getElementById('imagePreviewContainer').style.display='block';}renderModules();renderExamQuestionsBuilder();renderCATQuestionsBuilder();navigateTo('admin-builder');}
 function toggleCourseStatus(courseId){const cs=DB.get('courses');const c=cs.find(x=>x.id===courseId);if(!c)return;c.status=c.status==='published'?'draft':'published';DB.set('courses',cs);renderAdminCourses();alert('✅ Updated');}
 function deleteCourse(courseId){if(!confirm('Delete?'))return;let cs=DB.get('courses');cs=cs.filter(c=>c.id!==courseId);DB.set('courses',cs);renderAdminCourses();updateCounts();}
 
-/* COURSE BUILDER (condensed) */
-function initBuilder(){if(!editingCourseId){courseData={id:Date.now(),title:'',code:'',category:'IT & Technology',level:'Beginner',description:'',image:'',instructor:'Dr. Kelvin M. Obieing',duration:'',price:0,initialPaymentPercent:25,discount:{enabled:false,originalPrice:0,discountPrice:0,endsAt:null,label:''},modules:[],examQuestions:[],catQuestions:[],examPassMark:50,catPassMark:50,catUnlockHours:24,examUnlockHours:72,status:'draft'};examQuestions=[];catQuestions=[];document.getElementById('builderTitle').textContent='Create New Course';['courseTitle','courseCode','courseDescription','courseDuration'].forEach(id=>document.getElementById(id).value='');document.getElementById('coursePrice').value=0;document.getElementById('examUnlockHours').value=72;document.getElementById('catUnlockHours').value=24;document.getElementById('examPassMark').value=50;document.getElementById('catPassMark').value=50;document.getElementById('discountEnabled').checked=false;document.getElementById('discountFields').classList.add('hidden');document.getElementById('imagePreviewContainer').style.display='none';document.getElementById('courseStatusBadge').textContent='Draft';document.getElementById('courseStatusBadge').className='badge badge-draft';}goToStep(0);renderModules();renderExamQuestionsBuilder();renderCATQuestionsBuilder();}
+/* COURSE BUILDER */
+function initBuilder(){if(!editingCourseId){courseData={id:Date.now(),title:'',code:'',category:'IT & Technology',level:'Beginner',description:'',image:'',instructor:'',duration:'',price:0,initialPaymentPercent:25,discount:{enabled:false,originalPrice:0,discountPrice:0,endsAt:null,label:''},modules:[],examQuestions:[],catQuestions:[],examPassMark:50,catPassMark:50,catUnlockHours:24,examUnlockHours:72,status:'draft'};examQuestions=[];catQuestions=[];document.getElementById('builderTitle').textContent='Create New Course';['courseTitle','courseCode','courseDescription','courseDuration','courseInstructor'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});document.getElementById('coursePrice').value=0;document.getElementById('examUnlockHours').value=72;document.getElementById('catUnlockHours').value=24;document.getElementById('examPassMark').value=50;document.getElementById('catPassMark').value=50;document.getElementById('discountEnabled').checked=false;document.getElementById('discountFields').classList.add('hidden');document.getElementById('imagePreviewContainer').style.display='none';document.getElementById('courseStatusBadge').textContent='Draft';document.getElementById('courseStatusBadge').className='badge badge-draft';}goToStep(0);renderModules();renderExamQuestionsBuilder();renderCATQuestionsBuilder();}
 function goToStep(n){currentStep=n;document.querySelectorAll('.step-content').forEach(el=>el.classList.add('hidden'));const t=document.getElementById('step-'+n);if(t)t.classList.remove('hidden');if(n===4)buildPreview();if(n===3){renderExamQuestionsBuilder();renderCATQuestionsBuilder();}if(n===2)renderModules();window.scrollTo({top:0,behavior:'smooth'});}
 function saveBasicInfo(){courseData.title=document.getElementById('courseTitle').value;courseData.code=document.getElementById('courseCode').value;courseData.category=document.getElementById('courseCategory').value;courseData.level=document.getElementById('courseLevel').value;courseData.description=document.getElementById('courseDescription').value;courseData.instructor=document.getElementById('courseInstructor').value;courseData.duration=document.getElementById('courseDuration').value;if(uploadedImageData)courseData.image=uploadedImageData;if(!courseData.title){alert('⚠️ Title required');return;}goToStep(1);}
 function handleImageUpload(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{uploadedImageData=ev.target.result;document.getElementById('imagePreview').src=uploadedImageData;document.getElementById('imagePreviewContainer').style.display='block';};r.readAsDataURL(f);}
@@ -1531,13 +1067,10 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSidebar();clos
   checkAuth();
 })();
 
-console.log('🎓 Nexora Academy v8.0 — Instructor Management Complete');
+console.log('🎓 Nexora Academy v8.1 — Instructor Management Removed');
 console.log('👤 Admin: admin@nexora.com / admin123');
 console.log('👤 Student: brian@nexora.com / student123');
 </script>
-
-<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-<script>eruda.init();</script>
 
 </body>
 </html>
